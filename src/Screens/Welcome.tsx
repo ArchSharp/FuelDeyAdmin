@@ -6,7 +6,7 @@ export const Welcome = () => {
     <div className="flex flex-col min-h-[100vh]">
       {/* <Congratulations /> */}
       <Basic />
-      <div className=" lg:text-4xl text-orange-400 mt-52 z-[1] font-italiana text-center">
+      <div className="text-xl lg:text-4xl text-white mt-52 z-[1] font-italiana text-center">
         You are welcome <br /> <br /> To <br /> <br /> Fuel Dey Project
       </div>
     </div>
