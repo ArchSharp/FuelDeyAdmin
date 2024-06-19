@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("./assets/Fonts/helvetica_neu_bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Serif";
+  src: url("./assets/Fonts/DMSerifDisplay-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Italiana";
+  src: url("./assets/Fonts/Italiana-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/Fonts/Lato-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "LatoThin";
+  src: url("./assets/Fonts/Lato-Thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/Fonts/Manrope-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Pacifico";
+  src: url("./assets/Fonts/Pacifico-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/Fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+:root {
+  --textdur: 1050ms;
+  --wavedur: 2100ms;
+  --basicIconColor: #0a2540;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+::-webkit-scrollbar {
+  height: 0px; /* height of horizontal scrollbar ← You're missing this */
+  width: 5px; /* width of vertical scrollbar */
+  border: 1px solid #d5d5d5;
+}
+::-webkit-scrollbar-track {
+  border-radius: 80px;
+  background: #5f6469;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 80px;
+  background: #b0b0b0;
+}
