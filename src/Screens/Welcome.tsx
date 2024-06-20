@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { Basic } from "./AnimatedBGs/Basic";
 // import { Congratulations } from "./AnimatedBGs/Congratulations";
 
 export const Welcome = () => {
+  useEffect(() => {
+    document.title = "Welcome to Fuel Dey";
+  }, []);
+
   return (
     <div className="flex flex-col min-h-[100vh]">
       {/* <Congratulations /> */}
