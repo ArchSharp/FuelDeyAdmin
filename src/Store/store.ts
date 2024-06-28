@@ -19,7 +19,7 @@ import rootReducer from "./root-reducer";
 const middleware: any = [logger];
 
 const persistConfig = {
-  key: "archintel",
+  key: "fueldey",
   stateReconciler: autoMergeLevel1,
   storage,
 };

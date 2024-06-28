@@ -6,10 +6,17 @@
   font-family: "Helvetica";
   src: url("./assets/Fonts/helvetica_neu_bold.ttf") format("truetype");
 }
+
 @font-face {
-  font-family: "Serif";
+  font-family: "SerifRegular";
   src: url("./assets/Fonts/DMSerifDisplay-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "SerifItalic";
+  src: url("./assets/Fonts/DMSerifDisplay-Italic.ttf") format("truetype");
+}
+
 @font-face {
   font-family: "Italiana";
   src: url("./assets/Fonts/Italiana-Regular.ttf") format("truetype");

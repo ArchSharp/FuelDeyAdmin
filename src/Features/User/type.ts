@@ -1,6 +1,6 @@
-export interface ILogin {
-  Username: string;
-  Password: string;
+export interface ISignin {
+  Email: string;
+  Password?: string;
 }
 
 export interface IUserState {
