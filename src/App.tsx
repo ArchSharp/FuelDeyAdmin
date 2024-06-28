@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./App.css";
+// import "./App.css";
 import { useAppDispatch, useAppSelector } from "./Store/store";
 import { setupAxiosInterceptors } from "./Features/utils";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
