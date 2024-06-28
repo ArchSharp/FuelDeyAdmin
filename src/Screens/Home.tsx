@@ -9,6 +9,7 @@ import * as routes from "../Data/Routes";
 import { MdAttachEmail } from "react-icons/md";
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import { SignUp } from "../Features/User/userSlice";
+import fueldeylogo from "../assets/Images/fuel-dey-logo.jpeg";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ export const Home = () => {
   return (
     <div className="">
       <div className="h-screen flex">
-        <div className="h-full w-1/2 home-left-div flex flex-col items-center justify-center">
+        <div className="hidden lg:flex h-full w-1/2 home-left-div flex-col items-center justify-center">
           <img
             src={fuelSplash}
             alt="fuelSplash"
@@ -57,11 +58,11 @@ export const Home = () => {
           />
         </div>
 
-        <div className="h-full w-[50vw] flex flex-col items-center justify-center">
-          <div className="font-fueldeyserifreg text-4xl">Fuel Dey Here</div>
-          <div className="w-[70%] h-fit py-10 shadow-form-bx-sh">
+        <div className="h-full w-[100vw] lg:w-[50vw] flex flex-col items-center justify-center">
+          <img src={fueldeylogo} alt="fueldeylogo" className="w-[20%]" />
+          <div className="w-[95vw] lg:w-[35vw] h-fit py-10 lg:shadow-form-bx-sh">
             <form onSubmit={formik.handleSubmit}>
-              <div className="xs:w-[90%] md:w-fit mx-auto my-6">
+              <div className="w-[90%] md:w-fit mx-auto my-6">
                 <div className="w-[160px] h-[18px] flex-shrink-0 text-orange-600 text-xl not-italic font-[500] leading-normal">
                   Email address
                 </div>
@@ -69,9 +70,9 @@ export const Home = () => {
                   Enter your email address
                 </div>
                 <div className="relative">
-                  <MdAttachEmail className="absolute top-3 left-5 text-xl text-slate-700" />
+                  <MdAttachEmail className="absolute top-[14px] left-5 text-xl text-slate-700" />
                   <input
-                    className="xs:w-[86.4vw] md:w-[358px] xs:h-[40px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
+                    className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
                     type="text"
                     id="Email"
                     name="Email"
@@ -88,7 +89,7 @@ export const Home = () => {
                 )}
               </div>
 
-              <div className="w-fit mx-auto my-6">
+              <div className="w-[90%] md:w-fit mx-auto my-6">
                 <div className="w-[120px] h-[18px] flex-shrink-0 text-orange-600 text-lg not-italic font-[500] leading-normal">
                   Password
                 </div>
@@ -98,17 +99,17 @@ export const Home = () => {
                 <div className="relative">
                   {showPass === false ? (
                     <FaLock
-                      className="absolute top-3 left-5 text-xl text-slate-700 cursor-pointer"
+                      className="absolute top-[14px] left-5 text-xl text-slate-700 cursor-pointer"
                       onClick={() => setShowPass(true)}
                     />
                   ) : (
                     <FaLockOpen
-                      className="absolute top-3 left-5 text-xl text-slate-700 cursor-pointer"
+                      className="absolute top-[14px] left-5 text-xl text-slate-700 cursor-pointer"
                       onClick={() => setShowPass(false)}
                     />
                   )}
                   <input
-                    className="xs:w-[86.4vw] md:w-[358px] xs:h-[40px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
+                    className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
                     type={showPass ? "text" : "password"}
                     id="Password"
                     name="Password"
@@ -123,7 +124,7 @@ export const Home = () => {
                 )}
               </div>
 
-              <div className="text-slate-500 font-fueldeyserifreg xs:my-[10px] md:my-1 mx-auto xs:w-[90%] md:w-[358px] text-biyaGray text-sm not-italic font-[400] leading-normal">
+              <div className="text-slate-500 font-fueldeyserifreg xs:my-[10px] md:my-1 mx-auto w-[90%] md:w-[358px] text-biyaGray text-sm not-italic font-[400] leading-normal">
                 Forgot password?
                 <a
                   href="#a"
@@ -133,7 +134,7 @@ export const Home = () => {
                   Reset here
                 </a>
               </div>
-              <div className="text-slate-500 font-fueldeyserifreg xs:my-[10px] md:my-1 mx-auto xs:w-[90%] md:w-[358px] text-biyaGray text-sm not-italic font-[400] leading-normal">
+              <div className="text-slate-500 font-fueldeyserifreg xs:my-[10px] md:my-1 mx-auto w-[90%] md:w-[358px] text-biyaGray text-sm not-italic font-[400] leading-normal">
                 Don't have an account?
                 <a
                   href="#b"
@@ -145,7 +146,7 @@ export const Home = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="xs:w-[86.4vw] md:w-[129px] xs:h-[40px] md:h-[35px] flex-shrink-0 border-0 rounded-[94px] text-sm cursor-pointer bg-blue-400 text-white xs:ml-0 md:ml-2 mt-4 xs:mb-[70px] md:mb-0 text-center not-italic font-[400] leading-normal"
+                  className="w-full md:w-[129px] h-[45px] md:h-[35px] flex-shrink-0 border-0 rounded-[94px] text-sm cursor-pointer bg-blue-400 text-white xs:ml-0 md:ml-2 mt-4 xs:mb-[70px] md:mb-0 text-center not-italic font-[400] leading-normal"
                 >
                   Continue
                 </button>
