@@ -59,7 +59,11 @@ export const Home = () => {
         </div>
 
         <div className="h-full w-[100vw] lg:w-[50vw] flex flex-col items-center justify-center">
-          <img src={fueldeylogo} alt="fueldeylogo" className="w-[20%]" />
+          <img
+            src={fueldeylogo}
+            alt="fueldeylogo"
+            className="w-[40%] lg:w-[20%]"
+          />
           <div className="w-[95vw] lg:w-[35vw] h-fit py-10 lg:shadow-form-bx-sh">
             <form onSubmit={formik.handleSubmit}>
               <div className="w-[90%] md:w-fit mx-auto my-6">
