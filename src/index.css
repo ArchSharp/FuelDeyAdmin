@@ -59,3 +59,10 @@ body {
   padding: 0px;
   margin: 0px;
 }
+
+.home-left-div {
+  background-image: url("./assets//Images/fuel-splash2.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+}
