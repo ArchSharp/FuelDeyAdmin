@@ -5,8 +5,10 @@ import { setupAxiosInterceptors } from "./Features/utils";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import * as routes from "./Data/Routes";
 import { Loader } from "./Components/Loader";
-import { Welcome } from "./Screens/Welcome";
+// import { Welcome } from "./Screens/Welcome";
 import { ErrorPage } from "./Screens/ErrorPage";
+import { Home } from "./Screens/Home";
+import { Dashboard } from "./Screens/Dashboard";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -25,7 +27,8 @@ function App() {
     <BrowserRouter>
       {isLoading && <Loader />}
       <Routes>
-        <Route path={routes.homepage} index element={<Welcome />} />
+        <Route path={routes.homepage} index element={<Home />} />
+        <Route path={routes.dashboard} index element={<Dashboard />} />
         <Route path={routes.error} index element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

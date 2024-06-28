@@ -36,14 +36,7 @@
 }
 
 :root {
-  --textdur: 1050ms;
-  --wavedur: 2100ms;
-  --basicIconColor: #0a2540;
-}
-
-* {
-  padding: 0px;
-  margin: 0px;
+  --scroll-b-r: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -52,11 +45,17 @@
   border: 1px solid #d5d5d5;
 }
 ::-webkit-scrollbar-track {
-  border-radius: 80px;
+  border-radius: var(--scroll-b-r);
   background: #5f6469;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 80px;
+  border-radius: var(--scroll-b-r);
   background: #b0b0b0;
+}
+
+*,
+body {
+  padding: 0px;
+  margin: 0px;
 }
