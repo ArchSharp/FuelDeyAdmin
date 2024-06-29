@@ -46,8 +46,8 @@ export const SignIn = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="w-[90%] md:w-fit mx-auto my-6">
+    <form onSubmit={formik.handleSubmit} className="py-10">
+      <div className="w-[90%] md:w-fit mx-auto">
         <div className="w-[160px] h-[18px] flex-shrink-0 text-orange-600 text-xl not-italic font-[500] leading-normal">
           Email address
         </div>

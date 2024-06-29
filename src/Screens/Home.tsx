@@ -68,7 +68,7 @@ export const Home = () => {
           />
           <div
             style={{ "--scroll-width": isMobile ? "5px" : "0px" } as any}
-            className="relative w-[95vw] lg:w-[35vw] h-fit max-h-[80vh] lg:max-h-[600px] overflow-y-auto lg:shadow-form-bx-sh"
+            className="relative w-[95vw] lg:w-[35vw] h-fit max-h-[80vh] md:max-h-[55vh] lg:max-h-[60vh] overflow-y-auto lg:shadow-form-bx-sh"
             ref={containerRef}
           >
             {isAtBottom === false && (
