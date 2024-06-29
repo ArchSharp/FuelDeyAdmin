@@ -25,15 +25,16 @@ export interface IAuth {
 }
 
 export interface IProfile {
-  accessToken: string;
+  stationName: string;
   address: string;
-  dateCreated: string;
-  email: string;
-  isActive: boolean;
-  othername: string;
+  state: string;
+  lga: string;
   phoneno: string;
-  surname: string;
-  userType: number;
+  email: string;
+  isActive?: boolean;
+  password: string;
+  userRole?: number;
+  dateCreated?: string;
 }
 
 export interface ICreatePin {
