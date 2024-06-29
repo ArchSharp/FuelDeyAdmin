@@ -116,7 +116,7 @@ export const getAllAgents = (pageIndex: number): AppThunk => {
   };
 };
 
-export const SignUp = (data: any): AppThunk => {
+export const signUp = (data: any): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(clearErrors());
