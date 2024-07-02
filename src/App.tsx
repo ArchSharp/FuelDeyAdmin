@@ -8,7 +8,8 @@ import { Loader } from "./Components/Loader";
 // import { Welcome } from "./Screens/Welcome";
 import { ErrorPage } from "./Screens/ErrorPage";
 import { Home } from "./Screens/Home";
-import { Dashboard } from "./Screens/Dashboard";
+import { AdminDashboard } from "./Screens/AdminDashboard";
+import { VendorDashboard } from "./Screens/VendorDashboard";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -28,7 +29,8 @@ function App() {
       {isLoading && <Loader />}
       <Routes>
         <Route path={routes.homepage} index element={<Home />} />
-        <Route path={routes.dashboard} index element={<Dashboard />} />
+        <Route path={routes.admindash} index element={<AdminDashboard />} />
+        <Route path={routes.vendordash} index element={<VendorDashboard />} />
         <Route path={routes.error} index element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
