@@ -6,6 +6,7 @@ import { SignIn } from "./Auths/SignIn";
 import { SignUp } from "./Auths/SignUp";
 import { ForgotPassword } from "./Auths/ForgotPassword";
 import { useMediaQuery } from "react-responsive";
+import { ResetPassword } from "./Auths/ResetPassword";
 
 export const Home = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
@@ -36,6 +37,7 @@ export const Home = () => {
               <Route path={"/"} index={true} element={<SignIn />} />
               <Route path={routes.signup} element={<SignUp />} />
               <Route path={routes.f_password} element={<ForgotPassword />} />
+              <Route path={routes.resetPassword} element={<ResetPassword />} />
             </Routes>
           </div>
         </div>

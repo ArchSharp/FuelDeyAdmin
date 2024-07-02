@@ -1,3 +1,9 @@
+import { ChangePassword } from "./Auths/ChangePassword";
+
 export const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <ChangePassword />
+    </div>
+  );
 };

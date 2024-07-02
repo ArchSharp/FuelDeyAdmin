@@ -9,3 +9,4 @@ export const profile = "/profile";
 export const error = "*";
 export const portal = "/portal";
 export const welcome = "/welcome";
+export const resetPassword = "/reset-password";

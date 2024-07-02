@@ -50,8 +50,8 @@ export interface IPasswordUpdate {
 
 export interface IPasswordChange {
   password: string;
-  newPassword: string;
-  email?: string;
+  new_password: string;
+  email: string;
 }
 
 export interface IPatch {
@@ -75,5 +75,5 @@ export interface IForgetPassword {
 
 export interface IResetPassword {
   password: string;
-  confirmPassword: string;
+  confirm_password: string;
 }
