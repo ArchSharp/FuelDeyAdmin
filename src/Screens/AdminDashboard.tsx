@@ -21,8 +21,8 @@ export const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-[20vw] h-screen bg-black bg-opacity-[0.8] flex flex-col">
+    <div className="flex flex-col">
+      <div className="ml-[-90vw] lg:ml-0 w-[90vw] lg:w-[20vw] h-screen bg-black bg-opacity-[0.8] flex flex-col">
         <img
           src={fueldeylogo}
           alt="fueldeylogo"
