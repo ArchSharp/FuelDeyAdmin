@@ -74,3 +74,13 @@ body {
   background-repeat: no-repeat;
   background-position: right;
 }
+
+.open-nav {
+  transform: rotate(90deg);
+  transition: transform 300ms ease-in;
+}
+
+.close-nav {
+  transform: rotate(0deg);
+  transition: transform 300ms ease-in;
+}

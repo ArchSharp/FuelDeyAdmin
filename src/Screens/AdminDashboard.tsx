@@ -28,14 +28,21 @@ export const AdminDashboard = () => {
         {sidebars.map((sidebar, index) => (
           <div key={index}>
             <div
-              className={`text-white p-4 cursor-pointer flex items-center ${
+              className={`text-white p-4 cursor-pointer flex items-center text-base ${
                 mainNavIndex === index ? "bg-orange-500" : "bg-transparent"
               }`}
-              onClick={() => handleClick(index)}
+              onClick={() => {
+                handleSubNavClick(-1);
+                handleClick(index);
+              }}
             >
               {sidebar.sideText}{" "}
               {sidebar.subTexts.length > 0 && (
-                <FaChevronRight className="ml-auto" />
+                <FaChevronRight
+                  className={`ml-auto ${
+                    mainNavIndex === index ? "open-nav" : "close-nav"
+                  }`}
+                />
               )}
             </div>
 
@@ -47,9 +54,8 @@ export const AdminDashboard = () => {
                       key={subindex}
                       onClick={() => {
                         handleSubNavClick(subindex);
-                        // handleClick(-1);
                       }}
-                      className={`text-white pl-10 pt-2 pb-2 cursor-pointer flex items-center ${
+                      className={`text-white pl-10 pt-3 pb-3 cursor-pointer flex items-center text-base ${
                         subNavIndex === subindex
                           ? "bg-orange-300"
                           : "bg-transparent"
