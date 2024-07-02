@@ -120,7 +120,7 @@ export const ResetPassword = () => {
       <div className="text-slate-500 font-fueldeyserifreg xs:my-[10px] md:my-1 mx-auto w-[90%] md:w-[358px] text-biyaGray text-sm not-italic font-[400] leading-normal">
         Remembered password?
         <span
-          onClick={() => navigate(routes.homepage)}
+          onClick={() => navigate(routes.signin)}
           className="text-orange-900 font-fueldeyserifreg text-sm not-italic font-[400] leading-normal ml-1 cursor-pointer no-underline"
         >
           Login
