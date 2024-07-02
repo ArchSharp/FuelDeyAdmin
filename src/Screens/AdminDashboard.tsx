@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { sidebars } from "../Data/sidebarsText";
 import fueldeylogo from "../assets/Images/fuel-dey-logo-no-bg.png";
+import { FaChevronRight } from "react-icons/fa";
 
 export const AdminDashboard = () => {
   const [mainNavIndex, setMainNavIndex] = useState<number | null>(null);
@@ -32,7 +33,10 @@ export const AdminDashboard = () => {
               }`}
               onClick={() => handleClick(index)}
             >
-              {sidebar.sideText}
+              {sidebar.sideText}{" "}
+              {sidebar.subTexts.length > 0 && (
+                <FaChevronRight className="ml-auto" />
+              )}
             </div>
 
             {sidebar.subTexts.length > 0 && mainNavIndex === index && (
