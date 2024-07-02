@@ -3,6 +3,10 @@ import { useState } from "react";
 import { sidebars } from "../Data/sidebarsText";
 import fueldeylogo from "../assets/Images/fuel-dey-logo-no-bg.png";
 import { FaChevronRight } from "react-icons/fa";
+import { IoNotificationsCircle, IoSettings } from "react-icons/io5";
+import { PiUserSwitchFill, PiUsersThreeFill } from "react-icons/pi";
+import { MdSpaceDashboard } from "react-icons/md";
+import { BsFillFuelPumpFill } from "react-icons/bs";
 
 export const AdminDashboard = () => {
   const [mainNavIndex, setMainNavIndex] = useState<number | null>(null);
@@ -36,6 +40,14 @@ export const AdminDashboard = () => {
                 handleClick(index);
               }}
             >
+              {index === 0 && <MdSpaceDashboard className="mr-2 text-2xl" />}
+              {index === 1 && <BsFillFuelPumpFill className="mr-2 text-2xl" />}
+              {index === 2 && <PiUserSwitchFill className="mr-2 text-2xl" />}
+              {index === 3 && (
+                <IoNotificationsCircle className="mr-2 text-2xl" />
+              )}
+              {index === 4 && <PiUsersThreeFill className="mr-2 text-2xl" />}
+              {index === 5 && <IoSettings className="mr-2 text-2xl" />}
               {sidebar.sideText}{" "}
               {sidebar.subTexts.length > 0 && (
                 <FaChevronRight
