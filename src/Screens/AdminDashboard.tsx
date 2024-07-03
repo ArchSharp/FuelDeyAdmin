@@ -1,5 +1,5 @@
 // import { ChangePassword } from "./Auths/ChangePassword";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { sidebars } from "../Data/sidebarsText";
 import fueldeylogo from "../assets/Images/fuel-dey-logo-no-bg.png";
 import userImg from "../assets/Images/fuel-dey-logo - full.jpeg";
@@ -25,6 +25,9 @@ export const AdminDashboard = () => {
   const [subNavIndex, setSubNavIndex] = useState<number | null>(null);
   const [isNavIn, setIsNavIn] = useState(true);
   const [showUserNav, setShowUserNav] = useState(false);
+  const userImgRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
 
   const handleClick = (index: number) => {
     setMainNavIndex(index);
@@ -33,6 +36,35 @@ export const AdminDashboard = () => {
   const handleSubNavClick = (index: number) => {
     setSubNavIndex(index);
   };
+
+  const handleMouseMove = (event: MouseEvent) => {
+    setCoordinates({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (dropdownRef.current && userImgRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect();
+      if (
+        coordinates.x < rect.left ||
+        coordinates.y > rect.bottom ||
+        coordinates.x > rect.right
+      ) {
+        setShowUserNav(false);
+      }
+    }
+  }, [coordinates]);
 
   return (
     <div className="flex relative">
@@ -111,9 +143,10 @@ export const AdminDashboard = () => {
         />
 
         <div
-          className="ml-auto flex items-center mr-3 lg:mr-5 relative"
+          ref={userImgRef}
+          className="ml-auto flex items-center mr-3 lg:mr-5 relative cursor-pointer"
           onMouseEnter={() => setShowUserNav(true)}
-          onMouseLeave={() => setShowUserNav(false)}
+          // onMouseLeave={() => setShowUserNav(false)}
         >
           <img
             src={userImg}
@@ -127,6 +160,7 @@ export const AdminDashboard = () => {
           />
 
           <div
+            ref={dropdownRef}
             className={`${
               showUserNav
                 ? `${
