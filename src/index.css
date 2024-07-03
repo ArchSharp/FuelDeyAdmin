@@ -112,6 +112,20 @@ body {
   animation: user-nav-show-animate 200ms linear;
 }
 
+.user-nav-show-mobile {
+  position: absolute;
+  top: 7.2vh;
+  right: 0px;
+  animation: user-nav-show-animate-mobile 200ms linear;
+}
+
+.user-nav-show-tablet {
+  position: absolute;
+  top: 8.4vh;
+  right: 0px;
+  animation: user-nav-show-animate-tablet 200ms linear;
+}
+
 .user-nav-hide {
   position: absolute;
   top: 50px;
@@ -129,6 +143,32 @@ body {
   to {
     position: absolute;
     top: 72px;
+    right: 0px;
+  }
+}
+
+@keyframes user-nav-show-animate-mobile {
+  from {
+    position: absolute;
+    top: 5vh;
+    right: 0px;
+  }
+  to {
+    position: absolute;
+    top: 7.5vh;
+    right: 0px;
+  }
+}
+
+@keyframes user-nav-show-animate-tablet {
+  from {
+    position: absolute;
+    top: 5vh;
+    right: 0px;
+  }
+  to {
+    position: absolute;
+    top: 8.5vh;
     right: 0px;
   }
 }

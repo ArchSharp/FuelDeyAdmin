@@ -13,8 +13,14 @@ import { PiUserSwitchFill, PiUsersThreeFill } from "react-icons/pi";
 import { MdSpaceDashboard } from "react-icons/md";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
+import { useMediaQuery } from "react-responsive";
 
 export const AdminDashboard = () => {
+  const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
+  const isTablet = useMediaQuery({
+    query: "(min-width: 768px) and (max-width: 1023px)",
+  });
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const [mainNavIndex, setMainNavIndex] = useState<number | null>(null);
   const [subNavIndex, setSubNavIndex] = useState<number | null>(null);
   const [isNavIn, setIsNavIn] = useState(true);
@@ -98,7 +104,7 @@ export const AdminDashboard = () => {
           </div>
         ))}
       </div>
-      <div className="bg-orange-400 bg-opacity-[0.5] w-screen lg:w-[80vw] h-[10vh] lg:h-[100px] flex items-center">
+      <div className="bg-orange-400 bg-opacity-[0.5] w-screen lg:w-[80vw] h-[10vh] md:h-[12vh] lg:h-[100px] flex items-center">
         <AiOutlineBars
           className="lg:hidden text-3xl ml-5"
           onClick={() => setIsNavIn(!isNavIn)}
@@ -112,7 +118,7 @@ export const AdminDashboard = () => {
           <img
             src={userImg}
             alt="fueldey"
-            className="size-8 lg:size-12 rounded-[50%]"
+            className="size-8 md:size-10 lg:size-12 rounded-[50%]"
           />
           <IoChevronDownSharp
             className={`${
@@ -122,7 +128,17 @@ export const AdminDashboard = () => {
 
           <div
             className={`${
-              showUserNav ? "user-nav-show" : "user-nav-hide"
+              showUserNav
+                ? `${
+                    isLarge
+                      ? "user-nav-show"
+                      : isTablet
+                      ? "user-nav-show-tablet"
+                      : isMobile
+                      ? "user-nav-show-mobile"
+                      : ""
+                  }`
+                : "user-nav-hide"
             } shadow-xl w-[300px] h-[400px] border-2`}
           ></div>
         </div>
