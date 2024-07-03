@@ -2,16 +2,23 @@
 import { useState } from "react";
 import { sidebars } from "../Data/sidebarsText";
 import fueldeylogo from "../assets/Images/fuel-dey-logo-no-bg.png";
-import { FaAngleDoubleLeft, FaBars, FaChevronRight } from "react-icons/fa";
-import { IoNotificationsCircle, IoSettings } from "react-icons/io5";
+import userImg from "../assets/Images/fuel-dey-logo - full.jpeg";
+import { FaAngleDoubleLeft, FaChevronRight } from "react-icons/fa";
+import {
+  IoChevronDownSharp,
+  IoNotificationsCircle,
+  IoSettings,
+} from "react-icons/io5";
 import { PiUserSwitchFill, PiUsersThreeFill } from "react-icons/pi";
 import { MdSpaceDashboard } from "react-icons/md";
 import { BsFillFuelPumpFill } from "react-icons/bs";
+import { AiOutlineBars } from "react-icons/ai";
 
 export const AdminDashboard = () => {
   const [mainNavIndex, setMainNavIndex] = useState<number | null>(null);
   const [subNavIndex, setSubNavIndex] = useState<number | null>(null);
   const [isNavIn, setIsNavIn] = useState(true);
+  const [showUserNav, setShowUserNav] = useState(false);
 
   const handleClick = (index: number) => {
     setMainNavIndex(index);
@@ -91,11 +98,28 @@ export const AdminDashboard = () => {
           </div>
         ))}
       </div>
-      <div className="bg-orange-400 w-screen lg:w-[80vw] h-[10vh] lg:h-[100px] flex items-center">
-        <FaBars
-          className="lg:hidden font-extrabold text-3xl ml-5"
+      <div className="bg-orange-400 bg-opacity-[0.5] w-screen lg:w-[80vw] h-[10vh] lg:h-[100px] flex items-center">
+        <AiOutlineBars
+          className="lg:hidden text-3xl ml-5"
           onClick={() => setIsNavIn(!isNavIn)}
         />
+
+        <div
+          className="ml-auto flex items-center mr-3 lg:mr-5"
+          onMouseEnter={() => setShowUserNav(true)}
+          onMouseLeave={() => setShowUserNav(false)}
+        >
+          <img
+            src={userImg}
+            alt="fueldey"
+            className="size-8 lg:size-12 rounded-[50%]"
+          />
+          <IoChevronDownSharp
+            className={`${
+              showUserNav ? "open-user-arrow" : "close-user-arrow"
+            } text-xl md:text-2xl ml-1 md:ml-3`}
+          />
+        </div>
       </div>
       {/* <ChangePassword /> */}
     </div>

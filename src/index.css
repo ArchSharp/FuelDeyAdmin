@@ -94,3 +94,13 @@ body {
   margin-left: 0vw;
   transition: margin-left 300ms ease-in;
 }
+
+.open-user-arrow {
+  transform: rotate(180deg);
+  transition: transform 300ms ease-in;
+}
+
+.close-user-arrow {
+  transform: rotate(0deg);
+  transition: transform 300ms ease-in;
+}
