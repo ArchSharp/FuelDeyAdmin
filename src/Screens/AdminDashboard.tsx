@@ -92,7 +92,7 @@ export const AdminDashboard = () => {
           </div>
         ))}
       </div>
-      <div className="bg-orange-400 w-screen lg:w-[80vw] h-[60px] lg:h-[100px] flex items-center">
+      <div className="bg-orange-400 w-screen lg:w-[80vw] h-[15vh] lg:h-[100px] flex items-center">
         <HiBars3CenterLeft
           className="lg:hidden font-extrabold text-3xl ml-5"
           onClick={() => setIsNavIn(!isNavIn)}
