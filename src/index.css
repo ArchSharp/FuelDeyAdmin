@@ -84,3 +84,13 @@ body {
   transform: rotate(0deg);
   transition: transform 300ms ease-in;
 }
+
+.nav-in {
+  margin-left: -90vw;
+  transition: margin-left 300ms ease-in;
+}
+
+.nav-out {
+  margin-left: 0vw;
+  transition: margin-left 300ms ease-in;
+}
