@@ -136,45 +136,77 @@ export const AdminDashboard = () => {
           </div>
         ))}
       </div>
-      <div className="bg-orange-400 bg-opacity-[0.5] w-screen lg:w-[80vw] h-[10vh] md:h-[12vh] lg:h-[100px] flex items-center">
-        <AiOutlineBars
-          className="lg:hidden text-3xl ml-5"
-          onClick={() => setIsNavIn(!isNavIn)}
-        />
-
-        <div
-          ref={userImgRef}
-          className="ml-auto flex items-center mr-3 lg:mr-5 relative cursor-pointer"
-          onMouseEnter={() => setShowUserNav(true)}
-          // onMouseLeave={() => setShowUserNav(false)}
-        >
-          <img
-            src={userImg}
-            alt="fueldey"
-            className="size-8 md:size-10 lg:size-12 rounded-[50%]"
-          />
-          <IoChevronDownSharp
-            className={`${
-              showUserNav ? "open-user-arrow" : "close-user-arrow"
-            } text-xl md:text-2xl ml-1 md:ml-3`}
+      <div className="flex flex-col w-screen lg:w-[80vw]">
+        <div className="bg-orange-400 bg-opacity-[0.5] h-[10vh] md:h-[12vh] lg:h-[100px] flex items-center">
+          <AiOutlineBars
+            className="lg:hidden text-3xl ml-5"
+            onClick={() => setIsNavIn(!isNavIn)}
           />
 
           <div
-            ref={dropdownRef}
-            className={`${
-              showUserNav
-                ? `${
-                    isLarge
-                      ? "user-nav-show"
-                      : isTablet
-                      ? "user-nav-show-tablet"
-                      : isMobile
-                      ? "user-nav-show-mobile"
-                      : ""
-                  }`
-                : "user-nav-hide"
-            } shadow-xl w-[300px] h-[400px] border-2`}
-          ></div>
+            ref={userImgRef}
+            className="ml-auto flex items-center mr-3 lg:mr-5 relative cursor-pointer"
+            onMouseEnter={() => setShowUserNav(true)}
+            // onMouseLeave={() => setShowUserNav(false)}
+          >
+            <img
+              src={userImg}
+              alt="fueldey"
+              className="size-8 md:size-10 lg:size-12 rounded-[50%]"
+            />
+            <IoChevronDownSharp
+              className={`${
+                showUserNav ? "open-user-arrow" : "close-user-arrow"
+              } text-xl md:text-2xl ml-1 md:ml-3`}
+            />
+
+            <div
+              ref={dropdownRef}
+              className={`${
+                showUserNav
+                  ? `${
+                      isLarge
+                        ? "user-nav-show"
+                        : isTablet
+                        ? "user-nav-show-tablet"
+                        : isMobile
+                        ? "user-nav-show-mobile"
+                        : ""
+                    }`
+                  : "user-nav-hide"
+              } shadow-xl w-[300px] h-[400px] border-2`}
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center justify-center py-5">
+            <div className="border-[1px] border-slate-400 rounded-[35px] w-[90vw] md:w-[40vw] lg:w-[20vw] h-[45vh] md:h-[40vh] lg:h-[35vh]">
+              <div className="border-b-[1px] border-slate-400 rounded-tr-[35px] rounded-tl-[35px] h-1/2 flex items-center justify-center">
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    <BsFillFuelPumpFill className="mr-3 text-2xl text-orange-600" />
+                    <div className="font-pacifico text-2xl">Vendors</div>
+                  </div>
+                  <div className="font-pacifico text-2xl">100</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-center h-1/2 rounded-bl-[35px] rounded-br-[35px]">
+                <div className=" w-1/2 flex flex-col items-center justify-center h-full rounded-bl-[35px]">
+                  <div className="text-green-600 font-poppins font-bold">
+                    Active
+                  </div>
+                  <div className="font-pacifico text-2xl">100</div>
+                </div>
+                <div className="w-1/2 rounded-br-[35px] flex flex-col items-center justify-center">
+                  <div className="text-red-600 font-poppins font-bold">
+                    Inactive
+                  </div>
+                  <div className="font-pacifico text-2xl">20</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       {/* <ChangePassword /> */}
