@@ -105,7 +105,7 @@ export const AdminDashboard = () => {
         />
 
         <div
-          className="ml-auto flex items-center mr-3 lg:mr-5"
+          className="ml-auto flex items-center mr-3 lg:mr-5 relative"
           onMouseEnter={() => setShowUserNav(true)}
           onMouseLeave={() => setShowUserNav(false)}
         >
@@ -119,6 +119,12 @@ export const AdminDashboard = () => {
               showUserNav ? "open-user-arrow" : "close-user-arrow"
             } text-xl md:text-2xl ml-1 md:ml-3`}
           />
+
+          <div
+            className={`${
+              showUserNav ? "user-nav-show" : "user-nav-hide"
+            } shadow-xl w-[300px] h-[400px] border-2`}
+          ></div>
         </div>
       </div>
       {/* <ChangePassword /> */}

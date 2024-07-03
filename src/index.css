@@ -104,3 +104,44 @@ body {
   transform: rotate(0deg);
   transition: transform 300ms ease-in;
 }
+
+.user-nav-show {
+  position: absolute;
+  top: 72px;
+  right: 0px;
+  animation: user-nav-show-animate 200ms linear;
+}
+
+.user-nav-hide {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  display: none;
+  animation: user-nav-show-animate 300ms linear;
+}
+
+@keyframes user-nav-show-animate {
+  from {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+  }
+  to {
+    position: absolute;
+    top: 72px;
+    right: 0px;
+  }
+}
+
+@keyframes user-nav-hide-animate {
+  from {
+    position: absolute;
+    top: 72px;
+    right: 0px;
+  }
+  to {
+    position: absolute;
+    top: 65px;
+    right: 0px;
+  }
+}
