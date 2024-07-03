@@ -14,6 +14,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
+import { DashboardCard } from "../Components/DashboardCard";
 
 export const AdminDashboard = () => {
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
@@ -71,7 +72,7 @@ export const AdminDashboard = () => {
       <div
         className={`${
           isNavIn ? "nav-in" : "nav-out"
-        } lg:ml-0 w-[90vw] lg:w-[20vw] h-screen bg-black bg-opacity-[0.8] flex flex-col absolute top-0 left-0 lg:static`}
+        } z-[5] lg:ml-0 w-[90vw] lg:w-[20vw] h-screen bg-black bg-opacity-[0.8] flex flex-col absolute top-0 left-0 lg:static`}
       >
         <img
           src={fueldeylogo}
@@ -179,32 +180,29 @@ export const AdminDashboard = () => {
           </div>
         </div>
 
-        <div>
-          <div className="flex items-center justify-center py-5">
-            <div className="border-[1px] border-slate-400 rounded-[35px] w-[90vw] md:w-[40vw] lg:w-[20vw] h-[45vh] md:h-[40vh] lg:h-[35vh]">
-              <div className="border-b-[1px] border-slate-400 rounded-tr-[35px] rounded-tl-[35px] h-1/2 flex items-center justify-center">
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center">
-                    <BsFillFuelPumpFill className="mr-3 text-2xl text-orange-600" />
-                    <div className="font-pacifico text-2xl">Vendors</div>
-                  </div>
-                  <div className="font-pacifico text-2xl">100</div>
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-1/2 rounded-bl-[35px] rounded-br-[35px]">
-                <div className=" w-1/2 flex flex-col items-center justify-center h-full rounded-bl-[35px]">
-                  <div className="text-green-600 font-poppins font-bold">
-                    Active
-                  </div>
-                  <div className="font-pacifico text-2xl">100</div>
-                </div>
-                <div className="w-1/2 rounded-br-[35px] flex flex-col items-center justify-center">
-                  <div className="text-red-600 font-poppins font-bold">
-                    Inactive
-                  </div>
-                  <div className="font-pacifico text-2xl">20</div>
-                </div>
-              </div>
+        <div className="">
+          <div className={`w-full py-5 overflow-x-auto`}>
+            <div className="w-fit flex items-center">
+              <DashboardCard
+                css={"ml-3 md:ml-5 lg:ml-10"}
+                svgIndex={1}
+                title="Vendors"
+                number={120}
+                left_title="Active"
+                right_title="Inactive"
+                left_number={100}
+                right_number={20}
+              />
+              <DashboardCard
+                css={"mx-10"}
+                svgIndex={2}
+                title="Buyers"
+                number={20000}
+                left_title="Active"
+                right_title="Inactive"
+                left_number={19000}
+                right_number={1000}
+              />
             </div>
           </div>
         </div>
