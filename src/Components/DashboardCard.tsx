@@ -24,7 +24,7 @@ export const DashboardCard = ({
 }: DashboardCardProps) => {
   return (
     <div
-      className={`${css} border-[1px] border-slate-400 rounded-[35px] w-[90vw] md:w-[40vw] lg:w-[20vw] h-[45vh] md:h-[40vh] lg:h-[35vh]`}
+      className={`${css} border-[1px] border-slate-400 rounded-[35px] w-[70vw] md:w-[40vw] lg:w-[20vw] h-[35vh] md:h-[40vh] lg:h-[35vh]`}
     >
       <div className="border-b-[1px] border-slate-400 rounded-tr-[35px] rounded-tl-[35px] h-1/2 flex items-center justify-center">
         <div className="flex flex-col items-center">
@@ -35,23 +35,25 @@ export const DashboardCard = ({
             {svgIndex === 2 && (
               <PiUserSwitchFill className="mr-3 text-2xl text-gray-700" />
             )}
-            <div className="font-pacifico text-2xl">{title}</div>
+            <div className="font-pacifico text-lg md:text-2xl">{title}</div>
           </div>
-          <div className="font-pacifico text-2xl">{number}</div>
+          <div className="font-pacifico text-lg md:text-2xl">{number}</div>
         </div>
       </div>
       <div className="flex items-center justify-center h-1/2 rounded-bl-[35px] rounded-br-[35px]">
         <div className=" w-1/2 flex flex-col items-center justify-center h-full rounded-bl-[35px]">
-          <div className="text-green-600 font-poppins font-bold">
+          <div className="text-green-600 font-poppins font-bold text-lg md:text-2xl">
             {left_title}
           </div>
-          <div className="font-pacifico text-2xl">{left_number}</div>
+          <div className="font-pacifico text-lg md:text-2xl">{left_number}</div>
         </div>
         <div className="w-1/2 rounded-br-[35px] flex flex-col items-center justify-center">
-          <div className="text-red-600 font-poppins font-bold">
+          <div className="text-red-600 font-poppins font-bold text-lg md:text-2xl">
             {right_title}
           </div>
-          <div className="font-pacifico text-2xl">{right_number}</div>
+          <div className="font-pacifico text-lg md:text-2xl">
+            {right_number}
+          </div>
         </div>
       </div>
     </div>
