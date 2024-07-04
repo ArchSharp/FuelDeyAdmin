@@ -107,21 +107,21 @@ body {
 
 .user-nav-show {
   position: absolute;
-  /* top: 30px; */
+  top: 68px;
   right: 0px;
   animation: user-nav-show-animate 200ms linear;
 }
 
 .user-nav-show-mobile {
   position: absolute;
-  top: 7.2vh;
+  top: 7vh;
   right: 0px;
   animation: user-nav-show-animate-mobile 200ms linear;
 }
 
 .user-nav-show-tablet {
   position: absolute;
-  top: 8.4vh;
+  top: 7.5vh;
   right: 0px;
   animation: user-nav-show-animate-tablet 200ms linear;
 }
@@ -142,7 +142,7 @@ body {
   }
   to {
     position: absolute;
-    top: 65px;
+    top: 68px;
     right: 0px;
   }
 }
@@ -155,7 +155,7 @@ body {
   }
   to {
     position: absolute;
-    top: 7.5vh;
+    top: 7vh;
     right: 0px;
   }
 }
@@ -168,7 +168,7 @@ body {
   }
   to {
     position: absolute;
-    top: 8.5vh;
+    top: 7vh;
     right: 0px;
   }
 }
