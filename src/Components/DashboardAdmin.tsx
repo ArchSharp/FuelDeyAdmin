@@ -1,8 +1,14 @@
 import { DashboardCard } from "./DashboardCard";
 import StateFuelChartAnalysis from "./Charts/StateFuelChartAnalysis";
 import { ChartSection } from "./Charts/ChartSection";
+import { useState } from "react";
 
 export const DashboardAdmin = () => {
+  const [chartIndex, setChartIndex] = useState(0);
+
+  const ChartIndex = (index: number) => {
+    setChartIndex(index);
+  };
   return (
     <div className="px-3 md:px-5 lg:px-10">
       <div className={`w-full py-5 overflow-x-auto`}>
@@ -43,21 +49,51 @@ export const DashboardAdmin = () => {
       <div className="">
         <div className="overflow-x-auto">
           <div className="w-fit flex items-center mt-10 mb-5">
-            <ChartSection css={"py-1"} title="Availability" />
+            <ChartSection
+              css={"py-1"}
+              title="Availability"
+              index={0}
+              chartIndex={chartIndex}
+              ChartIndex={ChartIndex}
+            />
 
-            <ChartSection css={"ml-5 py-1"} title="Overall Status" />
+            <ChartSection
+              css={"ml-5 py-1"}
+              title="Overall Status"
+              index={1}
+              chartIndex={chartIndex}
+              ChartIndex={ChartIndex}
+            />
 
-            <ChartSection css={"ml-5 py-1"} title="Availability %" />
+            <ChartSection
+              css={"ml-5 py-1"}
+              title="Availability %"
+              index={2}
+              chartIndex={chartIndex}
+              ChartIndex={ChartIndex}
+            />
 
-            <ChartSection css={"ml-5 py-1"} title="Stock Level" />
+            <ChartSection
+              css={"ml-5 py-1"}
+              title="Stock Level"
+              index={3}
+              chartIndex={chartIndex}
+              ChartIndex={ChartIndex}
+            />
 
-            <ChartSection css={"ml-5 py-1"} title="Fuel Types" />
+            <ChartSection
+              css={"ml-5 py-1"}
+              title="Fuel Types"
+              index={4}
+              chartIndex={chartIndex}
+              ChartIndex={ChartIndex}
+            />
           </div>
         </div>
         <h1 className="font-bold font-manrope text-xl">State Fuel Analysis</h1>
 
         <div className="h-[500px] border-2 mt-10 mb-20">
-          <StateFuelChartAnalysis />
+          {chartIndex === 0 && <StateFuelChartAnalysis />}
         </div>
       </div>
     </div>
