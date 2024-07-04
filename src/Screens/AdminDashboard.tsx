@@ -175,7 +175,7 @@ export const AdminDashboard = () => {
                         : ""
                     }`
                   : "user-nav-hide"
-              } shadow-xl w-[300px] h-[400px] border-2`}
+              } bg-slate-300 shadow-xl w-[300px] h-[400px] border-2`}
             ></div>
           </div>
         </div>
