@@ -107,7 +107,7 @@ body {
 
 .user-nav-show {
   position: absolute;
-  top: 72px;
+  /* top: 30px; */
   right: 0px;
   animation: user-nav-show-animate 200ms linear;
 }
@@ -142,7 +142,7 @@ body {
   }
   to {
     position: absolute;
-    top: 72px;
+    top: 65px;
     right: 0px;
   }
 }

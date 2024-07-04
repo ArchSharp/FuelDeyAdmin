@@ -67,6 +67,8 @@ export const AdminDashboard = () => {
     }
   }, [coordinates]);
 
+  console.log("first: ", isLarge);
+
   return (
     <div className="flex relative">
       <div
