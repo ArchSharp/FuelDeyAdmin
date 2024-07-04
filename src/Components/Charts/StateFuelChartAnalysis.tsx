@@ -44,7 +44,11 @@ class StateFuelChartAnalysis extends PureComponent<StateFuelChartAnalysisProps> 
     // console.log("state fuel: ", transformedData, ", maxValue: ", exactMaxValue);
 
     return (
-      <ResponsiveContainer width="100%" height="85%">
+      <ResponsiveContainer
+        width="100%"
+        height="85%"
+        // style={{ border: "3px solid", padding: "0px", margin: "0px" }}
+      >
         <BarChart
           width={500}
           height={300}
