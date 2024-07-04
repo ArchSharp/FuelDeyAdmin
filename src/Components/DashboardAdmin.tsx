@@ -1,6 +1,6 @@
 import { DashboardCard } from "./DashboardCard";
-import fuelDrop from "../assets/Images/fuel-splash3.png";
 import StateFuelChartAnalysis from "./Charts/StateFuelChartAnalysis";
+import { ChartSection } from "./Charts/ChartSection";
 
 export const DashboardAdmin = () => {
   return (
@@ -43,41 +43,15 @@ export const DashboardAdmin = () => {
       <div className="">
         <div className="overflow-x-auto">
           <div className="w-fit mx-5 flex items-center mt-10 mb-5">
-            <div className="flex items-center cursor-pointer rounded-md px-[8px] bg-gradient-to-r from-blue-500 to-green-500">
-              <img src={fuelDrop} alt="fuel-drop" className="w-[15px]" />
-              <div className="font-bold font-poppins text-white ml-2 mr-4 text-sm tracking-wider">
-                Availability
-              </div>
-            </div>
+            <ChartSection css={"py-1"} title="Availability" />
 
-            <div className="flex items-center cursor-pointer rounded-md px-[8px] bg-gradient-to-r from-blue-500 to-green-500 ml-5">
-              <img src={fuelDrop} alt="fuel-drop" className="w-[15px]" />
-              <div className="font-bold font-poppins text-white ml-2 mr-4 text-sm tracking-wider text-center">
-                Stations vs <br /> Availability No.
-              </div>
-            </div>
+            <ChartSection css={"ml-5 py-1"} title="Overall Status" />
 
-            <div className="flex items-center cursor-pointer rounded-md px-[8px] bg-gradient-to-r from-blue-500 to-green-500 ml-5">
-              <img src={fuelDrop} alt="fuel-drop" className="w-[15px]" />
-              <div className="font-bold font-poppins text-white ml-2 mr-4 text-sm tracking-wider text-center">
-                Availability <br />
-                percentage
-              </div>
-            </div>
+            <ChartSection css={"ml-5 py-1"} title="Availability %" />
 
-            <div className="flex items-center cursor-pointer rounded-md px-[8px] bg-gradient-to-r from-blue-500 to-green-500 ml-5">
-              <img src={fuelDrop} alt="fuel-drop" className="w-[15px]" />
-              <div className="font-bold font-poppins text-white ml-2 mr-4 text-sm tracking-wider">
-                Stock Level
-              </div>
-            </div>
+            <ChartSection css={"ml-5 py-1"} title="Stock Level" />
 
-            <div className="flex items-center cursor-pointer rounded-md px-[8px] bg-gradient-to-r from-blue-500 to-green-500 ml-5">
-              <img src={fuelDrop} alt="fuel-drop" className="w-[15px]" />
-              <div className="font-bold font-poppins text-white ml-2 mr-4 text-sm tracking-wider">
-                Fuel Types
-              </div>
-            </div>
+            <ChartSection css={"ml-5 py-1"} title="Fuel Types" />
           </div>
         </div>
         <h1 className="font-bold font-manrope text-xl">State Fuel Analysis</h1>
