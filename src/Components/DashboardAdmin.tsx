@@ -4,7 +4,7 @@ import StateFuelChartAnalysis from "./Charts/StateFuelChartAnalysis";
 
 export const DashboardAdmin = () => {
   return (
-    <div className="border-2 border-red-600 px-3 md:px-5 lg:px-10">
+    <div className="px-3 md:px-5 lg:px-10">
       <div className={`w-full py-5 overflow-x-auto`}>
         <div className="w-fit flex items-center">
           <DashboardCard
