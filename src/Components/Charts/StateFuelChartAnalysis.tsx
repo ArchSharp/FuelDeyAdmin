@@ -39,7 +39,7 @@ class StateFuelChartAnalysis extends PureComponent<StateFuelChartAnalysisProps> 
       0
     );
 
-    let exactMaxValue = maxValue + 10;
+    let exactMaxValue = maxValue + 100;
 
     // console.log("state fuel: ", transformedData, ", maxValue: ", exactMaxValue);
 
