@@ -42,7 +42,7 @@ export const DashboardAdmin = () => {
 
       <div className="">
         <div className="overflow-x-auto">
-          <div className="w-fit mx-5 flex items-center mt-10 mb-5">
+          <div className="w-fit flex items-center mt-10 mb-5">
             <ChartSection css={"py-1"} title="Availability" />
 
             <ChartSection css={"ml-5 py-1"} title="Overall Status" />
