@@ -46,6 +46,24 @@ function App() {
           { state: "Ebonyi", availability: 70 },
           { state: "Gombe", availability: 20 },
         ],
+        totalVsAvailability: [
+          { state: "Lagos", availability: 200, totalStation: 250 },
+          { state: "Abuja", availability: 120, totalStation: 170 },
+          { state: "Kaduna", availability: 10, totalStation: 30 },
+          { state: "Kano", availability: 150, totalStation: 200 },
+          { state: "Kebbi", availability: 45, totalStation: 95 },
+          { state: "Kwara", availability: 15, totalStation: 65 },
+          { state: "Abia", availability: 25, totalStation: 75 },
+          { state: "Katsina", availability: 30, totalStation: 80 },
+          { state: "Kogi", availability: 90, totalStation: 140 },
+          { state: "Borno", availability: 55, totalStation: 105 },
+          { state: "Nassarawa", availability: 65, totalStation: 115 },
+          { state: "Kebbi", availability: 40, totalStation: 90 },
+          { state: "Zamfara", availability: 35, totalStation: 85 },
+          { state: "Delta", availability: 75, totalStation: 125 },
+          { state: "Ebonyi", availability: 70, totalStation: 120 },
+          { state: "Gombe", availability: 20, totalStation: 70 },
+        ],
       })
     );
   }, []);

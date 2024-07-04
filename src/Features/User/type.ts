@@ -16,10 +16,17 @@ export interface IUserState {
 
 export interface StateFuelDashboardData {
   availability: Availabilty[];
+  totalVsAvailability: TotalVsAvailability[];
 }
 
 export interface Availabilty {
   state: string;
+  availability: number;
+}
+
+export interface TotalVsAvailability {
+  state: string;
+  totalStation: number;
   availability: number;
 }
 

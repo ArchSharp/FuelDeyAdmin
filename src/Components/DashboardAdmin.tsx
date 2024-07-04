@@ -2,6 +2,7 @@ import { DashboardCard } from "./DashboardCard";
 import StateFuelChartAnalysis from "./Charts/StateFuelChartAnalysis";
 import { ChartSection } from "./Charts/ChartSection";
 import { useState } from "react";
+import TotalStationsVsAvailability from "./Charts/TotalStationsVsAvailability";
 
 export const DashboardAdmin = () => {
   const [chartIndex, setChartIndex] = useState(0);
@@ -94,6 +95,7 @@ export const DashboardAdmin = () => {
 
         <div className="h-[500px] border-2 mt-10 mb-20">
           {chartIndex === 0 && <StateFuelChartAnalysis />}
+          {chartIndex === 1 && <TotalStationsVsAvailability />}
         </div>
       </div>
     </div>
