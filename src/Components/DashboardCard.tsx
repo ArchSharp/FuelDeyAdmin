@@ -1,4 +1,4 @@
-import { BsFillFuelPumpFill } from "react-icons/bs";
+import { BsDropletFill, BsFillFuelPumpFill } from "react-icons/bs";
 import { PiUserSwitchFill } from "react-icons/pi";
 
 interface DashboardCardProps {
@@ -35,6 +35,10 @@ export const DashboardCard = ({
             {svgIndex === 2 && (
               <PiUserSwitchFill className="mr-3 text-2xl text-gray-700" />
             )}
+            {svgIndex === 3 && (
+              <BsDropletFill className="mr-3 text-2xl text-orange-700" />
+            )}
+
             <div className="font-pacifico text-sm md:text-xl">{title}</div>
           </div>
           <div className="font-pacifico text-sm md:text-xl">{number}</div>

@@ -185,6 +185,16 @@ export const AdminDashboard = () => {
             <div className="w-fit flex items-center">
               <DashboardCard
                 css={"ml-3 md:ml-5 lg:ml-10"}
+                svgIndex={3}
+                title="Fuel Availability"
+                number={20000}
+                left_title="High Stock"
+                right_title="Low Stock"
+                left_number={15000}
+                right_number={5000}
+              />
+              <DashboardCard
+                css={"mx-10"}
                 svgIndex={1}
                 title="Vendors"
                 number={120}
@@ -194,7 +204,7 @@ export const AdminDashboard = () => {
                 right_number={20}
               />
               <DashboardCard
-                css={"mx-10"}
+                css={"ml-10"}
                 svgIndex={2}
                 title="Buyers"
                 number={20000}
