@@ -11,6 +11,16 @@ export interface IUserState {
   userId?: string;
   token?: string;
   currentRoute?: string;
+  stateFuelDashboardData?: StateFuelDashboardData;
+}
+
+export interface StateFuelDashboardData {
+  availability: Availabilty[];
+}
+
+export interface Availabilty {
+  state: string;
+  availability: number;
 }
 
 export interface IAlertProps {

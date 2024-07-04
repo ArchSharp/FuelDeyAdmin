@@ -2,9 +2,9 @@ export const sidebars = [
   { sideText: "Dashboard", subTexts: [] },
   {
     sideText: "Vendors",
-    subTexts: ["Agents", "Merchant"],
+    subTexts: [],
   },
-  { sideText: "Buyers", subTexts: ["Processors", "Route Settings"] },
+  { sideText: "Buyers", subTexts: [] },
   { sideText: "Notifications", subTexts: [] },
   { sideText: "Staff Management", subTexts: [] },
   { sideText: "Settings", subTexts: [] },

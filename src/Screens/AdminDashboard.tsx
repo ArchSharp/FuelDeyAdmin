@@ -14,7 +14,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
-import { DashboardCard } from "../Components/DashboardCard";
+import { DashboardAdmin } from "../Components/DashboardAdmin";
 
 export const AdminDashboard = () => {
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
@@ -22,7 +22,7 @@ export const AdminDashboard = () => {
     query: "(min-width: 768px) and (max-width: 1023px)",
   });
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
-  const [mainNavIndex, setMainNavIndex] = useState<number | null>(null);
+  const [mainNavIndex, setMainNavIndex] = useState<number | null>(0);
   const [subNavIndex, setSubNavIndex] = useState<number | null>(null);
   const [isNavIn, setIsNavIn] = useState(true);
   const [showUserNav, setShowUserNav] = useState(false);
@@ -138,7 +138,7 @@ export const AdminDashboard = () => {
         ))}
       </div>
       <div className="flex flex-col w-screen lg:w-[80vw]">
-        <div className="bg-orange-400 bg-opacity-[0.5] h-[10vh] md:h-[12vh] lg:h-[100px] flex items-center">
+        <div className="bg-orange-400 bg-opacity-[0.5] h-[10vh] flex items-center">
           <AiOutlineBars
             className="lg:hidden text-3xl ml-5"
             onClick={() => setIsNavIn(!isNavIn)}
@@ -180,41 +180,8 @@ export const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="">
-          <div className={`w-full py-5 overflow-x-auto`}>
-            <div className="w-fit flex items-center">
-              <DashboardCard
-                css={"ml-3 md:ml-5 lg:ml-10"}
-                svgIndex={3}
-                title="Fuel Availability"
-                number={20000}
-                left_title="High Stock"
-                right_title="Low Stock"
-                left_number={15000}
-                right_number={5000}
-              />
-              <DashboardCard
-                css={"mx-10"}
-                svgIndex={1}
-                title="Vendors"
-                number={120}
-                left_title="Active"
-                right_title="Inactive"
-                left_number={100}
-                right_number={20}
-              />
-              <DashboardCard
-                css={""}
-                svgIndex={2}
-                title="Buyers"
-                number={20000}
-                left_title="Active"
-                right_title="Inactive"
-                left_number={19000}
-                right_number={1000}
-              />
-            </div>
-          </div>
+        <div className="h-[90vh] overflow-y-auto">
+          {mainNavIndex === 0 && <DashboardAdmin />}
         </div>
       </div>
       {/* <ChangePassword /> */}

@@ -10,6 +10,7 @@ import {
   // IProfile,
   IProfile,
   IAlertProps,
+  StateFuelDashboardData,
 } from "./type";
 
 const initialState: IUserState = {
@@ -57,6 +58,13 @@ const userSlice = createSlice({
     },
     setIsAuth: (state, { payload }: PayloadAction<boolean>) => {
       state.isAuth = payload;
+    },
+
+    setStateFuelDashboardData: (
+      state,
+      { payload }: PayloadAction<StateFuelDashboardData>
+    ) => {
+      state.stateFuelDashboardData = payload;
     },
   },
 });
@@ -265,5 +273,6 @@ export const {
   setShowAlert,
   setToken,
   setCurrentRoute,
+  setStateFuelDashboardData,
 } = userSlice.actions;
 export default userSlice.reducer;
