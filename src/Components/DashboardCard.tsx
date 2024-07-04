@@ -35,25 +35,23 @@ export const DashboardCard = ({
             {svgIndex === 2 && (
               <PiUserSwitchFill className="mr-3 text-2xl text-gray-700" />
             )}
-            <div className="font-pacifico text-lg md:text-2xl">{title}</div>
+            <div className="font-pacifico text-sm md:text-xl">{title}</div>
           </div>
-          <div className="font-pacifico text-lg md:text-2xl">{number}</div>
+          <div className="font-pacifico text-sm md:text-xl">{number}</div>
         </div>
       </div>
       <div className="flex items-center justify-center h-1/2 rounded-bl-[35px] rounded-br-[35px]">
         <div className=" w-1/2 flex flex-col items-center justify-center h-full rounded-bl-[35px]">
-          <div className="text-green-600 font-poppins font-bold text-lg md:text-2xl">
+          <div className="text-green-600 font-poppins font-bold text-sm md:text-xl">
             {left_title}
           </div>
-          <div className="font-pacifico text-lg md:text-2xl">{left_number}</div>
+          <div className="font-pacifico text-sm md:text-xl">{left_number}</div>
         </div>
         <div className="w-1/2 rounded-br-[35px] flex flex-col items-center justify-center">
-          <div className="text-red-600 font-poppins font-bold text-lg md:text-2xl">
+          <div className="text-red-600 font-poppins font-bold text-sm md:text-xl">
             {right_title}
           </div>
-          <div className="font-pacifico text-lg md:text-2xl">
-            {right_number}
-          </div>
+          <div className="font-pacifico text-sm md:text-xl">{right_number}</div>
         </div>
       </div>
     </div>
