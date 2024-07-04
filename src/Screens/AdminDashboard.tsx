@@ -204,7 +204,7 @@ export const AdminDashboard = () => {
                 right_number={20}
               />
               <DashboardCard
-                css={"ml-10"}
+                css={""}
                 svgIndex={2}
                 title="Buyers"
                 number={20000}
