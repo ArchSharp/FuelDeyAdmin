@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  CartesianGrid,
 } from "recharts";
 // import { useAppSelector } from "../../Store/store";
 import { connect } from "react-redux";
@@ -61,7 +62,7 @@ class TotalStationsVsAvailability extends PureComponent<TotalStationsVsAvailabil
             bottom: 5,
           }}
         >
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="state" className=" text-xs" />
           <YAxis domain={[0, exactMaxValue]} />
           <Tooltip contentStyle={{ fontSize: 12 }} />

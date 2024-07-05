@@ -94,10 +94,12 @@ export const DashboardAdmin = () => {
         </div>
         <h1 className="font-bold font-manrope text-xl">State Fuel Analysis</h1>
 
-        <div className="h-[500px] border-2 mt-10 mb-20">
-          {chartIndex === 0 && <StateFuelChartAnalysis />}
-          {chartIndex === 1 && <TotalStationsVsAvailability />}
-          {chartIndex === 2 && <StateFuelChartPercent />}
+        <div className="h-[500px] mt-10 mb-20 overflow-x-auto">
+          <div className="w-[150vw] md:w-[90vw] lg:w-[70vw] h-full">
+            {chartIndex === 0 && <StateFuelChartAnalysis />}
+            {chartIndex === 1 && <TotalStationsVsAvailability />}
+            {chartIndex === 2 && <StateFuelChartPercent />}
+          </div>
         </div>
       </div>
     </div>
