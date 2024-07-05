@@ -24,23 +24,26 @@ class StateFuelStockLevel extends PureComponent<StateFuelStockLevelProps> {
   render() {
     const { stateFuelDashboardData = { availability: [] } } = this.props;
 
-    const transformedData = stateFuelDashboardData?.availability?.map(
+    const transformedData = stateFuelDashboardData?.stockLevel?.map(
       (item: any) => ({
-        Availability: item.availability,
+        Petrol: item.stockLevel.petrol,
+        Diesel: item.stockLevel.diesel,
+        Kerosene: item.stockLevel.kerosene,
+        CookingGas: item.stockLevel.cookingGas,
         state: item.state,
         ...item,
       })
     );
 
-    const maxValue = stateFuelDashboardData?.availability?.reduce(
+    const maxValue = stateFuelDashboardData?.stockLevel?.reduce(
       (max: number, item: any) => {
-        const maxAvailability = Math.max(item?.availability || 0);
+        const maxAvailability = Math.max(item?.stockLevel.petrol || 0);
         return Math.max(max, maxAvailability);
       },
       0
     );
 
-    let exactMaxValue = maxValue + 100;
+    let exactMaxValue = maxValue + 1000;
 
     // console.log("state fuel: ", transformedData, ", maxValue: ", exactMaxValue);
 
@@ -66,7 +69,10 @@ class StateFuelStockLevel extends PureComponent<StateFuelStockLevelProps> {
           <YAxis domain={[0, exactMaxValue]} />
           <Tooltip contentStyle={{ fontSize: 12 }} />
           <Legend className="text-sm" />
-          <Bar dataKey="Availability" fill="#1EBB9F" />
+          <Bar dataKey="Petrol" fill="orange" />
+          <Bar dataKey="Diesel" fill="brown" />
+          <Bar dataKey="Kerosene" fill="#1EBB9F" />
+          <Bar dataKey="CookingGas" fill="lightblue" />
         </BarChart>
       </ResponsiveContainer>
     );
