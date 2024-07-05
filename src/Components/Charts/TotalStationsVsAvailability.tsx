@@ -57,7 +57,7 @@ class TotalStationsVsAvailability extends PureComponent<TotalStationsVsAvailabil
           margin={{
             top: 20,
             right: 30,
-            left: 20,
+            left: 5,
             bottom: 5,
           }}
         >

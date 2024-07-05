@@ -52,7 +52,7 @@ class StateFuelChartPercent extends PureComponent<StateFuelChartPercentProps> {
       if (active && payload && payload.length) {
         return (
           <div className="custom-tooltip">
-            <p className="label">{`${payload[0].payload.state} : ${payload[0].value}%`}</p>
+            <p className="label text-xs md:text-sm lg:text-base text-green-800">{`${payload[0].payload.state} : ${payload[0].value}%`}</p>
           </div>
         );
       }
@@ -88,6 +88,7 @@ class StateFuelChartPercent extends PureComponent<StateFuelChartPercentProps> {
             <LabelList
               dataKey="Percentage"
               position="top"
+              className="text-xs md:text-sm lg:text-base"
               formatter={(value: number) => `${value}%`}
             />
           </Bar>
