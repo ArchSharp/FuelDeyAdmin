@@ -17,6 +17,19 @@ export interface IUserState {
 export interface StateFuelDashboardData {
   availability: Availabilty[];
   totalVsAvailability: TotalVsAvailability[];
+  stockLevel: StateStockLevel[];
+}
+
+export interface StateStockLevel {
+  state: string;
+  stockLevel: StockLevel;
+}
+
+export interface StockLevel {
+  petrol: number;
+  diesel: number;
+  kerosene: number;
+  cookingGas: number;
 }
 
 export interface Availabilty {

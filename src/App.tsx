@@ -64,6 +64,107 @@ function App() {
           { state: "Ebonyi", availability: 70, totalStation: 120 },
           { state: "Gombe", availability: 20, totalStation: 70 },
         ],
+        stockLevel: [
+          {
+            state: "Lagos",
+            stockLevel: {
+              petrol: 2000,
+              diesel: 1200,
+              kerosene: 1450,
+              cookingGas: 2300,
+            },
+          },
+          {
+            state: "Abuja",
+            stockLevel: {
+              petrol: 1000,
+              diesel: 200,
+              kerosene: 450,
+              cookingGas: 300,
+            },
+          },
+          {
+            state: "Kano",
+            stockLevel: {
+              petrol: 2500,
+              diesel: 1500,
+              kerosene: 1550,
+              cookingGas: 2500,
+            },
+          },
+          {
+            state: "Nassarawa",
+            stockLevel: {
+              petrol: 900,
+              diesel: 600,
+              kerosene: 850,
+              cookingGas: 700,
+            },
+          },
+          {
+            state: "Abia",
+            stockLevel: {
+              petrol: 800,
+              diesel: 500,
+              kerosene: 550,
+              cookingGas: 4300,
+            },
+          },
+          {
+            state: "Kogi",
+            stockLevel: {
+              petrol: 2000,
+              diesel: 1200,
+              kerosene: 1450,
+              cookingGas: 2300,
+            },
+          },
+          {
+            state: "Kaduna",
+            stockLevel: {
+              petrol: 3000,
+              diesel: 3200,
+              kerosene: 3450,
+              cookingGas: 3300,
+            },
+          },
+          {
+            state: "Kebbi",
+            stockLevel: {
+              petrol: 4000,
+              diesel: 1200,
+              kerosene: 450,
+              cookingGas: 3300,
+            },
+          },
+          {
+            state: "Kwara",
+            stockLevel: {
+              petrol: 1550,
+              diesel: 1800,
+              kerosene: 1850,
+              cookingGas: 2800,
+            },
+          },
+          {
+            state: "Borno",
+            stockLevel: {
+              petrol: 2400,
+              diesel: 1700,
+              kerosene: 2450,
+              cookingGas: 4300,
+            },
+          },
+          {
+            state: "Delta",
+            stockLevel: {
+              petrol: 2000,
+              diesel: 1200,
+              kerosene: 1450,
+              cookingGas: 2300,
+            },
+          },
+        ],
       })
     );
   }, []);

@@ -4,6 +4,7 @@ import { ChartSection } from "./Charts/ChartSection";
 import { useState } from "react";
 import TotalStationsVsAvailability from "./Charts/TotalStationsVsAvailability";
 import StateFuelChartPercent from "./Charts/StateFuelChartPercent";
+import StateFuelStockLevel from "./Charts/StateFuelStockLevel";
 
 export const DashboardAdmin = () => {
   const [chartIndex, setChartIndex] = useState(0);
@@ -83,13 +84,13 @@ export const DashboardAdmin = () => {
               ChartIndex={ChartIndex}
             />
 
-            <ChartSection
+            {/* <ChartSection
               css={"ml-5 py-1"}
               title="Fuel Types"
               index={4}
               chartIndex={chartIndex}
               ChartIndex={ChartIndex}
-            />
+            /> */}
           </div>
         </div>
         <h1 className="font-bold font-manrope text-xl">State Fuel Analysis</h1>
@@ -99,6 +100,7 @@ export const DashboardAdmin = () => {
             {chartIndex === 0 && <StateFuelChartAnalysis />}
             {chartIndex === 1 && <TotalStationsVsAvailability />}
             {chartIndex === 2 && <StateFuelChartPercent />}
+            {chartIndex === 3 && <StateFuelStockLevel />}
           </div>
         </div>
       </div>
