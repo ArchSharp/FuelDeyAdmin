@@ -401,15 +401,11 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   } font-PoppinsRegular text-xs md:text-base cursor-pointer h-[45px] hover:bg-orange-200`}
                   onClick={() => {
                     setCurrentIndex(index);
-                    // setOpenTrx(!openTrx);
                   }}
                 >
                   <td className="text-center">{index + 1}</td>
-                  <td
-                    className="flex items-center justify-center h-[45px]"
-                    onClick={() => setOpenTrx(!openTrx)}
-                  >
-                    <FaEye />
+                  <td className="flex items-center justify-center h-[45px]">
+                    <FaEye onClick={() => setOpenTrx(!openTrx)} />
                   </td>
                   <td className="table-cell">{`${
                     dt.vendorName === null ? "-" : dt.vendorName
