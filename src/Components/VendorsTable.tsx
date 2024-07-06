@@ -85,7 +85,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
       setData(vendors);
     }
     // setShowFilter(false);
-    setShowProcessor((prevValue) => !prevValue);
+    // setShowProcessor((prevValue) => !prevValue);
   }, [processors, vendors, data?.pagination]);
 
   // const handleProcessorChange = (
@@ -157,7 +157,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
     // dispatch(getAllTransactions(1));
   }, [dispatch]);
 
-  console.log("sorted data: ", sortedData);
+  // console.log("sorted data: ", showProcessor);
 
   return (
     <div className="w-full min-h-[93vh] h-fit mb-10 transaction">
