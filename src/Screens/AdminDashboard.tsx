@@ -15,6 +15,7 @@ import { BsFillFuelPumpFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 import { DashboardAdmin } from "../Components/DashboardAdmin";
+import { Vendors } from "./Vendors";
 
 export const AdminDashboard = () => {
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
@@ -184,6 +185,7 @@ export const AdminDashboard = () => {
 
         <div className="h-[90vh] overflow-y-auto">
           {mainNavIndex === 0 && <DashboardAdmin />}
+          {mainNavIndex === 1 && <Vendors />}
         </div>
       </div>
       {/* <ChangePassword /> */}

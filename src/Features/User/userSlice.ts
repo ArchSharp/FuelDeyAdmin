@@ -11,6 +11,7 @@ import {
   IProfile,
   IAlertProps,
   StateFuelDashboardData,
+  IVendors,
 } from "./type";
 
 const initialState: IUserState = {
@@ -65,6 +66,10 @@ const userSlice = createSlice({
       { payload }: PayloadAction<StateFuelDashboardData>
     ) => {
       state.stateFuelDashboardData = payload;
+    },
+
+    setVendors: (state, { payload }: PayloadAction<IVendors | null>) => {
+      state.vendors = payload;
     },
   },
 });
@@ -274,5 +279,6 @@ export const {
   setToken,
   setCurrentRoute,
   setStateFuelDashboardData,
+  setVendors,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -10,7 +10,10 @@ import { ErrorPage } from "./Screens/ErrorPage";
 import { Home } from "./Screens/Home";
 import { AdminDashboard } from "./Screens/AdminDashboard";
 import { VendorDashboard } from "./Screens/VendorDashboard";
-import { setStateFuelDashboardData } from "./Features/User/userSlice";
+import {
+  setStateFuelDashboardData,
+  setVendors,
+} from "./Features/User/userSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,6 +29,35 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(
+      setVendors({
+        data: [
+          {
+            vendorName: "Mobil Apapa",
+            manager: "Emmanuel Crystal",
+            phoneno: "+234234234234234",
+            email: "archraphr@gmail.com",
+            address: "1 crescent Jalingo road",
+            lga: "Victoria island",
+            state: "Lagos",
+            isActive: true,
+            isFuelAvailable: true,
+          },
+          {
+            vendorName: "Mobil Apapa",
+            manager: "Emmanuel Crystal",
+            phoneno: "+234234234234234",
+            email: "archraphr@gmail.com",
+            address: "1 crescent Jalingo road",
+            lga: "Victoria island",
+            state: "Lagos",
+            isActive: true,
+            isFuelAvailable: true,
+          },
+        ],
+        pagination: { limit: 30, page: 1, totalCount: 30, totalUser: 500 },
+      })
+    );
     dispatch(
       setStateFuelDashboardData({
         availability: [

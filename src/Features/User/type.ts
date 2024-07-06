@@ -12,6 +12,31 @@ export interface IUserState {
   token?: string;
   currentRoute?: string;
   stateFuelDashboardData?: StateFuelDashboardData;
+  vendors?: IVendors | null;
+}
+
+export interface IVendors {
+  data: IVendor[];
+  pagination: IPagination;
+}
+
+export interface IVendor {
+  vendorName: string;
+  manager: string;
+  phoneno: string;
+  email: string;
+  address: string;
+  lga: string;
+  state: string;
+  isFuelAvailable: boolean;
+  isActive: boolean;
+}
+
+export interface IPagination {
+  limit: number;
+  page: number;
+  totalCount: number;
+  totalUser: number;
 }
 
 export interface StateFuelDashboardData {
@@ -42,6 +67,8 @@ export interface TotalVsAvailability {
   totalStation: number;
   availability: number;
 }
+
+export interface IVendorsSummary {}
 
 export interface IAlertProps {
   showAlert: boolean;
