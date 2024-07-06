@@ -398,7 +398,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   key={index}
                   className={`${
                     (index + 1) % 2 == 0 ? "bg-slate-200" : "bg-white"
-                  } font-PoppinsRegular text-xs md:text-base cursor-pointer h-[45px]`}
+                  } font-PoppinsRegular text-xs md:text-base cursor-pointer h-[45px] hover:bg-orange-200`}
                   onClick={() => {
                     setCurrentIndex(index);
                     // setOpenTrx(!openTrx);
