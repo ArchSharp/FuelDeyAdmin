@@ -405,33 +405,33 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                     setCurrentIndex(index);
                   }}
                 >
-                  <td className="text-center">{index + 1}</td>
+                  <td className="text-center text-sm">{index + 1}</td>
                   <td className="flex items-center justify-center h-[45px]">
                     <FaEye onClick={() => setOpenTrx(!openTrx)} />
                   </td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.vendorName === null ? "-" : dt.vendorName
                   }`}</td>
 
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.manager === null ? "-" : dt.manager
                   }`}</td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.phoneno === null ? "-" : dt.phoneno
                   }`}</td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.address === null ? "-" : dt.address
                   }`}</td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.lga === null ? "-" : dt.lga
                   }`}</td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.state === null ? "-" : dt.state
                   }`}</td>
-                  <td className="text-center">{`${
+                  <td className="text-center text-sm">{`${
                     dt.isFuelAvailable === null ? "-" : dt.isFuelAvailable
                   }`}</td>
                 </tr>
