@@ -55,7 +55,7 @@ function App() {
             isFuelAvailable: true,
           },
         ],
-        pagination: { limit: 30, page: 1, totalCount: 30, totalUser: 500 },
+        pagination: { limit: 30, page: 1, totalCount: 70, totalUser: 500 },
       })
     );
     dispatch(

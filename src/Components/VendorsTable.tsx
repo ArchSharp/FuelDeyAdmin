@@ -467,7 +467,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
             handlePageClick(e);
           }}
           containerClassName={"pagination"}
-          activeClassName={"bg-main text-white"}
+          activeClassName={"bg-orange-400 text-white"}
           initialPage={data?.pagination?.page - 1}
         />
       </div>

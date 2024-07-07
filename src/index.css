@@ -185,3 +185,14 @@ body {
     right: 0px;
   }
 }
+
+.paginate li {
+  margin: 0px 8px;
+  border: 1px solid gray;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
