@@ -46,13 +46,13 @@ export const DashboardCard = ({
       </div>
       <div className="flex items-center justify-center h-1/2 rounded-bl-[35px] rounded-br-[35px]">
         <div className=" w-1/2 flex flex-col items-center justify-center h-full rounded-bl-[35px]">
-          <div className="text-green-600 font-poppins font-bold text-sm md:text-xl">
+          <div className="text-green-600 font-poppins font-bold text-sm md:text-lg">
             {left_title}
           </div>
           <div className="font-pacifico text-sm md:text-lg">{left_number}</div>
         </div>
         <div className="w-1/2 rounded-br-[35px] flex flex-col items-center justify-center">
-          <div className="text-red-600 font-poppins font-bold text-sm md:text-xl">
+          <div className="text-red-600 font-poppins font-bold text-sm md:text-lg">
             {right_title}
           </div>
           <div className="font-pacifico text-sm md:text-lg">{right_number}</div>
