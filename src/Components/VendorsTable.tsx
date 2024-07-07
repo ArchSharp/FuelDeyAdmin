@@ -160,7 +160,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   // console.log("sorted data: ", showProcessor);
 
   return (
-    <div className="w-full min-h-[93vh] h-fit mb-10 transaction">
+    <div className="w-[1125px] xl:w-full min-h-[93vh] h-fit mb-10 transaction">
       <VendorDetailsModal
         isOpen={openTrx}
         onClose={closeModal}
@@ -296,7 +296,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
         <thead>
           <tr className="bg-slate-400 h-[50px] text-gray font-PoppinsRegular text-xs">
             <th>
-              <div className="flex items-center pl-3">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 S/N
                 {sortBy === "s/n" && (
                   <span>
@@ -306,10 +306,12 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th>
-              <div className="flex items-center pl-3">VIEW</div>
+              <div className="flex items-center justify-center px-2 text-nowrap">
+                VIEW
+              </div>
             </th>
             <th onClick={() => handleSort("vendorName")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 VENDOR NAME
                 {sortBy === "vendorName" && (
                   <span>
@@ -319,7 +321,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("manager")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 MANAGER
                 {sortBy === "manager" && (
                   <span>
@@ -329,7 +331,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("phoneno")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 PHONE NUMBER
                 {sortBy === "phoneno" && (
                   <span>
@@ -339,7 +341,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("email")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 EMAIL
                 {sortBy === "email" && (
                   <span>
@@ -349,7 +351,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("address")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 ADDRESS
                 {sortBy === "address" && (
                   <span>
@@ -359,7 +361,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("lga")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 LOCAL GOVERNMENT
                 {sortBy === "lga" && (
                   <span>
@@ -369,7 +371,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("state")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 STATE
                 {sortBy === "state" && (
                   <span>
@@ -379,7 +381,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               </div>
             </th>
             <th onClick={() => handleSort("isFuelAvailable")}>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center px-2 text-nowrap">
                 FUEL AVAILABILITY
                 {sortBy === "isFuelAvailable" && (
                   <span>
@@ -407,29 +409,29 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   <td className="flex items-center justify-center h-[45px]">
                     <FaEye onClick={() => setOpenTrx(!openTrx)} />
                   </td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.vendorName === null ? "-" : dt.vendorName
                   }`}</td>
 
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.manager === null ? "-" : dt.manager
                   }`}</td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.phoneno === null ? "-" : dt.phoneno
                   }`}</td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.address === null ? "-" : dt.address
                   }`}</td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.lga === null ? "-" : dt.lga
                   }`}</td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.state === null ? "-" : dt.state
                   }`}</td>
-                  <td className="table-cell">{`${
+                  <td className="text-center">{`${
                     dt.isFuelAvailable === null ? "-" : dt.isFuelAvailable
                   }`}</td>
                 </tr>
