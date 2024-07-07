@@ -106,7 +106,7 @@ export const AdminDashboard = () => {
               )}
               {index === 4 && <PiUsersThreeFill className="mr-2 text-2xl" />}
               {index === 5 && <IoSettings className="mr-2 text-2xl" />}
-              {sidebar.sideText}{" "}
+              <div className="text-sm">{sidebar.sideText} </div>
               {sidebar.subTexts.length > 0 && (
                 <FaChevronRight
                   className={`ml-auto ${
