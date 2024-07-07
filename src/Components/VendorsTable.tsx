@@ -172,7 +172,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
         {/* processors */}
         <div className="w-[165px] h-[38px] text-sm ml-7 z-[3]">
           <button
-            className="flex w-full h-full justify-center items-center border-[1px] rounded-[64px] text-xs font-PoppinsRegular font-bold"
+            className="flex w-full h-full justify-center items-center border-[1px] rounded-[64px] text-xs font-poppins font-bold"
             onClick={() => {
               setShowProcessor(!showProcessor);
               // setShowFilter(false);
@@ -208,7 +208,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
         {/* filters */}
         {/* <div className="w-[149px] h-[38px] z-[3]">
           <button
-            className="flex w-full h-full text-xs justify-center items-center border-[1px] rounded-[64px] font-PoppinsRegular font-bold"
+            className="flex w-full h-full text-xs justify-center items-center border-[1px] rounded-[64px] font-poppins font-bold"
             onClick={() => {
               setShowFilter(!showFilter);
               setShowProcessor(false);
@@ -240,11 +240,11 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               // defaultValue={""}
               placeholder="date"
               onChange={(e) => handleFromDate(e.currentTarget.value)}
-              className="rounded-[64px] h-full w-[145px] pr-1 border-[1px] text-center border-gray-400 font-PoppinsRegular text-xs font-bold"
+              className="rounded-[64px] h-full w-[145px] pr-1 border-[1px] text-center border-gray-400 font-poppins text-xs font-bold"
             />
           </div>
         </div>
-        <div className="flex items-center text-sm font-PoppinsRegular font-bold">
+        <div className="flex items-center text-sm font-poppins font-bold">
           -
         </div>
         <div className="w-[160px] h-[38px] z-[3] ml-3 mr-5">
@@ -260,7 +260,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               placeholder=""
               // readOnly
               onChange={(e) => handleToDate(e.currentTarget.value)}
-              className="rounded-[64px] h-full w-[145px] pr-1 border-[1px] text-center border-gray-400 font-PoppinsRegular text-xs font-bold"
+              className="rounded-[64px] h-full w-[145px] pr-1 border-[1px] text-center border-gray-400 font-poppins text-xs font-bold"
             />
           </div>
         </div>
@@ -282,7 +282,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               placeholder="Search vendors by name"
               // onClick={() => handleSearch}
               onChange={(e) => setSearch(e.currentTarget.value)}
-              className="rounded-[64px] w-full pl-10 h-full border-[1px] border-gray-400 font-PoppinsRegular text-xs font-bold"
+              className="rounded-[64px] w-full pl-10 h-full border-[1px] border-gray-400 font-poppins text-xs font-bold"
             />
           </div>
         </div>
@@ -458,7 +458,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
           per page
         </div>
         <ReactPaginate
-          className="flex w-fit ml-auto mt-6 paginate font-PoppinsRegular"
+          className="flex w-fit ml-auto mt-6 paginate font-poppins"
           previousLabel={"<"}
           nextLabel={">"}
           breakLabel={"..."}

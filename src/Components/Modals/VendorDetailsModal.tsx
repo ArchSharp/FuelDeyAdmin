@@ -45,7 +45,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
     <>
       <div className={modalClasses}>
         <div className="flex">
-          <div className="w-fit font-PoppinsRegular text-base text-gray-800 font-semibold">
+          <div className="w-fit font-poppins text-base text-gray-800 font-semibold">
             Vendors details
           </div>
           <IoClose
@@ -106,7 +106,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
 
   // function CardComponents(text1: any, text2: any) {
   //   return (
-  //     <div className="my-8 w-fit font-PoppinsRegular text-left text-xs">
+  //     <div className="my-8 w-fit font-poppins text-left text-xs">
   //       <div className=" font-semibold text-gray-600">{text1}</div>
   //       {!text2 ? "-" : text2}
   //     </div>
@@ -116,11 +116,11 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
   // function Trxcard(l1: string, l2: string, r1: string, r2: string) {
   //   return (
   //     <div className="flex my-9">
-  //       <div className="w-fit font-PoppinsRegular text-left text-xs">
+  //       <div className="w-fit font-poppins text-left text-xs">
   //         <div className=" font-semibold text-gray-600">{l1}</div>
   //         {l2}
   //       </div>
-  //       <div className="font-PoppinsRegular text-left text-xs ml-auto mr-52 border-2">
+  //       <div className="font-poppins text-left text-xs ml-auto mr-52 border-2">
   //         <div className=" font-semibold text-gray-600">{r1}</div>
   //         {r2}
   //       </div>
