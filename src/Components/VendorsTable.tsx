@@ -294,7 +294,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
       {/* Table */}
       <table className="mt-7 w-full">
         <thead>
-          <tr className="bg-slate-400 h-[50px] text-gray font-PoppinsRegular text-xs">
+          <tr className="bg-slate-400 h-[50px] text-gray font-poppins text-xs">
             <th>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 S/N
@@ -400,7 +400,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   key={index}
                   className={`${
                     (index + 1) % 2 == 0 ? "bg-slate-200" : "bg-white"
-                  } font-PoppinsRegular text-xs md:text-base cursor-pointer h-[45px] hover:bg-orange-200`}
+                  } font-poppins text-xs md:text-base cursor-pointer h-[45px] hover:bg-orange-200`}
                   onClick={() => {
                     setCurrentIndex(index);
                   }}
