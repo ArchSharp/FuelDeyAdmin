@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useAppSelector } from "../../Store/store";
 import { IVendor } from "../../Features/User/type";
+import { VendorStockLevel } from "../Charts/VendorStockLevel";
 // import { SVGs } from "../../assets/SVGs";
 
 interface ModalProps {
@@ -76,6 +77,13 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
             "Fuel Types",
             vendor?.fuelTypes.join(", ")
           )}
+          <div className="text-center underline font-bold font-poppins mt-5">
+            Stock Levels
+          </div>
+
+          <div className="h-[300px]">
+            <VendorStockLevel vendor={vendor} />
+          </div>
         </div>
       </div>
       <div className={overlayClasses}></div>

@@ -44,6 +44,12 @@ function App() {
             isFuelAvailable: true,
             fuelTypes: ["Petrol", "Diesel"],
             ownerType: "Private",
+            stockLevel: {
+              petrol: 2000,
+              diesel: 1200,
+              kerosene: 1450,
+              cookingGas: 2300,
+            },
           },
           {
             vendorName: "NNPC Ikeja",
@@ -57,6 +63,12 @@ function App() {
             isFuelAvailable: true,
             fuelTypes: ["Petrol", "Diesel"],
             ownerType: "Government",
+            stockLevel: {
+              petrol: 2000,
+              diesel: 1200,
+              kerosene: 1450,
+              cookingGas: 2300,
+            },
           },
         ],
         pagination: { limit: 30, page: 1, totalCount: 70, totalUser: 500 },
