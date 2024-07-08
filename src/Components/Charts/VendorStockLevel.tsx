@@ -38,29 +38,31 @@ export class VendorStockLevel extends PureComponent<VendorStockLevelProps> {
     let exactMaxValue = maxValue + 1000;
 
     return (
-      <ResponsiveContainer width="120%" height="85%">
-        <BarChart
-          width={500}
-          height={300}
-          data={transformedData}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 5,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Station" className="text-xs" />
-          <YAxis domain={[0, exactMaxValue]} />
-          <Tooltip contentStyle={{ fontSize: 12 }} />
-          <Legend className="text-sm" />
-          <Bar dataKey="Petrol" fill="orange" />
-          <Bar dataKey="Diesel" fill="brown" />
-          <Bar dataKey="Kerosene" fill="#1EBB9F" />
-          <Bar dataKey="CookingGas" fill="lightblue" />
-        </BarChart>
-      </ResponsiveContainer>
+      <div style={{ width: "100%", height: "100%" }}>
+        <ResponsiveContainer width="100%" height={270}>
+          <BarChart
+            // width={500}
+            // height={300}
+            data={transformedData}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 0,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="Station" className="text-xs" />
+            <YAxis domain={[0, exactMaxValue]} />
+            <Tooltip contentStyle={{ fontSize: 12 }} />
+            <Legend className="text-sm" />
+            <Bar dataKey="Petrol" fill="orange" />
+            <Bar dataKey="Diesel" fill="brown" />
+            <Bar dataKey="Kerosene" fill="#1EBB9F" />
+            <Bar dataKey="CookingGas" fill="lightblue" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }

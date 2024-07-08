@@ -437,7 +437,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   <td className="text-center text-sm px-3">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
-                  <td className="text-center text-sm">{`${
+                  <td className="text-center text-sm text-nowrap">{`${
                     dt.address === null ? "-" : dt.address
                   }`}</td>
                   <td className="text-center text-sm px-3">{`${
@@ -455,7 +455,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   >{`${
                     dt.isFuelAvailable === true ? "Available" : "Finished"
                   }`}</td>
-                  <td className="text-center text-sm px-3">{`${
+                  <td className="text-center text-sm px-3 text-nowrap">{`${
                     dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
                   }`}</td>
                 </tr>

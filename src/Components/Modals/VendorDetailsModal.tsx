@@ -4,7 +4,6 @@ import { IoClose } from "react-icons/io5";
 import { useAppSelector } from "../../Store/store";
 import { IVendor } from "../../Features/User/type";
 import { VendorStockLevel } from "../Charts/VendorStockLevel";
-// import { SVGs } from "../../assets/SVGs";
 
 interface ModalProps {
   isOpen: boolean;
@@ -19,7 +18,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
   content,
   dataId,
 }) => {
-  const modalClasses = `w-[95vw] md:w-[720px] h-[600px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
+  const modalClasses = `w-[95vw] md:w-[720px] h-[610px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
     isOpen ? "block" : "hidden"
   }`;
 
@@ -81,7 +80,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
             Stock Levels
           </div>
 
-          <div className="h-[270px] border-2 overflow-x-auto">
+          <div className="h-[280px] w-[90vw] md:w-[712px] -ml-4 overflow-x-auto">
             <VendorStockLevel vendor={vendor} />
           </div>
         </div>

@@ -1,4 +1,4 @@
-export const admindash = "/admin*";
+export const admindash = "/admin/*";
 export const adminDash = "dashboard";
 export const vendors = "vendors";
 export const vendordash = "/vendor-dashboard";

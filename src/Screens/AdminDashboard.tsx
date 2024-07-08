@@ -74,6 +74,10 @@ export const AdminDashboard = () => {
   useEffect(() => {
     if (pathName === "/admin") {
       navigate(routes.adminDash);
+      setMainNavIndex(0);
+    } else if (pathName === "/admin/" + routes.vendors) {
+      setMainNavIndex(1);
+      navigate(routes.vendors);
     }
   }, [pathName]);
 
