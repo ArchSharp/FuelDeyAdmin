@@ -160,7 +160,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   // console.log("sorted data: ", showProcessor);
 
   return (
-    <div className="w-[1125px] xl:w-full min-h-[93vh] h-fit mb-10 transaction">
+    <div className="min-w-[1125px] xl:min-w-full min-h-[93vh] h-fit mb-10 transaction">
       <VendorDetailsModal
         isOpen={openTrx}
         onClose={closeModal}
@@ -424,11 +424,11 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                       }}
                     />
                   </td>
-                  <td className="text-center text-sm">{`${
+                  <td className="text-center text-sm text-nowrap">{`${
                     dt.vendorName === null ? "-" : dt.vendorName
                   }`}</td>
 
-                  <td className="text-center text-sm px-3">{`${
+                  <td className="text-center text-sm px-3 text-nowrap">{`${
                     dt.manager === null ? "-" : dt.manager
                   }`}</td>
                   <td className="text-center text-sm">{`${
