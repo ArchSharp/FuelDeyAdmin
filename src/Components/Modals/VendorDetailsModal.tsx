@@ -81,7 +81,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
             Stock Levels
           </div>
 
-          <div className="h-[300px]">
+          <div className="h-[270px] border-2 overflow-x-auto">
             <VendorStockLevel vendor={vendor} />
           </div>
         </div>
