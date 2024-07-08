@@ -428,26 +428,26 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                     dt.vendorName === null ? "-" : dt.vendorName
                   }`}</td>
 
-                  <td className="text-center text-sm">{`${
+                  <td className="text-center text-sm px-3">{`${
                     dt.manager === null ? "-" : dt.manager
                   }`}</td>
                   <td className="text-center text-sm">{`${
                     dt.phoneno === null ? "-" : dt.phoneno
                   }`}</td>
-                  <td className="text-center text-sm">{`${
+                  <td className="text-center text-sm px-3">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
                   <td className="text-center text-sm">{`${
                     dt.address === null ? "-" : dt.address
                   }`}</td>
-                  <td className="text-center text-sm">{`${
+                  <td className="text-center text-sm px-3">{`${
                     dt.lga === null ? "-" : dt.lga
                   }`}</td>
                   <td className="text-center text-sm">{`${
                     dt.state === null ? "-" : dt.state
                   }`}</td>
                   <td
-                    className={`text-center text-sm ${
+                    className={`text-center text-sm px-3 ${
                       dt.isFuelAvailable === true
                         ? "text-green-700"
                         : "text-red-700"
@@ -455,7 +455,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   >{`${
                     dt.isFuelAvailable === true ? "Available" : "Finished"
                   }`}</td>
-                  <td className="text-center text-sm">{`${
+                  <td className="text-center text-sm px-3">{`${
                     dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
                   }`}</td>
                 </tr>
