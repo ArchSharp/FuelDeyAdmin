@@ -1,4 +1,3 @@
-// import { ChangePassword } from "./Auths/ChangePassword";
 import { useEffect, useRef, useState } from "react";
 import { sidebars } from "../Data/sidebarsText";
 import fueldeylogo from "../assets/Images/fuel-dey-logo-no-bg.png";
@@ -16,8 +15,11 @@ import { AiOutlineBars } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 import { DashboardAdmin } from "../Components/DashboardAdmin";
 import { Vendors } from "./Vendors";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import * as routes from "../Data/Routes";
 
 export const AdminDashboard = () => {
+  const navigate = useNavigate();
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
   const isTablet = useMediaQuery({
     query: "(min-width: 768px) and (max-width: 1023px)",
@@ -30,6 +32,7 @@ export const AdminDashboard = () => {
   const userImgRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  const pathName = useLocation().pathname;
 
   const handleClick = (index: number) => {
     setMainNavIndex(index);
@@ -68,7 +71,15 @@ export const AdminDashboard = () => {
     }
   }, [coordinates]);
 
-  // console.log("first: ", isLarge);
+  useEffect(() => {
+    if (pathName === "/admin/" + routes.adminDash) {
+      setMainNavIndex(0);
+    } else if (pathName === "/admin/" + routes.vendors) {
+      setMainNavIndex(1);
+    }
+  }, [pathName]);
+
+  // console.log("first: ", pathName);
 
   return (
     <div className="flex relative">
@@ -96,6 +107,11 @@ export const AdminDashboard = () => {
               onClick={() => {
                 handleSubNavClick(-1);
                 handleClick(index);
+                let route = routes.adminDash;
+                if (index === 0) route = routes.adminDash;
+                else if (index === 1) route = routes.vendors;
+
+                navigate(route);
               }}
             >
               {index === 0 && <MdSpaceDashboard className="mr-2 text-2xl" />}
@@ -184,11 +200,12 @@ export const AdminDashboard = () => {
         </div>
 
         <div className="h-[90vh] overflow-y-auto">
-          {mainNavIndex === 0 && <DashboardAdmin />}
-          {mainNavIndex === 1 && <Vendors />}
+          <Routes>
+            <Route path={routes.adminDash} element={<DashboardAdmin />} />
+            <Route path={routes.vendors} element={<Vendors />} />
+          </Routes>
         </div>
       </div>
-      {/* <ChangePassword /> */}
     </div>
   );
 };

@@ -18,7 +18,7 @@ export const Vendors = () => {
       <div className="flex items-center ml-8 mt-10 mb-7 text-orange-600">
         <BsFillFuelPumpFill className="mr-4 text-2xl" />{" "}
         <div className="text-black font-fueldeyserifreg text-2xl">
-          4000 Available Vendors
+          4000 Vendors
         </div>
       </div>
       {/* transactions table */}

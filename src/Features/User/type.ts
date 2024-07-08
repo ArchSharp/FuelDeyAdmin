@@ -30,6 +30,8 @@ export interface IVendor {
   state: string;
   isFuelAvailable: boolean;
   isActive: boolean;
+  fuelTypes: string[];
+  ownerType: string;
 }
 
 export interface IPagination {

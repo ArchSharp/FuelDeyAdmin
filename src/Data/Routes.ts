@@ -1,4 +1,6 @@
-export const admindash = "/admin-dashboard";
+export const admindash = "/admin*";
+export const adminDash = "dashboard";
+export const vendors = "vendors";
 export const vendordash = "/vendor-dashboard";
 export const signup = "/signup";
 export const signin = "/";

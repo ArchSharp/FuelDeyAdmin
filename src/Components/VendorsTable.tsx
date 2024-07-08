@@ -390,6 +390,16 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 )}
               </div>
             </th>
+            <th onClick={() => handleSort("fuelTypes")}>
+              <div className="flex items-center justify-center px-2 text-nowrap">
+                FUEL TYPES
+                {sortBy === "fuelTypes" && (
+                  <span>
+                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
+                  </span>
+                )}
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -407,7 +417,12 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 >
                   <td className="text-center text-sm">{index + 1}</td>
                   <td className="flex items-center justify-center h-[45px]">
-                    <FaEye onClick={() => setOpenTrx(!openTrx)} />
+                    <FaEye
+                      onClick={() => {
+                        setCurrentIndex(index);
+                        setOpenTrx(!openTrx);
+                      }}
+                    />
                   </td>
                   <td className="text-center text-sm">{`${
                     dt.vendorName === null ? "-" : dt.vendorName
@@ -431,8 +446,17 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   <td className="text-center text-sm">{`${
                     dt.state === null ? "-" : dt.state
                   }`}</td>
+                  <td
+                    className={`text-center text-sm ${
+                      dt.isFuelAvailable === true
+                        ? "text-green-700"
+                        : "text-red-700"
+                    } font-bold`}
+                  >{`${
+                    dt.isFuelAvailable === true ? "Available" : "Finished"
+                  }`}</td>
                   <td className="text-center text-sm">{`${
-                    dt.isFuelAvailable === null ? "-" : dt.isFuelAvailable
+                    dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
                   }`}</td>
                 </tr>
               );
