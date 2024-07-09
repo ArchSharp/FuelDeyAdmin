@@ -44,7 +44,7 @@
 
 :root {
   --scroll-b-r: 20px;
-  --scroll-width: 5px;
+  --scroll-width: 3px;
 }
 
 ::-webkit-scrollbar {
@@ -196,3 +196,5 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+/* each-buyer-table */

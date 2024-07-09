@@ -17,6 +17,7 @@ import { DashboardAdmin } from "../Components/DashboardAdmin";
 import { Vendors } from "./Vendors";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import * as routes from "../Data/Routes";
+import { Buyers } from "./Buyers";
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -78,6 +79,9 @@ export const AdminDashboard = () => {
     } else if (pathName === "/admin/" + routes.vendors) {
       setMainNavIndex(1);
       navigate(routes.vendors);
+    } else if (pathName === "/admin/" + routes.buyers) {
+      setMainNavIndex(2);
+      navigate(routes.buyers);
     }
   }, [pathName]);
 
@@ -112,6 +116,7 @@ export const AdminDashboard = () => {
                 let route = routes.adminDash;
                 if (index === 0) route = routes.adminDash;
                 else if (index === 1) route = routes.vendors;
+                else if (index === 2) route = routes.buyers;
 
                 navigate(route);
               }}
@@ -205,6 +210,7 @@ export const AdminDashboard = () => {
           <Routes>
             <Route path={routes.adminDash} element={<DashboardAdmin />} />
             <Route path={routes.vendors} element={<Vendors />} />
+            <Route path={routes.buyers} element={<Buyers />} />
           </Routes>
         </div>
       </div>

@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useAppSelector } from "../../Store/store";
-import { IVendor } from "../../Features/User/type";
-import { VendorStockLevel } from "../Charts/VendorStockLevel";
+import { IBuyer } from "../../Features/User/type";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,7 +11,7 @@ interface ModalProps {
   dataId: number;
 }
 
-const VendorDetailsModal: React.FC<ModalProps> = ({
+const BuyerDetailsModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   content,
@@ -26,12 +25,12 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  const { vendors } = useAppSelector((state) => state.user);
+  const { buyers } = useAppSelector((state) => state.user);
 
-  const [vendor, setVendor] = useState<IVendor>();
+  const [buyer, setBuyer] = useState<IBuyer>();
 
   useEffect(() => {
-    setVendor(vendors?.data[dataId]);
+    setBuyer(buyers?.data[dataId]);
   }, [content, dataId]);
   // console.log("dataId: ", dataId);
 
@@ -40,7 +39,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
       <div className={modalClasses}>
         <div className="flex">
           <div className="w-fit font-poppins text-base text-gray-800 font-semibold">
-            Vendor details
+            Buyer details
           </div>
           <IoClose
             className="ml-auto text-2xl cursor-pointer"
@@ -49,7 +48,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
         </div>
         <div className="flex mt-2">
           <div className="text-base text-left font-semibold text-green-700">
-            {vendor?.vendorName}
+            {buyer?.fullName}
           </div>
         </div>
         <hr className="my-4" />
@@ -57,40 +56,41 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
           <div className="h-fit">
             {VendorRow(
               "",
-              "Manager Name",
-              vendor?.manager,
-              "Manager Phone",
-              vendor?.phoneno
-            )}
-            {VendorRow(
-              "mt-5",
-              "Assistant Name",
-              vendor?.manager,
-              "Assistant Phone",
-              vendor?.phoneno
+              "Buyer Name",
+              buyer?.fullName,
+              "Buyer Phone",
+              buyer?.phoneno
             )}
 
-            {VendorRow(
-              "mt-5",
-              "Owner Type",
-              vendor?.ownerType,
-              "Fuel Types",
-              vendor?.fuelTypes.join(", ")
-            )}
-            {VendorRow(
-              "mt-5",
-              "Station address",
-              `${vendor?.vendorName} ${vendor?.address} ${vendor?.state}`,
-              "Station email",
-              vendor?.email
-            )}
-            <div className="text-center underline font-bold font-poppins mt-5">
-              Stock Levels
+            {VendorRow("mt-5", "Buyer Email", buyer?.email, "", "")}
+
+            <div className="text-center mt-5 font-bold font-poppins">
+              Last Ten Visited Stations
             </div>
 
-            <div className="h-[280px] w-[90vw] md:w-[712px] -ml-4 px-3 overflow-x-auto">
-              <VendorStockLevel vendor={vendor} />
-            </div>
+            {/* {buyer?.lastTenVisitedStation.map((last, index) =>
+              VendorRow("mt-5", "", last?.stationName, "", "")
+            )} */}
+            <table className="mx-auto mt-5 font-poppins text-sm">
+              <thead>
+                <tr>
+                  <th className="px-2">S/N</th>
+                  <th>Station Name</th>
+                  <th>Station Address</th>
+                  <th>Frequency (Last 3 Days)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {buyer?.lastTenVisitedStation.map((last, index) => (
+                  <tr key={index} className="">
+                    <td className="text-center">{index + 1}</td>
+                    <td className="text-center py-2">{last.stationName}</td>
+                    <td className="text-center px-5 py-2">{last.address}</td>
+                    <td className="text-center py-2">{last.countIn3Days}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -128,4 +128,4 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
   // }
 };
 
-export default VendorDetailsModal;
+export default BuyerDetailsModal;

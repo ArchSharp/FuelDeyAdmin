@@ -8,10 +8,10 @@ import { CiSearch } from "react-icons/ci";
 
 import ReactPaginate from "react-paginate";
 import { useAppDispatch } from "../Store/store";
-import { IAlertProps, IVendor, IVendors } from "../Features/User/type";
+import { IAlertProps, IBuyer, IBuyers } from "../Features/User/type";
 import { setShowAlert } from "../Features/User/userSlice";
 import { SVGs } from "../assets/SVGs";
-import VendorDetailsModal from "./Modals/VendorDetailsModal";
+import BuyerDetailsModal from "./Modals/BuyerDetailsModal";
 
 // import { clearErrors } from "../../Features/Error/errorSlice";
 
@@ -19,14 +19,15 @@ import VendorDetailsModal from "./Modals/VendorDetailsModal";
 // import { initialData } from "../Data/TableData";
 
 type IVendorsProps = {
-  vendorsData: IVendors;
+  buyersData: IBuyers;
 };
 
-export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
+export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   // const navigate = useNavigate();
+  //   const { vendors } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [data, setData] = useState<IVendors>(vendorsData);
+  const [data, setData] = useState<IBuyers>(buyersData);
   const [sortBy, setSortBy] = useState<keyof any>("internalid");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [openTrx, setOpenTrx] = useState(false);
@@ -41,8 +42,8 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   // const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
-    setData(vendorsData);
-  }, [vendorsData]);
+    setData(buyersData);
+  }, [buyersData]);
 
   const handleRowsPerPageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -50,7 +51,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
     setRowsPerPage(parseInt(event.target.value));
   };
 
-  const handleSort = (column: keyof IVendor) => {
+  const handleSort = (column: keyof IBuyer) => {
     if (column === sortBy) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
@@ -61,8 +62,8 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
 
   const sortedData = data?.data.slice().sort((a, b) => {
     if (sortBy) {
-      const aValue = a[sortBy as keyof IVendor];
-      const bValue = b[sortBy as keyof IVendor];
+      const aValue = a[sortBy as keyof IBuyer];
+      const bValue = b[sortBy as keyof IBuyer];
       if (aValue < bValue) {
         return sortOrder === "asc" ? -1 : 1;
       }
@@ -74,18 +75,18 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   });
 
   useEffect(() => {
-    const sortedData = vendorsData?.data
+    const sortedData = buyersData?.data
       ?.slice()
       .filter((dt: any) => dt?.processorName === processors);
 
     if (processors !== "All Processors") {
       setData({ data: sortedData, pagination: data.pagination });
     } else {
-      setData(vendorsData);
+      setData(buyersData);
     }
     // setShowFilter(false);
     // setShowProcessor((prevValue) => !prevValue);
-  }, [processors, vendorsData, data?.pagination]);
+  }, [processors, buyersData, data?.pagination]);
 
   // const handleProcessorChange = (
   //   event: React.ChangeEvent<HTMLSelectElement>
@@ -160,7 +161,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
 
   return (
     <div className="min-w-[1125px] xl:min-w-full min-h-[93vh] h-fit mb-10 transaction">
-      <VendorDetailsModal
+      <BuyerDetailsModal
         isOpen={openTrx}
         onClose={closeModal}
         content="testing"
@@ -190,16 +191,16 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 All Types
               </li>
               <li
-                className="py-2 px-3 hover:bg-white cursor-pointer"
+                className="py-2 px-3 hover:bg-white cursor-pointer text-green-600 font-bold"
                 onClick={() => setProcessors("Interswitch")}
               >
-                Private
+                Active
               </li>
               <li
-                className="py-2 px-3 hover:bg-white cursor-pointer"
+                className="py-2 px-3 hover:bg-white cursor-pointer text-red-600 font-bold"
                 onClick={() => setProcessors("ZONE")}
               >
-                Government
+                Inactive
               </li>
             </ul>
           )}
@@ -278,7 +279,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               name="rrn"
               type="text"
               value={search}
-              placeholder="Search vendors by name"
+              placeholder="Search buyers by name"
               // onClick={() => handleSearch}
               onChange={(e) => setSearch(e.currentTarget.value)}
               className="rounded-[64px] w-full pl-10 h-full border-[1px] border-gray-400 font-poppins text-xs font-bold"
@@ -309,20 +310,10 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 VIEW
               </div>
             </th>
-            <th onClick={() => handleSort("vendorName")}>
+            <th onClick={() => handleSort("fullName")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
-                VENDOR NAME
-                {sortBy === "vendorName" && (
-                  <span>
-                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
-                  </span>
-                )}
-              </div>
-            </th>
-            <th onClick={() => handleSort("manager")}>
-              <div className="flex items-center justify-center px-2 text-nowrap">
-                MANAGER
-                {sortBy === "manager" && (
+                BUYER NAME
+                {sortBy === "fullName" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -331,7 +322,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
             </th>
             <th onClick={() => handleSort("phoneno")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
-                PHONE NUMBER
+                BUYER PHONE
                 {sortBy === "phoneno" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
@@ -349,50 +340,10 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("address")}>
+            <th onClick={() => handleSort("lastTenVisitedStation")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
-                ADDRESS
-                {sortBy === "address" && (
-                  <span>
-                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
-                  </span>
-                )}
-              </div>
-            </th>
-            <th onClick={() => handleSort("lga")}>
-              <div className="flex items-center justify-center px-2 text-nowrap">
-                LOCAL GOVERNMENT
-                {sortBy === "lga" && (
-                  <span>
-                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
-                  </span>
-                )}
-              </div>
-            </th>
-            <th onClick={() => handleSort("state")}>
-              <div className="flex items-center justify-center px-2 text-nowrap">
-                STATE
-                {sortBy === "state" && (
-                  <span>
-                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
-                  </span>
-                )}
-              </div>
-            </th>
-            <th onClick={() => handleSort("isFuelAvailable")}>
-              <div className="flex items-center justify-center px-2 text-nowrap">
-                FUEL AVAILABILITY
-                {sortBy === "isFuelAvailable" && (
-                  <span>
-                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
-                  </span>
-                )}
-              </div>
-            </th>
-            <th onClick={() => handleSort("fuelTypes")}>
-              <div className="flex items-center justify-center px-2 text-nowrap">
-                FUEL TYPES
-                {sortBy === "fuelTypes" && (
+                LAST TEN VISITED STATIONS
+                {sortBy === "lastTenVisitedStation" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -402,8 +353,12 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
           </tr>
         </thead>
         <tbody>
-          {sortedData?.map((dt: IVendor, index: number) => {
+          {sortedData?.map((dt: IBuyer, index: number) => {
             if (index < rowsPerPage) {
+              const stationNames = dt.lastTenVisitedStation
+                .map((last) => last.stationName)
+                .join(", ");
+
               return (
                 <tr
                   key={index}
@@ -425,38 +380,17 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                     />
                   </td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.vendorName === null ? "-" : dt.vendorName
+                    dt.fullName === null ? "-" : dt.fullName
                   }`}</td>
 
                   <td className="text-center text-sm px-3 text-nowrap">{`${
-                    dt.manager === null ? "-" : dt.manager
-                  }`}</td>
-                  <td className="text-center text-sm">{`${
                     dt.phoneno === null ? "-" : dt.phoneno
                   }`}</td>
                   <td className="text-center text-sm px-3">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
-                  <td className="text-center text-sm text-nowrap">{`${
-                    dt.address === null ? "-" : dt.address
-                  }`}</td>
-                  <td className="text-center text-sm px-3">{`${
-                    dt.lga === null ? "-" : dt.lga
-                  }`}</td>
-                  <td className="text-center text-sm">{`${
-                    dt.state === null ? "-" : dt.state
-                  }`}</td>
-                  <td
-                    className={`text-center text-sm px-3 ${
-                      dt.isFuelAvailable === true
-                        ? "text-green-700"
-                        : "text-red-700"
-                    } font-bold`}
-                  >{`${
-                    dt.isFuelAvailable === true ? "Available" : "Finished"
-                  }`}</td>
-                  <td className="text-center text-sm px-3 text-nowrap">{`${
-                    dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
+                  <td className="text-center text-sm px-3 w-[30%]">{`${
+                    dt.lastTenVisitedStation === null ? "-" : stationNames
                   }`}</td>
                 </tr>
               );
@@ -562,4 +496,4 @@ export const formatDate = (inputDateStr: string) => {
 //   );
 // }
 
-export default VendorsTable;
+export default BuyersTable;

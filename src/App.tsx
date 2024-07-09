@@ -11,6 +11,7 @@ import { Home } from "./Screens/Home";
 import { AdminDashboard } from "./Screens/AdminDashboard";
 import { VendorDashboard } from "./Screens/VendorDashboard";
 import {
+  setBuyers,
   setStateFuelDashboardData,
   setVendors,
 } from "./Features/User/userSlice";
@@ -69,6 +70,82 @@ function App() {
               kerosene: 1450,
               cookingGas: 2300,
             },
+          },
+        ],
+        pagination: { limit: 30, page: 1, totalCount: 70, totalUser: 500 },
+      })
+    );
+
+    dispatch(
+      setBuyers({
+        data: [
+          {
+            fullName: "Alade George Barret",
+            email: "archraphr@gmail.com",
+            phoneno: "+2349098126743",
+            isActive: true,
+            lastTenVisitedStation: [
+              {
+                stationName: "Mobil Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 4,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "NNPC Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 2,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "Mobil Ikeja",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 5,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "NNPC Hilton",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 8,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "Mobil Abuja",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 12,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "NNPC Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 1,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "Mobil Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 8,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "Mobil Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 1,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "Mobil Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 3,
+                address: "1 crescent Jalingo road Lagos",
+              },
+              {
+                stationName: "Mobil Apapa",
+                coordinates: "4.700 3.37847",
+                countIn3Days: 7,
+                address: "1 crescent Jalingo road Lagos",
+              },
+            ],
           },
         ],
         pagination: { limit: 30, page: 1, totalCount: 70, totalUser: 500 },

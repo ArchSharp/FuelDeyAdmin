@@ -13,6 +13,7 @@ export interface IUserState {
   currentRoute?: string;
   stateFuelDashboardData?: StateFuelDashboardData;
   vendors?: IVendors | null;
+  buyers?: IBuyers | null;
 }
 
 export interface IVendors {
@@ -33,6 +34,26 @@ export interface IVendor {
   fuelTypes: string[];
   ownerType: string;
   stockLevel: StockLevel;
+}
+
+export interface IBuyers {
+  data: IBuyer[];
+  pagination: IPagination;
+}
+
+export interface IBuyer {
+  fullName: string;
+  phoneno: string;
+  email: string;
+  isActive: boolean;
+  lastTenVisitedStation: ILastTenVisitedStation[];
+}
+
+export interface ILastTenVisitedStation {
+  stationName: string;
+  address: string;
+  coordinates: string;
+  countIn3Days: number;
 }
 
 export interface IPagination {

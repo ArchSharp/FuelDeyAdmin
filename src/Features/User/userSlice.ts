@@ -12,6 +12,7 @@ import {
   IAlertProps,
   StateFuelDashboardData,
   IVendors,
+  IBuyers,
 } from "./type";
 
 const initialState: IUserState = {
@@ -70,6 +71,10 @@ const userSlice = createSlice({
 
     setVendors: (state, { payload }: PayloadAction<IVendors | null>) => {
       state.vendors = payload;
+    },
+
+    setBuyers: (state, { payload }: PayloadAction<IBuyers | null>) => {
+      state.buyers = payload;
     },
   },
 });
@@ -280,5 +285,6 @@ export const {
   setCurrentRoute,
   setStateFuelDashboardData,
   setVendors,
+  setBuyers,
 } = userSlice.actions;
 export default userSlice.reducer;
