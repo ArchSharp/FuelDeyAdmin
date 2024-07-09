@@ -2,6 +2,7 @@ export const admindash = "/admin/*";
 export const adminDash = "dashboard";
 export const vendors = "vendors";
 export const buyers = "buyers";
+export const staffMngt = "staffMngt";
 export const vendordash = "/vendor-dashboard";
 export const signup = "/signup";
 export const signin = "/";

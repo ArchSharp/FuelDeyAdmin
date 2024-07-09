@@ -12,6 +12,7 @@ import { AdminDashboard } from "./Screens/AdminDashboard";
 import { VendorDashboard } from "./Screens/VendorDashboard";
 import {
   setBuyers,
+  setStaffs,
   setStateFuelDashboardData,
   setVendors,
 } from "./Features/User/userSlice";
@@ -70,6 +71,25 @@ function App() {
               kerosene: 1450,
               cookingGas: 2300,
             },
+          },
+        ],
+        pagination: { limit: 30, page: 1, totalCount: 70, totalUser: 500 },
+      })
+    );
+
+    dispatch(
+      setStaffs({
+        data: [
+          {
+            firstName: "Kenny",
+            lastName: "Afolabi",
+            address: "43 Abule-egba Toll gate ibadan express street",
+            fullName: "Kenny Afolabi",
+            email: "archraphr@gmail.com",
+            phoneno: "+2349023986741",
+            role: "SuperAdmin",
+            createdAt: new Date().toDateString(),
+            isActive: true,
           },
         ],
         pagination: { limit: 30, page: 1, totalCount: 70, totalUser: 500 },

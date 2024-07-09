@@ -13,6 +13,7 @@ import {
   StateFuelDashboardData,
   IVendors,
   IBuyers,
+  IStaffs,
 } from "./type";
 
 const initialState: IUserState = {
@@ -75,6 +76,10 @@ const userSlice = createSlice({
 
     setBuyers: (state, { payload }: PayloadAction<IBuyers | null>) => {
       state.buyers = payload;
+    },
+
+    setStaffs: (state, { payload }: PayloadAction<IStaffs | null>) => {
+      state.staffs = payload;
     },
   },
 });
@@ -286,5 +291,6 @@ export const {
   setStateFuelDashboardData,
   setVendors,
   setBuyers,
+  setStaffs,
 } = userSlice.actions;
 export default userSlice.reducer;

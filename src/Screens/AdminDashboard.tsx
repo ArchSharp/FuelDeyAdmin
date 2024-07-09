@@ -18,6 +18,7 @@ import { Vendors } from "./Vendors";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import * as routes from "../Data/Routes";
 import { Buyers } from "./Buyers";
+import { StaffMngt } from "./StaffMngt";
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -82,6 +83,9 @@ export const AdminDashboard = () => {
     } else if (pathName === "/admin/" + routes.buyers) {
       setMainNavIndex(2);
       navigate(routes.buyers);
+    } else if (pathName === "/admin/" + routes.staffMngt) {
+      setMainNavIndex(4);
+      navigate(routes.staffMngt);
     }
   }, [pathName]);
 
@@ -117,6 +121,7 @@ export const AdminDashboard = () => {
                 if (index === 0) route = routes.adminDash;
                 else if (index === 1) route = routes.vendors;
                 else if (index === 2) route = routes.buyers;
+                else if (index === 4) route = routes.staffMngt;
 
                 navigate(route);
               }}
@@ -211,6 +216,7 @@ export const AdminDashboard = () => {
             <Route path={routes.adminDash} element={<DashboardAdmin />} />
             <Route path={routes.vendors} element={<Vendors />} />
             <Route path={routes.buyers} element={<Buyers />} />
+            <Route path={routes.staffMngt} element={<StaffMngt />} />
           </Routes>
         </div>
       </div>

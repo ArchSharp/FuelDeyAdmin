@@ -10,8 +10,8 @@ export const Buyers = () => {
 
   return (
     <div className="h-[90vh] overflow-y-auto overflow-x-hidden">
-      <div className="flex items-center ml-8 mt-10 mb-7 text-orange-600">
-        <PiUserSwitchFill className="mr-2 text-2xl" />
+      <div className="flex items-center ml-8 mt-10 mb-7 text-blue-900">
+        <PiUserSwitchFill className="mr-2 text-4xl" />
         <div className="text-black font-fueldeyserifreg text-2xl">
           20000 Buyers
         </div>

@@ -14,6 +14,24 @@ export interface IUserState {
   stateFuelDashboardData?: StateFuelDashboardData;
   vendors?: IVendors | null;
   buyers?: IBuyers | null;
+  staffs?: IStaffs | null;
+}
+
+export interface IStaffs {
+  data: IStaff[];
+  pagination: IPagination;
+}
+
+export interface IStaff {
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  email: string;
+  phoneno: string;
+  address: string;
+  role: string;
+  createdAt: string;
+  isActive: boolean;
 }
 
 export interface IVendors {
