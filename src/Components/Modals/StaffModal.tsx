@@ -28,13 +28,13 @@ const StaffModal: React.FC<ModalProps> = ({
 
   const { staffs } = useAppSelector((state) => state.user);
 
-  const [staff, setStaff] = useState<IStaff>();
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [phoneno, setPhoneno] = useState<string>();
-  const [address, setAddress] = useState<string>();
-  const [role, setRole] = useState<string>();
+  const [staff, setStaff] = useState<IStaff | undefined>();
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phoneno, setPhoneno] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [role, setRole] = useState<string>("");
 
   useEffect(() => {
     setStaff(staffs.data[dataId]);
@@ -42,12 +42,12 @@ const StaffModal: React.FC<ModalProps> = ({
   // console.log("dataId: ", dataId);
 
   useEffect(() => {
-    setFirstName(staff?.firstName);
-    setLastName(staff?.lastName);
-    setEmail(staff?.email);
-    setPhoneno(staff?.phoneno);
-    setAddress(staff?.address);
-    setRole(staff?.role);
+    setFirstName(staff?.firstName ?? "");
+    setLastName(staff?.lastName ?? "");
+    setEmail(staff?.email ?? "");
+    setPhoneno(staff?.phoneno ?? "");
+    setAddress(staff?.address ?? "");
+    setRole(staff?.role ?? "");
   }, [staff]);
 
   return (
@@ -76,7 +76,7 @@ const StaffModal: React.FC<ModalProps> = ({
                   <div className="font-bold mb-1">First Name</div>
                   <input
                     type="text"
-                    value={firstName}
+                    defaultValue={firstName}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
                     readOnly
                   />
@@ -85,7 +85,7 @@ const StaffModal: React.FC<ModalProps> = ({
                   <div className="font-bold mb-1">Last Name</div>
                   <input
                     type="text"
-                    value={lastName}
+                    defaultValue={lastName}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
                     readOnly
                   />
@@ -97,7 +97,7 @@ const StaffModal: React.FC<ModalProps> = ({
                   <div className="font-bold mb-1">Email</div>
                   <input
                     type="text"
-                    value={email}
+                    defaultValue={email}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
                     readOnly
                   />
