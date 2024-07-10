@@ -21,6 +21,7 @@ import { Buyers } from "./Buyers";
 import { StaffMngt } from "./StaffMngt";
 import { useAppDispatch, useAppSelector } from "../Store/store";
 import { setIsAuth } from "../Features/User/userSlice";
+import { Settings } from "./Settings";
 
 export const AdminDashboard = () => {
   const { isAuth } = useAppSelector((state) => state.user);
@@ -32,7 +33,7 @@ export const AdminDashboard = () => {
   });
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const [mainNavIndex, setMainNavIndex] = useState<number | null>(0);
-  const [subNavIndex, setSubNavIndex] = useState<number | null>(null);
+  const [subNavIndex, setSubNavIndex] = useState<number>(0);
   const [isNavIn, setIsNavIn] = useState(true);
   const [showUserNav, setShowUserNav] = useState(false);
   const userImgRef = useRef<HTMLDivElement>(null);
@@ -96,6 +97,11 @@ export const AdminDashboard = () => {
     } else if (pathName === "/admin/" + routes.staffMngt) {
       setMainNavIndex(4);
       navigate(routes.staffMngt);
+    } else if (pathName === "/admin/" + routes.settings) {
+      setMainNavIndex(5);
+      setSubNavIndex(0);
+
+      navigate(routes.settings);
     }
   }, [pathName]);
 
@@ -132,6 +138,7 @@ export const AdminDashboard = () => {
                 else if (index === 1) route = routes.vendors;
                 else if (index === 2) route = routes.buyers;
                 else if (index === 4) route = routes.staffMngt;
+                else if (index === 5) route = routes.settings;
 
                 navigate(route);
               }}
@@ -144,7 +151,9 @@ export const AdminDashboard = () => {
               )}
               {index === 4 && <PiUsersThreeFill className="mr-2 text-2xl" />}
               {index === 5 && <IoSettings className="mr-2 text-2xl" />}
-              <div className="text-sm">{sidebar.sideText} </div>
+              <div className="text-sm" onClick={() => {}}>
+                {sidebar.sideText}{" "}
+              </div>
               {sidebar.subTexts.length > 0 && (
                 <FaChevronRight
                   className={`ml-auto ${
@@ -165,7 +174,7 @@ export const AdminDashboard = () => {
                       }}
                       className={`text-white pl-10 pt-3 pb-3 cursor-pointer flex items-center text-base ${
                         subNavIndex === subindex
-                          ? "bg-orange-300"
+                          ? "bg-orange-400"
                           : "bg-transparent"
                       }`}
                     >
@@ -237,6 +246,10 @@ export const AdminDashboard = () => {
             <Route path={routes.vendors} element={<Vendors />} />
             <Route path={routes.buyers} element={<Buyers />} />
             <Route path={routes.staffMngt} element={<StaffMngt />} />
+            <Route
+              path={routes.settings}
+              element={<Settings subIndex={subNavIndex} />}
+            />
           </Routes>
         </div>
       </div>

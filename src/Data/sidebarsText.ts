@@ -7,5 +7,5 @@ export const sidebars = [
   { sideText: "Buyers", subTexts: [] },
   { sideText: "Notifications", subTexts: [] },
   { sideText: "Staff Management", subTexts: [] },
-  { sideText: "Settings", subTexts: [] },
+  { sideText: "Settings", subTexts: ["Profile", "Security"] },
 ];

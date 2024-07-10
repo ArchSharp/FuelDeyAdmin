@@ -341,7 +341,7 @@ function App() {
   }, []);
 
   // Idle session logout
-  const session = useMemo(() => new IdleSessionTimeout(1 * 60 * 1000), []); // Time in seconds (5 minutes)
+  const session = useMemo(() => new IdleSessionTimeout(30 * 60 * 1000), []); // Time in seconds (5 minutes)
   useEffect(() => {
     if (isAuth) {
       session.onTimeOut = () => {

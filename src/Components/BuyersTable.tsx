@@ -389,7 +389,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                   <td className="text-center text-sm px-3">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
-                  <td className="text-center text-sm px-3 w-[30%]">{`${
+                  <td className="text-center text-sm px-3 w-[30%] py-1">{`${
                     dt.lastTenVisitedStation === null ? "-" : stationNames
                   }`}</td>
                 </tr>
