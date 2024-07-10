@@ -131,7 +131,7 @@ export const AdminDashboard = () => {
                 mainNavIndex === index ? "bg-orange-500" : "bg-transparent"
               }`}
               onClick={() => {
-                handleSubNavClick(-1);
+                handleSubNavClick(0);
                 handleClick(index);
                 let route = routes.adminDash;
                 if (index === 0) route = routes.adminDash;

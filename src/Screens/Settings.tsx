@@ -15,5 +15,5 @@ export const Settings = ({ subIndex }: ISettingsProps) => {
     }
   }, [pathName]);
 
-  return <div className="border-2">{subIndex === 0 && <Profile />}</div>;
+  return <div className="">{subIndex === 0 && <Profile />}</div>;
 };
