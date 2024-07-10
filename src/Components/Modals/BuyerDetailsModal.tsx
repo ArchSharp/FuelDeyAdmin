@@ -71,26 +71,30 @@ const BuyerDetailsModal: React.FC<ModalProps> = ({
             {/* {buyer?.lastTenVisitedStation.map((last, index) =>
               VendorRow("mt-5", "", last?.stationName, "", "")
             )} */}
-            <table className="mx-auto mt-5 font-poppins text-sm">
-              <thead>
-                <tr>
-                  <th className="px-2">S/N</th>
-                  <th>Station Name</th>
-                  <th>Station Address</th>
-                  <th>Frequency (Last 3 Days)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {buyer?.lastTenVisitedStation.map((last, index) => (
-                  <tr key={index} className="">
-                    <td className="text-center">{index + 1}</td>
-                    <td className="text-center py-2">{last.stationName}</td>
-                    <td className="text-center px-5 py-2">{last.address}</td>
-                    <td className="text-center py-2">{last.countIn3Days}</td>
+            <div className="w-full overflow-x-auto">
+              <table className="mx-auto mt-5 font-poppins text-sm w-fit">
+                <thead>
+                  <tr>
+                    <th className="px-2">S/N</th>
+                    <th className="text-nowrap px-2">Station Name</th>
+                    <th className="text-nowrap px-5">Station Address</th>
+                    <th className="px-2">Frequency (Last 3 Days)</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {buyer?.lastTenVisitedStation.map((last, index) => (
+                    <tr key={index} className="">
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center py-2">{last.stationName}</td>
+                      <td className="text-center px-5 py-2 h-fit text-nowrap">
+                        {last.address}
+                      </td>
+                      <td className="text-center py-2">{last.countIn3Days}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
