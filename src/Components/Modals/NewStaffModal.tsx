@@ -1,9 +1,10 @@
 // Modal.tsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useAppSelector } from "../../Store/store";
 import { IStaff } from "../../Features/User/type";
 import { roles } from "../../Data/roles";
+import { new_staff } from "../../Features/User/userSlice";
+import { useAppDispatch } from "../../Store/store";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,13 +13,13 @@ interface ModalProps {
   dataId: number;
 }
 
-const StaffModal: React.FC<ModalProps> = ({
+const NewStaffModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   content,
   dataId,
 }) => {
-  const modalClasses = `w-[95vw] md:w-[720px] h-[610px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
+  const modalClasses = `${dataId}${content} w-[95vw] md:w-[720px] h-[610px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
     isOpen ? "block" : "hidden"
   }`;
 
@@ -26,36 +27,37 @@ const StaffModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  const { staffs } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
-  const [staff, setStaff] = useState<IStaff>();
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [phoneno, setPhoneno] = useState<string>();
-  const [address, setAddress] = useState<string>();
-  const [role, setRole] = useState<string>();
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phoneno, setPhoneno] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [role, setRole] = useState<string>("");
 
-  useEffect(() => {
-    setStaff(staffs.data[dataId]);
-  }, [content, dataId]);
-  // console.log("dataId: ", dataId);
+  const payload: IStaff = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    phoneno: phoneno,
+    address: address,
+    createdAt: new Date().toDateString(),
+    fullName: `${firstName} ${lastName}`,
+    isActive: true,
+    role: role,
+  };
 
-  useEffect(() => {
-    setFirstName(staff?.firstName);
-    setLastName(staff?.lastName);
-    setEmail(staff?.email);
-    setPhoneno(staff?.phoneno);
-    setAddress(staff?.address);
-    setRole(staff?.role);
-  }, [staff]);
+  const validateForm = () => {
+    return firstName && lastName && email && phoneno && address && role;
+  };
 
   return (
     <>
       <div className={modalClasses}>
         <div className="flex">
           <div className="w-fit font-poppins text-base text-gray-800 font-semibold">
-            Staff details
+            New Staff
           </div>
           <IoClose
             className="ml-auto text-2xl cursor-pointer"
@@ -78,7 +80,8 @@ const StaffModal: React.FC<ModalProps> = ({
                     type="text"
                     value={firstName}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
-                    readOnly
+                    onChange={(e) => setFirstName(e.currentTarget.value)}
+                    required
                   />
                 </div>
                 <div className="w-full md:w-[48%] ml-0 md:ml-[2%] mt-5 md:mt-0">
@@ -87,7 +90,8 @@ const StaffModal: React.FC<ModalProps> = ({
                     type="text"
                     value={lastName}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
-                    readOnly
+                    onChange={(e) => setLastName(e.currentTarget.value)}
+                    required
                   />
                 </div>
               </div>
@@ -99,7 +103,8 @@ const StaffModal: React.FC<ModalProps> = ({
                     type="text"
                     value={email}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
-                    readOnly
+                    onChange={(e) => setEmail(e.currentTarget.value)}
+                    required
                   />
                 </div>
                 <div className="w-full md:w-[48%] ml-0 md:ml-[2%] mt-5 md:mt-0">
@@ -109,6 +114,7 @@ const StaffModal: React.FC<ModalProps> = ({
                     value={phoneno}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
                     onChange={(e) => setPhoneno(e.currentTarget.value)}
+                    required
                   />
                 </div>
               </div>
@@ -141,6 +147,7 @@ const StaffModal: React.FC<ModalProps> = ({
                     value={address}
                     className="w-full px-2 py-2 h-[180px] rounded-md border-[1px] border-gray-500"
                     onChange={(e) => setAddress(e.currentTarget.value)}
+                    required
                   />
                 </div>
               </div>
@@ -160,9 +167,20 @@ const StaffModal: React.FC<ModalProps> = ({
                   className="rounded-md px-5 py-2 bg-slate-800 text-white"
                   onClick={(e) => {
                     e.preventDefault();
+                    if (validateForm()) {
+                      dispatch(new_staff(payload));
+                      setFirstName("");
+                      setLastName("");
+                      setEmail("");
+                      setAddress("");
+                      setPhoneno("");
+                      onClose();
+                    } else {
+                      alert("Please fill all fields before submitting.");
+                    }
                   }}
                 >
-                  Update
+                  Create
                 </button>
               </div>
             </form>
@@ -174,4 +192,4 @@ const StaffModal: React.FC<ModalProps> = ({
   );
 };
 
-export default StaffModal;
+export default NewStaffModal;

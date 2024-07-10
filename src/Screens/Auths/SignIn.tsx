@@ -3,16 +3,16 @@ import * as Yup from "yup";
 import * as routes from "../../Data/Routes";
 import { MdAttachEmail } from "react-icons/md";
 import { FaLock, FaLockOpen } from "react-icons/fa";
-import { signUp } from "../../Features/User/userSlice";
+import { setIsAuth, signIn } from "../../Features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ISignin } from "../../Features/User/type";
 
 export const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state: any) => state.user);
+  const { isLoading, isAuth } = useAppSelector((state: any) => state.user);
   const [showPass, setShowPass] = useState(false);
 
   // Define the validation schema using Yup
@@ -35,7 +35,9 @@ export const SignIn = () => {
 
   // Submit handler
   const handleSubmit = (values: ISignin) => {
-    dispatch(signUp(values));
+    // alert("God is good");
+    dispatch(setIsAuth(true));
+    dispatch(signIn(values));
   };
 
   // Formik form handling
@@ -44,6 +46,12 @@ export const SignIn = () => {
     validationSchema,
     onSubmit: handleSubmit,
   });
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/admin");
+    }
+  }, [isAuth]);
 
   return (
     <form onSubmit={formik.handleSubmit} className="py-10">

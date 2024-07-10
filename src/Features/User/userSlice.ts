@@ -14,6 +14,8 @@ import {
   IVendors,
   IBuyers,
   IStaffs,
+  IStaff,
+  ISignin,
 } from "./type";
 
 const initialState: IUserState = {
@@ -91,6 +93,60 @@ export const reset_password = (data: IResetPassword): AppThunk => {
       const path = "/ResetPassword";
       // console.log("checking ResetPassword path: ", path, " data: ", data);
       const response = await axios.put(path, data);
+      if (response) {
+        const { data } = response;
+        if (data && !data.token) {
+          if (data.error.length > 0)
+            data.error.forEach((element: string) => {
+              dispatch(setError(element));
+            });
+          else if (data.message) dispatch(setError(data.message));
+        } else if (data && data.token) {
+          // dispatch(setProfile(data.profile));
+          // dispatch(setToken(data.token));
+        }
+      }
+    } catch (error: any) {
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const new_staff = (data: IStaff): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const path = "/NewStaff";
+      // console.log("checking ResetPassword path: ", path, " data: ", data);
+      const response = await axios.post(path, data);
+      if (response) {
+        const { data } = response;
+        if (data && !data.token) {
+          if (data.error.length > 0)
+            data.error.forEach((element: string) => {
+              dispatch(setError(element));
+            });
+          else if (data.message) dispatch(setError(data.message));
+        } else if (data && data.token) {
+          // dispatch(setProfile(data.profile));
+          // dispatch(setToken(data.token));
+        }
+      }
+    } catch (error: any) {
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const signIn = (data: ISignin): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const path = "/NewStaff";
+      // console.log("checking ResetPassword path: ", path, " data: ", data);
+      const response = await axios.post(path, data);
       if (response) {
         const { data } = response;
         if (data && !data.token) {

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 // import "./App.css";
 import { useAppDispatch, useAppSelector } from "./Store/store";
 import { setupAxiosInterceptors } from "./Features/utils";
@@ -12,14 +12,24 @@ import { AdminDashboard } from "./Screens/AdminDashboard";
 import { VendorDashboard } from "./Screens/VendorDashboard";
 import {
   setBuyers,
+  setIsAuth,
+  setShowAlert,
   setStaffs,
   setStateFuelDashboardData,
   setVendors,
 } from "./Features/User/userSlice";
+import { IdleSessionTimeout } from "idle-session-timeout";
+import { Notification } from "./Components/Notification";
+import Modal from "./Components/Modals/Modal";
 
 function App() {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { isLoading, alertProps, isAuth } = useAppSelector(
+    (state) => state.user
+  );
+  const [isTimeout, setIsTimeout] = useState(false);
+  const [idleTimeLeft, setIdleTimeLeft] = useState(0);
+  const [showTimeLeft, setShowTimeLeft] = useState(false);
 
   useEffect(() => {
     setupAxiosInterceptors(dispatch);
@@ -330,9 +340,85 @@ function App() {
     };
   }, []);
 
+  // Idle session logout
+  const session = useMemo(() => new IdleSessionTimeout(1 * 60 * 1000), []); // Time in seconds (5 minutes)
+  useEffect(() => {
+    if (isAuth) {
+      session.onTimeOut = () => {
+        dispatch(
+          setShowAlert({
+            content: "You have been logged out due to inactivity.",
+            showAlert: true,
+            isError: true,
+          })
+        );
+        setIsTimeout(true);
+      };
+
+      //optional
+      session.onTimeLeftChange = (timeLeft: number) => {
+        // console.log(`${timeLeft} ms left`);
+        const exitTimeLeft = parseInt((timeLeft / 1000).toFixed(0));
+        if (exitTimeLeft < 11) {
+          setIdleTimeLeft(exitTimeLeft);
+          setShowTimeLeft(true);
+        }
+      };
+
+      session.start();
+
+      return () => {
+        session.dispose();
+      };
+    }
+  }, [dispatch, session]);
+
+  useEffect(() => {
+    if (isTimeout) {
+      dispatch(setIsAuth(false));
+    }
+  }, [dispatch, isTimeout]);
+
+  useEffect(() => {
+    if (!isAuth) {
+      session.dispose();
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (showTimeLeft) {
+      if (idleTimeLeft > 1) {
+        dispatch(
+          setShowAlert({
+            content: `You will be logged out in next seconds: ${idleTimeLeft} Click continue to remain logged in.`,
+            showAlert: true,
+            isError: true,
+          })
+        );
+      } else if (idleTimeLeft === 1) {
+        dispatch(
+          setShowAlert({ showAlert: false, content: "", isError: false })
+        );
+      }
+    }
+  }, [dispatch, showTimeLeft, idleTimeLeft]);
+
   return (
     <BrowserRouter>
       {isLoading && <Loader />}
+      {showTimeLeft && (
+        <Modal
+          content={alertProps?.content}
+          isOpen={alertProps?.showAlert}
+          onClose={() => {
+            session.reset();
+            dispatch(
+              setShowAlert({ ...alertProps, showAlert: false, content: "" })
+            );
+          }}
+        />
+      )}
+      {!showTimeLeft && <Notification />}
       <Routes>
         <Route path={routes.homepage} index element={<Home />} />
         <Route path={routes.admindash} index element={<AdminDashboard />} />

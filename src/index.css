@@ -198,3 +198,8 @@ body {
 }
 
 /* each-buyer-table */
+
+.animate-hr {
+  width: 100%;
+  transition: width 10s linear;
+}

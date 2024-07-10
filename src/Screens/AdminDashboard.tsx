@@ -19,8 +19,12 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import * as routes from "../Data/Routes";
 import { Buyers } from "./Buyers";
 import { StaffMngt } from "./StaffMngt";
+import { useAppDispatch, useAppSelector } from "../Store/store";
+import { setIsAuth } from "../Features/User/userSlice";
 
 export const AdminDashboard = () => {
+  const { isAuth } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
   const isTablet = useMediaQuery({
@@ -35,6 +39,12 @@ export const AdminDashboard = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const pathName = useLocation().pathname;
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate(routes.signin);
+    }
+  }, [isAuth]);
 
   const handleClick = (index: number) => {
     setMainNavIndex(index);
@@ -207,7 +217,14 @@ export const AdminDashboard = () => {
                     }`
                   : "user-nav-hide"
               } bg-slate-300 shadow-xl w-[300px] h-[400px] border-2 z-[7]`}
-            ></div>
+            >
+              <div
+                className="font-poppins text-sm text-red-600"
+                onClick={() => dispatch(setIsAuth(false))}
+              >
+                Log out
+              </div>
+            </div>
           </div>
         </div>
 

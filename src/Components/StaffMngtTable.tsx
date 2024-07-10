@@ -12,6 +12,7 @@ import { SVGs } from "../assets/SVGs";
 import { IoPersonAdd } from "react-icons/io5";
 import StaffModal from "./Modals/StaffModal";
 import { AiFillEdit } from "react-icons/ai";
+import NewStaffModal from "./Modals/NewStaffModal";
 
 // import { clearErrors } from "../../Features/Error/errorSlice";
 
@@ -29,7 +30,8 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   const [data, setData] = useState<IStaffs>(staffsData);
   const [sortBy, setSortBy] = useState<keyof any>("internalid");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [openTrx, setOpenTrx] = useState(false);
+  const [openStaff, setOpenStaff] = useState(false);
+  const [addStaff, setAddStaff] = useState(false);
   const [processors, setProcessors] = useState("All Processors");
   // const [showFilter, setShowFilter] = useState(false);
   const [showProcessor, setShowProcessor] = useState(false);
@@ -98,7 +100,8 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   // };
 
   const closeModal = () => {
-    setOpenTrx(false);
+    setOpenStaff(false);
+    setAddStaff(false);
   };
 
   var pages = Math.ceil(data?.pagination?.totalCount / data?.pagination?.limit);
@@ -151,7 +154,13 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   return (
     <div className="min-w-[1125px] xl:min-w-full min-h-[93vh] h-fit mb-10 transaction">
       <StaffModal
-        isOpen={openTrx}
+        isOpen={openStaff}
+        onClose={closeModal}
+        content="testing"
+        dataId={currentIndex}
+      />
+      <NewStaffModal
+        isOpen={addStaff}
         onClose={closeModal}
         content="testing"
         dataId={currentIndex}
@@ -162,8 +171,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
         <button
           className="flex px-5 py-2 ml-5 bg-blue-950 text-white h-full justify-center items-center border-[1px] rounded-[64px] text-xs md:text-sm font-poppins font-bold"
           onClick={() => {
-            setShowProcessor(!showProcessor);
-            // setShowFilter(false);
+            setAddStaff(!addStaff);
           }}
         >
           <IoPersonAdd className=" text-main text-xl" />
@@ -333,7 +341,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
                       className="mx-auto"
                       onClick={() => {
                         setCurrentIndex(index);
-                        setOpenTrx(!openTrx);
+                        setOpenStaff(!openStaff);
                       }}
                     />
                   </td>

@@ -7,9 +7,11 @@ import { SignUp } from "./Auths/SignUp";
 import { ForgotPassword } from "./Auths/ForgotPassword";
 import { useMediaQuery } from "react-responsive";
 import { ResetPassword } from "./Auths/ResetPassword";
+import { useState } from "react";
 
 export const Home = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
+  const [pauseAnimate, setPauseAnimate] = useState(false);
   //
 
   return (
@@ -19,7 +21,11 @@ export const Home = () => {
           <img
             src={fuelSplash}
             alt="fuelSplash"
-            className="w-[50px] animate-bounce"
+            className={`w-[50px] ${
+              !pauseAnimate ? "animate-bounce" : "animate-ping"
+            }`}
+            onMouseEnter={() => setPauseAnimate(true)}
+            onMouseLeave={() => setPauseAnimate(false)}
           />
         </div>
 
