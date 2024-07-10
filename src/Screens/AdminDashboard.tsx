@@ -218,8 +218,11 @@ export const AdminDashboard = () => {
                   : "user-nav-hide"
               } bg-slate-300 shadow-xl w-[300px] h-[400px] border-2 z-[7]`}
             >
+              <div className="font-poppins text-sm pl-5 py-3 hover:bg-white">
+                Profile
+              </div>
               <div
-                className="font-poppins text-sm text-red-600"
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => dispatch(setIsAuth(false))}
               >
                 Log out

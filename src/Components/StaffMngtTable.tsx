@@ -178,7 +178,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
           <div className="w-fit mx-3">New Staff</div>
         </button>
         {/* processors */}
-        <div className="w-[165px] h-[38px] text-sm ml-7 z-[3]">
+        <div className="w-[165px] h-[38px] text-sm ml-5 z-[3]">
           <button
             className="flex w-full h-full justify-center items-center border-[1px] rounded-[64px] text-xs font-poppins font-bold"
             onClick={() => {
@@ -214,7 +214,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
           )}
         </div>
 
-        <div className="w-[220px] h-[38px] z-[3] ml-0 mr-5">
+        <div className="w-[220px] h-[38px] z-[3] ml-5 mr-5">
           <div className="relative w-[220px] h-[38px]">
             <CiSearch
               className="text-2xl absolute top-2 left-4 text-main cursor-pointer"
