@@ -30,6 +30,8 @@ function App() {
   const [isTimeout, setIsTimeout] = useState(false);
   const [idleTimeLeft, setIdleTimeLeft] = useState(0);
   const [showTimeLeft, setShowTimeLeft] = useState(false);
+  const [shouldResetSession, setShouldResetSession] = useState(false);
+  // const [session, setSession] = useState<IdleSessionTimeout>(useMemo(() => new IdleSessionTimeout(1 * 60 * 1000), []));
 
   useEffect(() => {
     setupAxiosInterceptors(dispatch);
@@ -341,36 +343,35 @@ function App() {
   }, []);
 
   // Idle session logout
-  const session = useMemo(() => new IdleSessionTimeout(30 * 60 * 1000), []); // Time in seconds (5 minutes)
+  // if (isAuth) {
+  const session = useMemo(() => new IdleSessionTimeout(15 * 60 * 1000), []); // Time in seconds (5 minutes)
   useEffect(() => {
-    if (isAuth) {
-      session.onTimeOut = () => {
-        dispatch(
-          setShowAlert({
-            content: "You have been logged out due to inactivity.",
-            showAlert: true,
-            isError: true,
-          })
-        );
-        setIsTimeout(true);
-      };
+    session.onTimeOut = () => {
+      dispatch(
+        setShowAlert({
+          content: "You have been logged out due to inactivity.",
+          showAlert: true,
+          isError: true,
+        })
+      );
+      setIsTimeout(true);
+    };
 
-      //optional
-      session.onTimeLeftChange = (timeLeft: number) => {
-        // console.log(`${timeLeft} ms left`);
-        const exitTimeLeft = parseInt((timeLeft / 1000).toFixed(0));
-        if (exitTimeLeft < 11) {
-          setIdleTimeLeft(exitTimeLeft);
-          setShowTimeLeft(true);
-        }
-      };
+    //optional
+    session.onTimeLeftChange = (timeLeft: number) => {
+      // console.log(`${timeLeft} ms left`);
+      const exitTimeLeft = parseInt((timeLeft / 1000).toFixed(0));
+      if (exitTimeLeft < 11) {
+        setIdleTimeLeft(exitTimeLeft);
+        setShowTimeLeft(true);
+      }
+    };
 
-      session.start();
+    session.start();
 
-      return () => {
-        session.dispose();
-      };
-    }
+    return () => {
+      session.dispose();
+    };
   }, [dispatch, session]);
 
   useEffect(() => {
@@ -403,6 +404,13 @@ function App() {
     }
   }, [dispatch, showTimeLeft, idleTimeLeft]);
 
+  useEffect(() => {
+    if (shouldResetSession) {
+      session.reset();
+    }
+  }, [shouldResetSession]);
+  // }
+
   return (
     <BrowserRouter>
       {isLoading && <Loader />}
@@ -411,7 +419,7 @@ function App() {
           content={alertProps?.content}
           isOpen={alertProps?.showAlert}
           onClose={() => {
-            session.reset();
+            setShouldResetSession(true);
             dispatch(
               setShowAlert({ ...alertProps, showAlert: false, content: "" })
             );
