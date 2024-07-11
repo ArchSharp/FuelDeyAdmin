@@ -14,58 +14,58 @@ export const Profile = () => {
   return (
     <div className="">
       <div className="border-2 w-[95%] md:w-fit mx-auto mt-10 px-5 md:px-10">
-        <h1 className="font-bold font-poppins text-lg mt-3 ml-5">Profile</h1>
-        <div className="text-slate-600 text-sm mt-1 ml-5">
+        <h1 className="font-bold font-poppins text-lg mt-3">Profile</h1>
+        <div className="text-slate-600 text-sm mt-1">
           Manage your profile details
         </div>
 
-        <div className="mt-10">
+        <div className="mt-3 md:mt-10">
           <form action="post" className="md:pl-5 py-8">
-            <div className="flex items-center">
+            <div className="flex md:items-center flex-col md:flex-row">
               <div className="text-sm font-medium text-gray-600 font-PoppinsRegular mr-10">
                 Full name
               </div>{" "}
               <input
                 type="text"
-                className="md:w-[510px] h-[48px] rounded-lg ml-7 py-3 px-2 border-[1px] border-gray-400 flex-1"
+                className="md:w-[510px] h-[48px] rounded-lg md:ml-7 mt-2 md:mt-0 py-3 px-2 border-[1px] border-gray-400"
                 value={fullName}
                 onChange={(e) => setFullName(e.currentTarget.value)}
                 readOnly
               />
             </div>
 
-            <div className="flex items-center my-5">
+            <div className="flex md:items-center flex-col md:flex-row my-5">
               <div className=" text-sm font-medium text-gray-600 font-PoppinsRegular mr-10">
                 Email address
               </div>
               <input
                 type="text"
-                className="md:w-[510px] h-[48px] rounded-lg ml-1 py-3 px-2 border-[1px] border-gray-400 flex-1"
+                className="md:w-[510px] h-[48px] rounded-lg md:ml-1 mt-2 md:mt-0 py-3 px-2 border-[1px] border-gray-400"
                 value={email}
                 onChange={(e) => setEmail(e.currentTarget.value)}
                 readOnly
               />
             </div>
 
-            <div className="flex items-center my-5">
+            <div className="flex md:items-center flex-col md:flex-row my-5">
               <div className=" text-sm font-medium text-gray-600 font-PoppinsRegular mr-8">
                 Phone number
               </div>{" "}
               <input
                 type="text"
-                className="md:w-[510px] h-[48px] rounded-lg ml-1 py-3 px-2 border-[1px] border-gray-400 flex-1"
+                className="md:w-[510px] h-[48px] rounded-lg md:ml-1 mt-2 md:mt-0 py-3 px-2 border-[1px] border-gray-400"
                 value={phone}
                 onChange={(e) => setPhone(e.currentTarget.value)}
               />
             </div>
 
-            <div className="flex items-center my-5">
+            <div className="flex md:items-center flex-col md:flex-row my-5">
               <div className=" text-sm font-medium text-gray-600 font-PoppinsRegular mr-8">
                 Address
               </div>
               <input
                 type="text"
-                className="md:w-[510px] h-[48px] rounded-lg py-3 px-2 border-[1px] border-gray-400 md:ml-12 flex-1"
+                className="md:w-[510px] h-[48px] rounded-lg py-3 px-2 border-[1px] border-gray-400 md:ml-12 mt-2 md:mt-0"
                 value={address}
                 onChange={(e) => setAddress(e.currentTarget.value)}
               />
