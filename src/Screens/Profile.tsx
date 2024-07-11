@@ -71,9 +71,9 @@ export const Profile = () => {
               />
             </div>
 
-            <div className="flex md:w-[80%] mx-auto items-center justify-between mt-16">
+            <div className="flex md:w-[80%] mx-auto items-center justify-evenly md:justify-between mt-8 md:mt-16">
               <button
-                className="py-[11px] px-5 md:px-[65px] font-PoppinsRegular text-xs font-semibold rounded-md bg-gray-400"
+                className="py-[11px] px-2 md:px-[65px] font-PoppinsRegular text-xs font-semibold rounded-md bg-gray-400"
                 onClick={(e) => {
                   e.preventDefault();
                 }}
@@ -82,7 +82,7 @@ export const Profile = () => {
               </button>
               <button
                 type="submit"
-                className="bg-black rounded-md py-[11px] text-white px-10 md:px-[57px] font-PoppinsRegular text-xs font-semibold ml-10"
+                className="bg-black rounded-md py-[11px] text-white px-5 md:px-[57px] font-PoppinsRegular text-xs font-semibold ml-10"
                 onClick={(e) => {
                   e.preventDefault();
                   handleSaveChanges();

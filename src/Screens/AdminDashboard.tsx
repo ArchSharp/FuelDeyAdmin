@@ -151,8 +151,13 @@ export const AdminDashboard = () => {
               )}
               {index === 4 && <PiUsersThreeFill className="mr-2 text-2xl" />}
               {index === 5 && <IoSettings className="mr-2 text-2xl" />}
-              <div className="text-sm" onClick={() => {}}>
-                {sidebar.sideText}{" "}
+              <div
+                className="text-sm"
+                onClick={() => {
+                  if (sidebar.subTexts.length === 0) setIsNavIn(!isNavIn);
+                }}
+              >
+                {sidebar.sideText}
               </div>
               {sidebar.subTexts.length > 0 && (
                 <FaChevronRight
@@ -171,6 +176,7 @@ export const AdminDashboard = () => {
                       key={subindex}
                       onClick={() => {
                         handleSubNavClick(subindex);
+                        setIsNavIn(!isNavIn);
                       }}
                       className={`text-white pl-10 pt-3 pb-3 cursor-pointer flex items-center text-base ${
                         subNavIndex === subindex
@@ -227,12 +233,21 @@ export const AdminDashboard = () => {
                   : "user-nav-hide"
               } bg-slate-300 shadow-xl w-[300px] h-[400px] border-2 z-[7]`}
             >
-              <div className="font-poppins text-sm pl-5 py-3 hover:bg-white">
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.settings);
+                }}
+              >
                 Profile
               </div>
               <div
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
-                onClick={() => dispatch(setIsAuth(false))}
+                onClick={() => {
+                  setShowUserNav(false);
+                  dispatch(setIsAuth(false));
+                }}
               >
                 Log out
               </div>
