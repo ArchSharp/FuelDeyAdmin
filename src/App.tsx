@@ -343,8 +343,7 @@ function App() {
   }, []);
 
   // Idle session logout
-  // if (isAuth) {
-  const session = useMemo(() => new IdleSessionTimeout(15 * 60 * 1000), []); // Time in seconds (5 minutes)
+  const session = useMemo(() => new IdleSessionTimeout(1 * 60 * 1000), []); // Time in seconds (5 minutes)
   useEffect(() => {
     session.onTimeOut = () => {
       dispatch(
@@ -381,9 +380,7 @@ function App() {
   }, [dispatch, isTimeout]);
 
   useEffect(() => {
-    if (!isAuth) {
-      session.dispose();
-    }
+    session.dispose();
   }, [isAuth]);
 
   useEffect(() => {
@@ -409,7 +406,8 @@ function App() {
       session.reset();
     }
   }, [shouldResetSession]);
-  // }
+
+  console.log("shouldResetSession: ", shouldResetSession);
 
   return (
     <BrowserRouter>

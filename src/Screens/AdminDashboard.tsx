@@ -105,7 +105,7 @@ export const AdminDashboard = () => {
     }
   }, [pathName]);
 
-  // console.log("first: ", pathName);
+  // console.log("isNavIn: ", isNavIn);
 
   return (
     <div className="flex relative">
@@ -154,7 +154,7 @@ export const AdminDashboard = () => {
               <div
                 className="text-sm"
                 onClick={() => {
-                  if (sidebar.subTexts.length === 0) setIsNavIn(!isNavIn);
+                  if (sidebar.subTexts.length === 0) setIsNavIn(true);
                 }}
               >
                 {sidebar.sideText}
@@ -176,7 +176,7 @@ export const AdminDashboard = () => {
                       key={subindex}
                       onClick={() => {
                         handleSubNavClick(subindex);
-                        setIsNavIn(!isNavIn);
+                        setIsNavIn(true);
                       }}
                       className={`text-white pl-10 pt-3 pb-3 cursor-pointer flex items-center text-base ${
                         subNavIndex === subindex
