@@ -3,6 +3,7 @@ export const adminDash = "dashboard";
 export const vendors = "vendors";
 export const settings = "settings";
 export const buyers = "buyers";
+export const notifications = "notifications";
 export const staffMngt = "staffMngt";
 export const vendordash = "/vendor-dashboard";
 export const signup = "/signup";

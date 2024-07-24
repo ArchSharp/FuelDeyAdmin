@@ -22,6 +22,7 @@ import { StaffMngt } from "./StaffMngt";
 import { useAppDispatch, useAppSelector } from "../Store/store";
 import { setIsAuth } from "../Features/User/userSlice";
 import { Settings } from "./Settings";
+import { Notifications } from "./Notifications";
 
 export const AdminDashboard = () => {
   const { isAuth } = useAppSelector((state) => state.user);
@@ -94,6 +95,9 @@ export const AdminDashboard = () => {
     } else if (pathName === "/admin/" + routes.buyers) {
       setMainNavIndex(2);
       navigate(routes.buyers);
+    } else if (pathName === "/admin/" + routes.notifications) {
+      setMainNavIndex(3);
+      navigate(routes.notifications);
     } else if (pathName === "/admin/" + routes.staffMngt) {
       setMainNavIndex(4);
       navigate(routes.staffMngt);
@@ -137,6 +141,7 @@ export const AdminDashboard = () => {
                 if (index === 0) route = routes.adminDash;
                 else if (index === 1) route = routes.vendors;
                 else if (index === 2) route = routes.buyers;
+                else if (index === 3) route = routes.notifications;
                 else if (index === 4) route = routes.staffMngt;
                 else if (index === 5) route = routes.settings;
 
@@ -260,6 +265,7 @@ export const AdminDashboard = () => {
             <Route path={routes.adminDash} element={<DashboardAdmin />} />
             <Route path={routes.vendors} element={<Vendors />} />
             <Route path={routes.buyers} element={<Buyers />} />
+            <Route path={routes.notifications} element={<Notifications />} />
             <Route path={routes.staffMngt} element={<StaffMngt />} />
             <Route
               path={routes.settings}
