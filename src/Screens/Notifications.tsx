@@ -5,7 +5,7 @@ export const Notifications = () => {
   const [isReply, setIsReply] = useState(false);
 
   return (
-    <div className="bg-slate-100 w-[90%] mx-auto mt-10 pb-10 rounded-2xl min-h-[300px]">
+    <div className="bg-slate-100 w-[90%] mx-auto my-10 pb-10 rounded-2xl min-h-[300px]">
       <div className="flex items-center">
         <div className="text-xl text-orange-700 border-b-[1.5px] border-b-orange-700 mt-5 ml-10 pb-3 font-bold cursor-pointer">
           Vendors Notifications
