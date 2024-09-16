@@ -20,12 +20,18 @@ import * as routes from "../Data/Routes";
 import { Buyers } from "./Buyers";
 import { StaffMngt } from "./StaffMngt";
 import { useAppDispatch, useAppSelector } from "../Store/store";
-import { setIsAuth } from "../Features/User/userSlice";
+import {
+  getFuelSummaryData,
+  getVendorSummary,
+  setLogout,
+} from "../Features/User/userSlice";
 import { Settings } from "./Settings";
 import { Notifications } from "./Notifications";
 
 export const AdminDashboard = () => {
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { isAuth, vendorSummary, fuelSummary } = useAppSelector(
+    (state) => state.user
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" });
@@ -110,6 +116,16 @@ export const AdminDashboard = () => {
   }, [pathName]);
 
   // console.log("isNavIn: ", isNavIn);
+
+  useEffect(() => {
+    if (!vendorSummary) {
+      dispatch(getVendorSummary());
+    }
+
+    if (!fuelSummary) {
+      dispatch(getFuelSummaryData());
+    }
+  }, [dispatch, vendorSummary, fuelSummary]);
 
   return (
     <div className="flex relative">
@@ -251,7 +267,7 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  dispatch(setIsAuth(false));
+                  dispatch(setLogout());
                 }}
               >
                 Log out

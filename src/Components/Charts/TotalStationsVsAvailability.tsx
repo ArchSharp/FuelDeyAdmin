@@ -24,18 +24,16 @@ class TotalStationsVsAvailability extends PureComponent<TotalStationsVsAvailabil
   render() {
     const { stateFuelDashboardData = { availability: [] } } = this.props;
 
-    const transformedData = stateFuelDashboardData?.totalVsAvailability?.map(
-      (item: any) => ({
-        Availability: item.availability,
-        TotalStations: item.totalStation,
-        state: item.state,
-        ...item,
-      })
-    );
+    const transformedData = stateFuelDashboardData?.map((item: any) => ({
+      Availability: item.availability,
+      TotalStations: item.totalstation,
+      state: item.state,
+      ...item,
+    }));
 
-    const maxValue = stateFuelDashboardData?.totalVsAvailability?.reduce(
+    const maxValue = stateFuelDashboardData?.reduce(
       (max: number, item: any) => {
-        const maxAvailability = Math.max(item?.totalStation || 0);
+        const maxAvailability = Math.max(item?.totalstation || 0);
         return Math.max(max, maxAvailability);
       },
       0
@@ -75,7 +73,7 @@ class TotalStationsVsAvailability extends PureComponent<TotalStationsVsAvailabil
   }
 }
 const mapStateToProps = (state: any) => ({
-  stateFuelDashboardData: state.user.stateFuelDashboardData,
+  stateFuelDashboardData: state.user.vendorSummary,
 });
 
 export default connect(mapStateToProps)(TotalStationsVsAvailability);

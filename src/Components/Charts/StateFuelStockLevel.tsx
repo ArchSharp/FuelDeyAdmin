@@ -22,26 +22,26 @@ class StateFuelStockLevel extends PureComponent<StateFuelStockLevelProps> {
   static demoUrl = "https://codesandbox.io/s/mixed-bar-chart-q4hgc";
 
   render() {
-    const { stateFuelDashboardData = { availability: [] } } = this.props;
+    const { stateFuelDashboardData = [] } = this.props;
 
-    const transformedData = stateFuelDashboardData?.stockLevel?.map(
-      (item: any) => ({
-        Petrol: item.stockLevel.petrol,
-        Diesel: item.stockLevel.diesel,
-        Kerosene: item.stockLevel.kerosene,
-        CookingGas: item.stockLevel.cookingGas,
-        state: item.state,
-        ...item,
-      })
-    );
+    const transformedData = stateFuelDashboardData?.map((item: any) => ({
+      Petrol: item.stocklevel?.petrol || 0,
+      Diesel: item.stocklevel?.diesel || 0,
+      Kerosene: item.stocklevel?.kerosene || 0,
+      CookingGas: item.stocklevel?.cookinggas || 0,
+      state: item.state,
+      ...item,
+    }));
 
-    const maxValue = stateFuelDashboardData?.stockLevel?.reduce(
-      (max: number, item: any) => {
-        const maxAvailability = Math.max(item?.stockLevel.petrol || 0);
-        return Math.max(max, maxAvailability);
-      },
-      0
-    );
+    const maxValue = transformedData.reduce((max: number, item: any) => {
+      const maxAvailability = Math.max(
+        item.Petrol,
+        item.Diesel,
+        item.Kerosene,
+        item.CookingGas
+      );
+      return Math.max(max, maxAvailability);
+    }, 0);
 
     let exactMaxValue = maxValue + 1000;
 
@@ -79,7 +79,7 @@ class StateFuelStockLevel extends PureComponent<StateFuelStockLevelProps> {
   }
 }
 const mapStateToProps = (state: any) => ({
-  stateFuelDashboardData: state.user.stateFuelDashboardData,
+  stateFuelDashboardData: state.user.vendorSummary,
 });
 
 export default connect(mapStateToProps)(StateFuelStockLevel);

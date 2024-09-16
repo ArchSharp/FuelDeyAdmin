@@ -1,20 +1,53 @@
 export interface ISignin {
-  Email: string;
-  Password?: string;
+  email: string;
+  password: string;
 }
 
 export interface IUserState {
   currentUser?: IProfile | any | null;
   isLoading: boolean;
   isAuth?: boolean;
+  token?: ITokens | null;
+  vendorSummary?: IVendorSummary[] | null;
+  fuelSummary?: IFuelSummary | null;
   alertProps?: IAlertProps | null;
   userId?: string;
-  token?: string;
   currentRoute?: string;
   stateFuelDashboardData?: StateFuelDashboardData;
   vendors?: IVendors | null;
   buyers?: IBuyers | null;
   staffs?: IStaffs | null;
+}
+
+export interface IFuelSummary {
+  buyers: IActive;
+  vendors: IActive;
+  fuelAvailability: IFuelAvailability;
+}
+
+export interface IActive {
+  active: number;
+  inactive: number;
+}
+
+export interface IFuelAvailability {
+  highstock: number;
+  lowstock: number;
+}
+
+export interface IVendorSummary {
+  availability: number;
+  totalstation: number;
+  state: string;
+  stocklevel: IStocklevel;
+}
+
+export interface IStocklevel {
+  cookinggas: number;
+  diesel: number;
+  gas: number;
+  kerosene: number;
+  petrol: number;
 }
 
 export interface IStaffs {
@@ -120,20 +153,29 @@ export interface IAlertProps {
 
 export interface IAuth {
   userId: string;
-  token: string;
+  token: ITokens;
 }
 
 export interface IProfile {
-  stationName: string;
-  address: string;
-  state: string;
-  lga: string;
-  phoneno: string;
+  id: string;
+  firstname: string;
+  lastname: string;
   email: string;
-  isActive?: boolean;
+  address: string;
   password: string;
-  userRole?: number;
-  dateCreated?: string;
+  phonenumber: string;
+  imageurl: string;
+  is_email_verified: boolean;
+  is_two_factor_enabled: boolean;
+  role: string;
+  isactive: boolean;
+  createdat: string;
+  updatedat: string;
+}
+
+export interface ITokens {
+  accesstoken: string;
+  refreshtoken: string;
 }
 
 export interface ICreatePin {

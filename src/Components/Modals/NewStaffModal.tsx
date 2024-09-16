@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { IStaff } from "../../Features/User/type";
 import { roles } from "../../Data/roles";
-import { new_staff } from "../../Features/User/userSlice";
+// import { new_staff } from "../../Features/User/userSlice";
 import { useAppDispatch } from "../../Store/store";
 
 interface ModalProps {
@@ -168,7 +168,7 @@ const NewStaffModal: React.FC<ModalProps> = ({
                   onClick={(e) => {
                     e.preventDefault();
                     if (validateForm()) {
-                      dispatch(new_staff(payload));
+                      // dispatch(new_staff(payload));
                       setFirstName("");
                       setLastName("");
                       setEmail("");

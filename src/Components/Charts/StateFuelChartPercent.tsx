@@ -25,17 +25,15 @@ class StateFuelChartPercent extends PureComponent<StateFuelChartPercentProps> {
   render() {
     const { stateFuelDashboardData = { availability: [] } } = this.props;
 
-    const transformedData = stateFuelDashboardData?.totalVsAvailability?.map(
-      (item: any) => ({
-        Availability: item.availability,
-        Percentage: (
-          (parseFloat(item.availability) / parseFloat(item.totalStation)) *
-          100
-        ).toFixed(0),
-        state: item.state,
-        ...item,
-      })
-    );
+    const transformedData = stateFuelDashboardData?.map((item: any) => ({
+      Availability: item.availability,
+      Percentage: (
+        (parseFloat(item.availability) / parseFloat(item.totalstation)) *
+        100
+      ).toFixed(0),
+      state: item.state,
+      ...item,
+    }));
 
     // const maxValue = stateFuelDashboardData?.totalVsAvailability?.reduce(
     //   (max: number, item: any) => {
@@ -99,7 +97,7 @@ class StateFuelChartPercent extends PureComponent<StateFuelChartPercentProps> {
   }
 }
 const mapStateToProps = (state: any) => ({
-  stateFuelDashboardData: state.user.stateFuelDashboardData,
+  stateFuelDashboardData: state.user.vendorSummary,
 });
 
 export default connect(mapStateToProps)(StateFuelChartPercent);

@@ -24,15 +24,13 @@ class StateFuelChartAnalysis extends PureComponent<StateFuelChartAnalysisProps> 
   render() {
     const { stateFuelDashboardData = { availability: [] } } = this.props;
 
-    const transformedData = stateFuelDashboardData?.availability?.map(
-      (item: any) => ({
-        Availability: item.availability,
-        state: item.state,
-        ...item,
-      })
-    );
+    const transformedData = stateFuelDashboardData?.map((item: any) => ({
+      Availability: item.availability,
+      state: item.state,
+      ...item,
+    }));
 
-    const maxValue = stateFuelDashboardData?.availability?.reduce(
+    const maxValue = stateFuelDashboardData?.reduce(
       (max: number, item: any) => {
         const maxAvailability = Math.max(item?.availability || 0);
         return Math.max(max, maxAvailability);
@@ -73,7 +71,7 @@ class StateFuelChartAnalysis extends PureComponent<StateFuelChartAnalysisProps> 
   }
 }
 const mapStateToProps = (state: any) => ({
-  stateFuelDashboardData: state.user.stateFuelDashboardData,
+  stateFuelDashboardData: state.user.vendorSummary,
 });
 
 export default connect(mapStateToProps)(StateFuelChartAnalysis);

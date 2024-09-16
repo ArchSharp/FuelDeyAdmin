@@ -14,8 +14,11 @@ import {
   IVendors,
   IBuyers,
   IStaffs,
-  IStaff,
+  // IStaff,
   ISignin,
+  ITokens,
+  IVendorSummary,
+  IFuelSummary,
 } from "./type";
 
 const initialState: IUserState = {
@@ -33,15 +36,24 @@ const userSlice = createSlice({
 
     setLogout: (state) => {
       state.isAuth = false;
-      state.token = "";
+      state.token = null;
       state.userId = "";
       state.currentUser = null;
       state.alertProps = null;
+      state.vendorSummary = null;
     },
 
     setProfile: (state, { payload }: PayloadAction<IProfile>) => {
       state.currentUser = payload;
       state.isAuth = true;
+    },
+
+    setVendorSummary: (state, { payload }: PayloadAction<IVendorSummary[]>) => {
+      state.vendorSummary = payload;
+    },
+
+    setFuelSummary: (state, { payload }: PayloadAction<IFuelSummary>) => {
+      state.fuelSummary = payload;
     },
 
     setShowAlert: (state, { payload }: PayloadAction<IAlertProps | null>) => {
@@ -55,7 +67,7 @@ const userSlice = createSlice({
       state.isAuth = true;
     },
 
-    setToken: (state, { payload }: PayloadAction<string>) => {
+    setToken: (state, { payload }: PayloadAction<ITokens>) => {
       state.token = payload;
     },
     setCurrentRoute: (state, { payload }: PayloadAction<string>) => {
@@ -113,82 +125,80 @@ export const reset_password = (data: IResetPassword): AppThunk => {
   };
 };
 
-export const new_staff = (data: IStaff): AppThunk => {
-  return async (dispatch) => {
-    dispatch(setLoading(true));
-    try {
-      const path = "/NewStaff";
-      // console.log("checking ResetPassword path: ", path, " data: ", data);
-      const response = await axios.post(path, data);
-      if (response) {
-        const { data } = response;
-        if (data && !data.token) {
-          if (data.error.length > 0)
-            data.error.forEach((element: string) => {
-              dispatch(setError(element));
-            });
-          else if (data.message) dispatch(setError(data.message));
-        } else if (data && data.token) {
-          // dispatch(setProfile(data.profile));
-          // dispatch(setToken(data.token));
-        }
-      }
-    } catch (error: any) {
-      dispatch(setError(error?.message));
-    }
-    dispatch(setLoading(false));
-  };
-};
-
 export const signIn = (data: ISignin): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const path = "/NewStaff";
+      const path = "/SignInAdmin";
       // console.log("checking ResetPassword path: ", path, " data: ", data);
       const response = await axios.post(path, data);
       if (response) {
         const { data } = response;
-        if (data && !data.token) {
-          if (data.error.length > 0)
-            data.error.forEach((element: string) => {
-              dispatch(setError(element));
-            });
-          else if (data.message) dispatch(setError(data.message));
-        } else if (data && data.token) {
-          // dispatch(setProfile(data.profile));
-          // dispatch(setToken(data.token));
+        // console.log("signIn response: ", data);
+        if (data?.code === 200) {
+          dispatch(setProfile(data.body));
+          dispatch(setToken(data.extrainfo));
+          dispatch(setIsAuth(true));
+          localStorage.setItem("token", data?.extrainfo?.accesstoken);
+        } else if (data?.code !== 200) {
         }
       }
     } catch (error: any) {
+      console.log("signIn error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
   };
 };
 
-export const getAllAgents = (pageIndex: number): AppThunk => {
-  return async (dispatch) => {
+export const getVendorSummary = (): AppThunk => {
+  return async (dispatch, getState) => {
     dispatch(setLoading(true));
     dispatch(clearErrors());
     try {
-      const path = `GetAllAgents?pageNo=${pageIndex}`;
+      const adminId = getState()?.user?.currentUser?.id;
+      const path = `AdminGetVendorSummary?adminId=${adminId}`;
       // console.log("payload: ", data);
       const response = await axiosWithAuth.get(path);
       if (response) {
         const data = response.data;
 
-        console.log("getAllAgents response: ", data);
-        if (data.status === true) {
-          if (data?.responseCode === "100") {
-            //
-          }
+        console.log("getVendorSummary response: ", data);
+        if (data?.code === 200) {
+          dispatch(setVendorSummary(data?.body));
         } else {
           // j
         }
       }
     } catch (error: any) {
-      console.log("getAllAgents error response: ");
+      console.log("getVendorSummary error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const getFuelSummaryData = (): AppThunk => {
+  return async (dispatch, getState) => {
+    dispatch(setLoading(true));
+    dispatch(clearErrors());
+    try {
+      const adminId = getState()?.user?.currentUser?.id;
+      const path = `AdminGetFuelSummary?adminId=${adminId}`;
+      // console.log("payload: ", data);
+      const response = await axiosWithAuth.get(path);
+      if (response) {
+        const data = response.data;
+
+        console.log("getFuelSummaryData response: ", data);
+        if (data?.code === 200) {
+          dispatch(setFuelSummary(data?.body));
+        } else {
+          // j
+        }
+      }
+    } catch (error: any) {
+      console.log("getFuelSummaryData error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -348,5 +358,7 @@ export const {
   setVendors,
   setBuyers,
   setStaffs,
+  setVendorSummary,
+  setFuelSummary,
 } = userSlice.actions;
 export default userSlice.reducer;

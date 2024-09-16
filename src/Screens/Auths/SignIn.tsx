@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import * as routes from "../../Data/Routes";
 import { MdAttachEmail } from "react-icons/md";
 import { FaLock, FaLockOpen } from "react-icons/fa";
-import { setIsAuth, signIn } from "../../Features/User/userSlice";
+import { signIn } from "../../Features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/store";
 import { useEffect, useState } from "react";
@@ -17,8 +17,8 @@ export const SignIn = () => {
 
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
-    Email: Yup.string().required("Email is required"),
-    Password: Yup.string()
+    email: Yup.string().required("Email is required"),
+    password: Yup.string()
       .min(6, "Must not be less than 6 characters")
       .required("Password is required")
       .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
@@ -29,14 +29,14 @@ export const SignIn = () => {
 
   // Initial form values
   const initialValues = {
-    Email: "",
-    Password: "",
+    email: "",
+    password: "",
   };
 
   // Submit handler
   const handleSubmit = (values: ISignin) => {
     // alert("God is good");
-    dispatch(setIsAuth(true));
+    // dispatch(setIsAuth(true));
     dispatch(signIn(values));
   };
 
@@ -67,18 +67,18 @@ export const SignIn = () => {
           <input
             className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
             type="text"
-            id="Email"
-            name="Email"
+            id="email"
+            name="email"
             onChange={(e) => {
               formik.handleChange(e);
             }}
             onBlur={formik.handleBlur}
-            value={formik.values.Email}
+            value={formik.values.email}
             // placeholder="Enter Email"
           />
         </div>
-        {formik.touched.Email && formik.errors.Email && (
-          <div className="text-red-700">{formik.errors.Email}</div>
+        {formik.touched.email && formik.errors.email && (
+          <div className="text-red-700">{formik.errors.email}</div>
         )}
       </div>
 
@@ -103,16 +103,16 @@ export const SignIn = () => {
           <input
             className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
             type={showPass ? "text" : "password"}
-            id="Password"
-            name="Password"
+            id="password"
+            name="password"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.Password}
+            value={formik.values.password}
             // placeholder="Enter password"
           />
         </div>
-        {formik.touched.Password && formik.errors.Password && (
-          <div className="text-red-700">{formik.errors.Password}</div>
+        {formik.touched.password && formik.errors.password && (
+          <div className="text-red-700">{formik.errors.password}</div>
         )}
       </div>
 
