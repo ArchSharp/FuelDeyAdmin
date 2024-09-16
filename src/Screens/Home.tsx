@@ -3,7 +3,7 @@ import * as routes from "../Data/Routes";
 import fueldeylogo from "../assets/Images/fuel-dey-logo.jpeg";
 import { Route, Routes } from "react-router-dom";
 import { SignIn } from "./Auths/SignIn";
-import { SignUp } from "./Auths/SignUp";
+// import { SignUp } from "./Auths/SignUp";
 import { ForgotPassword } from "./Auths/ForgotPassword";
 import { useMediaQuery } from "react-responsive";
 import { ResetPassword } from "./Auths/ResetPassword";
