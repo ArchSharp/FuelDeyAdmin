@@ -41,7 +41,7 @@ export const Home = () => {
           >
             <Routes>
               <Route path={"/"} index={true} element={<SignIn />} />
-              <Route path={routes.signup} element={<SignUp />} />
+              {/* <Route path={routes.signup} element={<SignUp />} /> */}
               <Route path={routes.f_password} element={<ForgotPassword />} />
               <Route path={routes.resetPassword} element={<ResetPassword />} />
             </Routes>

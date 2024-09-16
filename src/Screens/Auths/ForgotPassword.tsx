@@ -14,8 +14,8 @@ export const ForgotPassword = () => {
 
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
-    Email: Yup.string().required("Email is required"),
-    Password: Yup.string()
+    email: Yup.string().required("Email is required"),
+    password: Yup.string()
       .min(6, "Must not be less than 6 characters")
       .required("Password is required")
       .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
@@ -26,8 +26,8 @@ export const ForgotPassword = () => {
 
   // Initial form values
   const initialValues = {
-    Email: "",
-    Password: "",
+    email: "",
+    password: "",
   };
 
   // Submit handler
@@ -56,18 +56,18 @@ export const ForgotPassword = () => {
           <input
             className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
             type="text"
-            id="Email"
-            name="Email"
+            id="email"
+            name="email"
             onChange={(e) => {
               formik.handleChange(e);
             }}
             onBlur={formik.handleBlur}
-            value={formik.values.Email}
-            // placeholder="Enter Email"
+            value={formik.values.email}
+            // placeholder="Enter email"
           />
         </div>
-        {formik.touched.Email && formik.errors.Email && (
-          <div className="text-red-700">{formik.errors.Email}</div>
+        {formik.touched.email && formik.errors.email && (
+          <div className="text-red-700">{formik.errors.email}</div>
         )}
       </div>
 

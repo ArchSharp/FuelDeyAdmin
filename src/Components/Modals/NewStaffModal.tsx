@@ -1,10 +1,10 @@
 // Modal.tsx
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { IStaff } from "../../Features/User/type";
+// import { IStaff } from "../../Features/User/type";
 import { roles } from "../../Data/roles";
 // import { new_staff } from "../../Features/User/userSlice";
-import { useAppDispatch } from "../../Store/store";
+// import { useAppDispatch } from "../../Store/store";
 
 interface ModalProps {
   isOpen: boolean;
@@ -27,7 +27,7 @@ const NewStaffModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -36,17 +36,17 @@ const NewStaffModal: React.FC<ModalProps> = ({
   const [address, setAddress] = useState<string>("");
   const [role, setRole] = useState<string>("");
 
-  const payload: IStaff = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    phoneno: phoneno,
-    address: address,
-    createdAt: new Date().toDateString(),
-    fullName: `${firstName} ${lastName}`,
-    isActive: true,
-    role: role,
-  };
+  // const payload: IStaff = {
+  //   firstName: firstName,
+  //   lastName: lastName,
+  //   email: email,
+  //   phoneno: phoneno,
+  //   address: address,
+  //   createdAt: new Date().toDateString(),
+  //   fullName: `${firstName} ${lastName}`,
+  //   isActive: true,
+  //   role: role,
+  // };
 
   const validateForm = () => {
     return firstName && lastName && email && phoneno && address && role;

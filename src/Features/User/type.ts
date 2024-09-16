@@ -157,7 +157,7 @@ export interface IAuth {
 }
 
 export interface IProfile {
-  id: string;
+  id?: string;
   firstname: string;
   lastname: string;
   email: string;
@@ -165,12 +165,12 @@ export interface IProfile {
   password: string;
   phonenumber: string;
   imageurl: string;
-  is_email_verified: boolean;
-  is_two_factor_enabled: boolean;
+  is_email_verified?: boolean;
+  is_two_factor_enabled?: boolean;
   role: string;
-  isactive: boolean;
-  createdat: string;
-  updatedat: string;
+  isactive?: boolean;
+  createdat?: string;
+  updatedat?: string;
 }
 
 export interface ITokens {
