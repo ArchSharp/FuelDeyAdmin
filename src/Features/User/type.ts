@@ -73,18 +73,33 @@ export interface IVendors {
 }
 
 export interface IVendor {
-  vendorName: string;
-  manager: string;
-  phoneno: string;
-  email: string;
   address: string;
+  averagerating: number;
+  commuterrating: number;
+  createdat: string;
+  diesellevel: number;
+  dieselprice: number;
+  email: string;
+  gaslevel: number;
+  gasprice: number;
+  id: string;
+  isactive: boolean;
+  isdiesel: boolean;
+  isgas: boolean;
+  ispetrol: boolean;
+  kerosenelevel: number;
+  latitude: string;
   lga: string;
+  longitude: string;
+  petrollevel: number;
+  petrolprice: number;
+  phonenumber: string;
+  postalcode: number;
+  ratingcount: any;
   state: string;
-  isFuelAvailable: boolean;
-  isActive: boolean;
-  fuelTypes: string[];
-  ownerType: string;
-  stockLevel: StockLevel;
+  stationname: string;
+  totalrater: number;
+  updatedat: string;
 }
 
 export interface IBuyers {

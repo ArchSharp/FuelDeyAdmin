@@ -22,20 +22,21 @@ export class VendorStockLevel extends PureComponent<VendorStockLevelProps> {
     const { vendor } = this.props;
 
     const transformedData = [vendor]?.map((item) => ({
-      Petrol: item?.stockLevel.petrol,
-      Diesel: item?.stockLevel.diesel,
-      Kerosene: item?.stockLevel.kerosene,
-      CookingGas: item?.stockLevel.cookingGas,
-      Station: `${item?.vendorName} ${vendor?.address} ${vendor?.state}`,
+      Petrol: item?.petrollevel,
+      Diesel: item?.diesellevel,
+      Kerosene: item?.kerosenelevel,
+      CookingGas: item?.gaslevel,
+      Station: `${item?.stationname} ${vendor?.address} ${vendor?.state}`,
       ...item,
     }));
 
-    const maxValue = [vendor?.stockLevel]?.reduce((max: number, item: any) => {
-      const maxAvailability = Math.max(item?.petrol || 0);
-      return Math.max(max, maxAvailability);
-    }, 0);
+    // const maxValue = [vendor?.stockLevel]?.reduce((max: number, item: any) => {
+    //   const maxAvailability = Math.max(item?.petrol || 0);
+    //   return Math.max(max, maxAvailability);
+    // }, 0);
 
-    let exactMaxValue = maxValue + 1000;
+    // let exactMaxValue = maxValue + 1000;
+    let exactMaxValue = 1000;
 
     return (
       <div style={{ width: "100%", height: "100%" }}>

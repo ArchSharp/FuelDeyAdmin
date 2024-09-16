@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "../Store/store";
+import { IProfile } from "../Features/User/type";
 
 export const Profile = () => {
-  const [fullName, setFullName] = useState("");
+  const { currentUser } = useAppSelector((state) => state.user);
+  const [user, setUser] = useState<IProfile>(currentUser);
+  const [fullName, setFullName] = useState(" ");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    setUser(currentUser);
+  }, []);
+
+  useEffect(() => {
+    setFullName(user.firstname + " " + user.lastname);
+    setEmail(user.email);
+    setPhone(user.phonenumber);
+    setAddress(user.address);
+  }, [currentUser]);
 
   const handleSaveChanges = () => {
     // Your existing logic here

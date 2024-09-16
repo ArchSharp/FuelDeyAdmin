@@ -1,10 +1,25 @@
-import { useAppSelector } from "../Store/store";
+import { useAppDispatch, useAppSelector } from "../Store/store";
 // import { IVendorsSummary } from "../Features/User/type";
 import { VendorsTable } from "../Components/VendorsTable";
 import { BsFillFuelPumpFill } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { getAllVendors } from "../Features/User/userSlice";
 
 export const Vendors = () => {
+  const dispatch = useAppDispatch();
   const { vendors } = useAppSelector((state) => state.user);
+  const [totalVendors, setTotalVendors] = useState(0);
+
+  useEffect(() => {
+    if (vendors) {
+      setTotalVendors(vendors?.pagination?.total);
+    }
+  }, [vendors]);
+
+  useEffect(() => {
+    dispatch(getAllVendors(1));
+  }, []);
+
   // const [vendorsSummary, setTrxSummary] =
   //   useState<IVendorsSummary>(transactionSummary);
 
@@ -13,7 +28,7 @@ export const Vendors = () => {
       <div className="flex items-center ml-8 mt-10 mb-7 text-orange-600">
         <BsFillFuelPumpFill className="mr-4 text-2xl" />{" "}
         <div className="text-black font-fueldeyserifreg text-2xl">
-          4000 Vendors
+          {totalVendors} Vendors
         </div>
       </div>
       {/* transactions table */}

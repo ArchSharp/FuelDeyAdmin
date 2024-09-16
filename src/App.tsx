@@ -9,7 +9,7 @@ import { Loader } from "./Components/Loader";
 import { ErrorPage } from "./Screens/ErrorPage";
 import { Home } from "./Screens/Home";
 import { AdminDashboard } from "./Screens/AdminDashboard";
-import { VendorDashboard } from "./Screens/VendorDashboard";
+
 import {
   // setBuyers,
   setIsAuth,
@@ -42,21 +42,21 @@ function App() {
     };
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const originalConsoleError = console.error;
+  useEffect(() => {
+    const originalConsoleError = console.error;
 
-  //   console.error = (...args: any[]) => {
-  //     if (typeof args[0] === "string" && /defaultProps/.test(args[0])) {
-  //       return;
-  //     }
+    console.error = (...args: any[]) => {
+      if (typeof args[0] === "string" && /defaultProps/.test(args[0])) {
+        return;
+      }
 
-  //     originalConsoleError(...args);
-  //   };
+      originalConsoleError(...args);
+    };
 
-  //   return () => {
-  //     console.error = originalConsoleError;
-  //   };
-  // }, []);
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, []);
 
   // Idle session logout
   const session = useMemo(() => new IdleSessionTimeout(1 * 60 * 1000), []); // Time in seconds (5 minutes)
@@ -144,7 +144,6 @@ function App() {
       <Routes>
         <Route path={routes.homepage} index element={<Home />} />
         <Route path={routes.admindash} index element={<AdminDashboard />} />
-        <Route path={routes.vendordash} index element={<VendorDashboard />} />
         <Route path={routes.error} index element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

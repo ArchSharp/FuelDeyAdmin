@@ -49,8 +49,9 @@ export const AdminDashboard = () => {
   const pathName = useLocation().pathname;
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate(routes.signin);
+    console.log("isAuth: ", isAuth);
+    if (isAuth === false) {
+      navigate(routes.homepage);
     }
   }, [isAuth]);
 

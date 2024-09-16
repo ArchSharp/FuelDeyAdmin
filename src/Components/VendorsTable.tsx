@@ -38,6 +38,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   const [fromDate, setFromDate] = useState("");
   const [search, setSearch] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [tappedVendor, setTappedVendor] = useState<IVendor>();
   // const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
     }
   };
 
-  const sortedData = data?.data.slice().sort((a, b) => {
+  const sortedData = data?.data?.slice().sort((a, b) => {
     if (sortBy) {
       const aValue = a[sortBy as keyof IVendor];
       const bValue = b[sortBy as keyof IVendor];
@@ -164,7 +165,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
         isOpen={openTrx}
         onClose={closeModal}
         content="testing"
-        dataId={currentIndex}
+        data={tappedVendor!}
       />
       {/* Table header */}
       <div className="pt-6 flex">
@@ -309,30 +310,30 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 VIEW
               </div>
             </th>
-            <th onClick={() => handleSort("vendorName")}>
+            <th onClick={() => handleSort("stationname")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 VENDOR NAME
-                {sortBy === "vendorName" && (
+                {sortBy === "stationname" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("manager")}>
+            <th onClick={() => handleSort("stationname")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 MANAGER
-                {sortBy === "manager" && (
+                {sortBy === "stationname" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("phoneno")}>
+            <th onClick={() => handleSort("phonenumber")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 PHONE NUMBER
-                {sortBy === "phoneno" && (
+                {sortBy === "phonenumber" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -379,7 +380,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("isFuelAvailable")}>
+            <th onClick={() => handleSort("ispetrol")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 FUEL AVAILABILITY
                 {sortBy === "isFuelAvailable" && (
@@ -389,7 +390,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("fuelTypes")}>
+            <th onClick={() => handleSort("isdiesel")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 FUEL TYPES
                 {sortBy === "fuelTypes" && (
@@ -421,18 +422,19 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                       onClick={() => {
                         setCurrentIndex(index);
                         setOpenTrx(!openTrx);
+                        setTappedVendor(dt);
                       }}
                     />
                   </td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.vendorName === null ? "-" : dt.vendorName
+                    dt.stationname === null ? "-" : dt.stationname
                   }`}</td>
 
                   <td className="text-center text-sm px-3 text-nowrap">{`${
-                    dt.manager === null ? "-" : dt.manager
+                    dt.stationname === null ? "-" : dt.stationname
                   }`}</td>
                   <td className="text-center text-sm">{`${
-                    dt.phoneno === null ? "-" : dt.phoneno
+                    dt.phonenumber === null ? "-" : dt.phonenumber
                   }`}</td>
                   <td className="text-center text-sm px-3">{`${
                     dt.email === null ? "-" : dt.email
@@ -448,15 +450,12 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   }`}</td>
                   <td
                     className={`text-center text-sm px-3 ${
-                      dt.isFuelAvailable === true
-                        ? "text-green-700"
-                        : "text-red-700"
+                      dt.ispetrol === true ? "text-green-700" : "text-red-700"
                     } font-bold`}
-                  >{`${
-                    dt.isFuelAvailable === true ? "Available" : "Finished"
-                  }`}</td>
+                  >{`${dt.ispetrol === true ? "Available" : "Finished"}`}</td>
                   <td className="text-center text-sm px-3 text-nowrap">{`${
-                    dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
+                    // dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
+                    ""
                   }`}</td>
                 </tr>
               );

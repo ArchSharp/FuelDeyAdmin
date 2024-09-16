@@ -41,14 +41,22 @@ const userSlice = createSlice({
       state.currentUser = null;
       state.alertProps = null;
       state.vendorSummary = null;
+      state.vendors = null;
     },
 
-    setProfile: (state, { payload }: PayloadAction<IProfile>) => {
+    setProfile: (state, { payload }: PayloadAction<IProfile | null>) => {
       state.currentUser = payload;
       state.isAuth = true;
     },
 
-    setVendorSummary: (state, { payload }: PayloadAction<IVendorSummary[]>) => {
+    setVendors: (state, { payload }: PayloadAction<IVendors | null>) => {
+      state.vendors = payload;
+    },
+
+    setVendorSummary: (
+      state,
+      { payload }: PayloadAction<IVendorSummary[] | null>
+    ) => {
       state.vendorSummary = payload;
     },
 
@@ -82,10 +90,6 @@ const userSlice = createSlice({
       { payload }: PayloadAction<StateFuelDashboardData>
     ) => {
       state.stateFuelDashboardData = payload;
-    },
-
-    setVendors: (state, { payload }: PayloadAction<IVendors | null>) => {
-      state.vendors = payload;
     },
 
     setBuyers: (state, { payload }: PayloadAction<IBuyers | null>) => {
@@ -199,6 +203,32 @@ export const getFuelSummaryData = (): AppThunk => {
       }
     } catch (error: any) {
       console.log("getFuelSummaryData error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const getAllVendors = (page: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(clearErrors());
+    try {
+      const path = `AdminGetAllVendors?page=${page}`;
+      // console.log("payload: ", data);
+      const response = await axiosWithAuth.get(path);
+      if (response) {
+        const data = response.data;
+
+        console.log("getAllVendors response: ", data);
+        if (data?.code === 200) {
+          dispatch(setVendors(data?.body));
+        } else {
+          // j
+        }
+      }
+    } catch (error: any) {
+      console.log("getAllVendors error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));

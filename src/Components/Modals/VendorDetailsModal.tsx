@@ -1,7 +1,6 @@
 // Modal.tsx
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useAppSelector } from "../../Store/store";
 import { IVendor } from "../../Features/User/type";
 import { VendorStockLevel } from "../Charts/VendorStockLevel";
 
@@ -9,14 +8,14 @@ interface ModalProps {
   isOpen: boolean;
   content: string;
   onClose: () => void;
-  dataId: number;
+  data: IVendor;
 }
 
 const VendorDetailsModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   content,
-  dataId,
+  data,
 }) => {
   const modalClasses = `w-[95vw] md:w-[720px] h-[610px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
     isOpen ? "block" : "hidden"
@@ -26,13 +25,11 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  const { vendors } = useAppSelector((state) => state.user);
-
   const [vendor, setVendor] = useState<IVendor>();
 
   useEffect(() => {
-    setVendor(vendors?.data[dataId]);
-  }, [content, dataId]);
+    setVendor(data);
+  }, [content, data]);
   // console.log("dataId: ", dataId);
 
   return (
@@ -49,7 +46,7 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
         </div>
         <div className="flex mt-2">
           <div className="text-base text-left font-semibold text-green-700">
-            {vendor?.vendorName}
+            {vendor?.stationname}
           </div>
         </div>
         <hr className="my-4" />
@@ -58,29 +55,29 @@ const VendorDetailsModal: React.FC<ModalProps> = ({
             {VendorRow(
               "",
               "Manager Name",
-              vendor?.manager,
+              vendor?.stationname,
               "Manager Phone",
-              vendor?.phoneno
+              vendor?.phonenumber
             )}
             {VendorRow(
               "mt-5",
               "Assistant Name",
-              vendor?.manager,
+              vendor?.stationname,
               "Assistant Phone",
-              vendor?.phoneno
+              vendor?.phonenumber
             )}
 
             {VendorRow(
               "mt-5",
               "Owner Type",
-              vendor?.ownerType,
+              vendor?.stationname,
               "Fuel Types",
-              vendor?.fuelTypes.join(", ")
+              "" // vendor?.fuelTypes?.join(", ")
             )}
             {VendorRow(
               "mt-5",
               "Station address",
-              `${vendor?.vendorName} ${vendor?.address} ${vendor?.state}`,
+              `${vendor?.address} ${vendor?.lga} ${vendor?.state}`,
               "Station email",
               vendor?.email
             )}

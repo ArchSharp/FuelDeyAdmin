@@ -1,8 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "../Store/store";
+import { IProfile } from "../Features/User/type";
 
 export const Security = () => {
-  const [email, setEmail] = useState("archraphr@gmail.com");
+  const { currentUser } = useAppSelector((state) => state.user);
+  const [user, setUser] = useState<IProfile>(currentUser);
+  const [email, setEmail] = useState("");
   const [istwoF, setIstwoF] = useState(false);
+
+  useEffect(() => {
+    setUser(currentUser);
+  }, []);
+
+  useEffect(() => {
+    setEmail(user.email);
+  }, [currentUser]);
 
   return (
     <div className="mx-auto w-[60%] border-2 border-gray-300 mt-10 pl-7 rounded-lg">
@@ -18,6 +30,7 @@ export const Security = () => {
           type="text"
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
+          readOnly
         />
         <button className="absolute right-2 top-3 text-blue-400 font-bold text-lg text-nowrap">
           Change Password
