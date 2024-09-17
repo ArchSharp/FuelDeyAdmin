@@ -1,10 +1,10 @@
 // Modal.tsx
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-// import { IStaff } from "../../Features/User/type";
 import { roles } from "../../Data/roles";
-// import { new_staff } from "../../Features/User/userSlice";
-// import { useAppDispatch } from "../../Store/store";
+import { createStaff } from "../../Features/User/userSlice";
+import { useAppDispatch } from "../../Store/store";
+import { ISignUp } from "../../Features/User/type";
 
 interface ModalProps {
   isOpen: boolean;
@@ -27,29 +27,27 @@ const NewStaffModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [phoneno, setPhoneno] = useState<string>("");
+  const [phonenumber, setPhonenumber] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [role, setRole] = useState<string>("");
 
-  // const payload: IStaff = {
-  //   firstName: firstName,
-  //   lastName: lastName,
-  //   email: email,
-  //   phoneno: phoneno,
-  //   address: address,
-  //   createdAt: new Date().toDateString(),
-  //   fullName: `${firstName} ${lastName}`,
-  //   isActive: true,
-  //   role: role,
-  // };
+  const payload: ISignUp = {
+    firstname: firstName,
+    lastname: lastName,
+    email: email,
+    phonenumber: "+234" + phonenumber,
+    address: address,
+    role: role,
+    password: firstName + new Date().getFullYear(),
+  };
 
   const validateForm = () => {
-    return firstName && lastName && email && phoneno && address && role;
+    return firstName && lastName && email && phonenumber && address && role;
   };
 
   return (
@@ -111,9 +109,9 @@ const NewStaffModal: React.FC<ModalProps> = ({
                   <div className="font-bold mb-1">Phone Number</div>
                   <input
                     type="text"
-                    value={phoneno}
+                    value={phonenumber}
                     className="w-full px-2 py-2 rounded-md border-[1px] border-gray-500"
-                    onChange={(e) => setPhoneno(e.currentTarget.value)}
+                    onChange={(e) => setPhonenumber(e.currentTarget.value)}
                     required
                   />
                 </div>
@@ -168,12 +166,12 @@ const NewStaffModal: React.FC<ModalProps> = ({
                   onClick={(e) => {
                     e.preventDefault();
                     if (validateForm()) {
-                      // dispatch(new_staff(payload));
+                      dispatch(createStaff(payload));
                       setFirstName("");
                       setLastName("");
                       setEmail("");
                       setAddress("");
-                      setPhoneno("");
+                      setPhonenumber("");
                       onClose();
                     } else {
                       alert("Please fill all fields before submitting.");

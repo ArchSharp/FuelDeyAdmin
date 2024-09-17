@@ -41,6 +41,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   const [search, setSearch] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState(0);
   // const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [tappedStaff, setTappedStaff] = useState<IStaff>();
 
   useEffect(() => {
     setData(staffsData);
@@ -157,7 +158,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
         isOpen={openStaff}
         onClose={closeModal}
         content="testing"
-        dataId={currentIndex}
+        data={tappedStaff!}
       />
       <NewStaffModal
         isOpen={addStaff}
@@ -260,10 +261,10 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
                 VIEW
               </div>
             </th>
-            <th onClick={() => handleSort("fullName")}>
+            <th onClick={() => handleSort("firstname")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 FULL NAME
-                {sortBy === "fullName" && (
+                {sortBy === "firstname" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -280,10 +281,10 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("phoneno")}>
+            <th onClick={() => handleSort("phonenumber")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 PHONE NUMBER
-                {sortBy === "phoneno" && (
+                {sortBy === "phonenumber" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -300,20 +301,20 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("createdAt")}>
+            <th onClick={() => handleSort("createdat")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 DATE CREATED
-                {sortBy === "createdAt" && (
+                {sortBy === "createdat" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("isActive")}>
+            <th onClick={() => handleSort("isactive")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 STATUS
-                {sortBy === "isActive" && (
+                {sortBy === "isactive" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -342,30 +343,33 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
                       onClick={() => {
                         setCurrentIndex(index);
                         setOpenStaff(!openStaff);
+                        setTappedStaff(dt);
                       }}
                     />
                   </td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.fullName === null ? "-" : dt.fullName
+                    dt.firstname === null
+                      ? "-"
+                      : dt.firstname + " " + dt.lastname
                   }`}</td>
 
                   <td className="text-center text-sm px-3 text-nowrap">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
                   <td className="text-center text-sm">{`${
-                    dt.phoneno === null ? "-" : dt.phoneno
+                    dt.phonenumber === null ? "-" : dt.phonenumber
                   }`}</td>
                   <td className="text-center text-sm px-3">{`${
                     dt.role === null ? "-" : dt.role
                   }`}</td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.createdAt === null ? "-" : dt.createdAt
+                    dt.createdat === null ? "-" : dt.createdat
                   }`}</td>
                   <td
                     className={`text-center text-sm px-3 ${
-                      dt.isActive === true ? "text-green-700" : "text-red-700"
+                      dt.isactive === true ? "text-green-700" : "text-red-700"
                     } font-bold`}
-                  >{`${dt.isActive === true ? "Active" : "Inactive"}`}</td>
+                  >{`${dt.isactive === true ? "Active" : "Inactive"}`}</td>
                 </tr>
               );
             } else {

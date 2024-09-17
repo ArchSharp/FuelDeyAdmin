@@ -1,22 +1,23 @@
 // Modal.tsx
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useAppSelector } from "../../Store/store";
-import { IStaff } from "../../Features/User/type";
+import { IStaff, IUpdateStaff } from "../../Features/User/type";
 import { roles } from "../../Data/roles";
+import { useAppDispatch } from "../../Store/store";
+import { updateStaff } from "../../Features/User/userSlice";
 
 interface ModalProps {
   isOpen: boolean;
   content: string;
   onClose: () => void;
-  dataId: number;
+  data: IStaff;
 }
 
 const StaffModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   content,
-  dataId,
+  data,
 }) => {
   const modalClasses = `w-[95vw] md:w-[720px] h-[610px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
     isOpen ? "block" : "hidden"
@@ -26,8 +27,7 @@ const StaffModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  const { staffs } = useAppSelector((state) => state.user);
-
+  const dispatch = useAppDispatch();
   const [staff, setStaff] = useState<IStaff | undefined>();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -35,20 +35,33 @@ const StaffModal: React.FC<ModalProps> = ({
   const [phoneno, setPhoneno] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [role, setRole] = useState<string>("");
+  const [adminid, setAdminid] = useState<string>("");
 
   useEffect(() => {
-    setStaff(staffs.data[dataId]);
-  }, [content, dataId]);
+    setStaff(data);
+  }, [content, data]);
   // console.log("dataId: ", dataId);
 
   useEffect(() => {
-    setFirstName(staff?.firstName ?? "");
-    setLastName(staff?.lastName ?? "");
+    setFirstName(data?.firstname ?? "");
+    setLastName(staff?.lastname ?? "");
     setEmail(staff?.email ?? "");
-    setPhoneno(staff?.phoneno ?? "");
+    setPhoneno(staff?.phonenumber ?? "");
     setAddress(staff?.address ?? "");
     setRole(staff?.role ?? "");
+    setAdminid(staff?.id ?? "");
   }, [staff]);
+
+  const payload: IUpdateStaff = {
+    phonenumber: phoneno,
+    address: address,
+    role: role,
+    adminid: adminid,
+  };
+
+  const validateForm = () => {
+    return firstName && lastName && email && phoneno && address && role;
+  };
 
   return (
     <>
@@ -124,7 +137,9 @@ const StaffModal: React.FC<ModalProps> = ({
                     onChange={(e) => setRole(e.currentTarget.value)}
                     required
                   >
-                    <option value="">Change Role</option>
+                    <option value="">
+                      {role == "" ? "Change Role" : role}
+                    </option>
                     {roles.map((role, index) => {
                       return (
                         <option key={index} value={role.role}>
@@ -160,6 +175,17 @@ const StaffModal: React.FC<ModalProps> = ({
                   className="rounded-md px-5 py-2 bg-slate-800 text-white"
                   onClick={(e) => {
                     e.preventDefault();
+                    if (validateForm()) {
+                      dispatch(updateStaff(payload));
+                      setFirstName("");
+                      setLastName("");
+                      setEmail("");
+                      setAddress("");
+                      setPhoneno("");
+                      onClose();
+                    } else {
+                      alert("Please fill all fields before submitting.");
+                    }
                   }}
                 >
                   Update

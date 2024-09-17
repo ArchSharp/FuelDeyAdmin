@@ -40,6 +40,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   const [search, setSearch] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState(0);
   // const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [tappedBuyer, setTappedBuyer] = useState<IBuyer>();
 
   useEffect(() => {
     setData(buyersData);
@@ -165,7 +166,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
         isOpen={openTrx}
         onClose={closeModal}
         content="testing"
-        dataId={currentIndex}
+        data={tappedBuyer!}
       />
       {/* Table header */}
       <div className="pt-6 flex">
@@ -310,20 +311,20 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                 VIEW
               </div>
             </th>
-            <th onClick={() => handleSort("fullName")}>
+            <th onClick={() => handleSort("firstname")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 BUYER NAME
-                {sortBy === "fullName" && (
+                {sortBy === "firstname" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("phoneno")}>
+            <th onClick={() => handleSort("phonenumber")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 BUYER PHONE
-                {sortBy === "phoneno" && (
+                {sortBy === "phonenumber" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -340,10 +341,10 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("lastTenVisitedStation")}>
+            <th onClick={() => handleSort("lasttenvisitedstations")}>
               <div className="flex items-center justify-center px-2 text-nowrap">
                 LAST TEN VISITED STATIONS
-                {sortBy === "lastTenVisitedStation" && (
+                {sortBy === "lasttenvisitedstations" && (
                   <span>
                     {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
                   </span>
@@ -355,9 +356,10 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
         <tbody>
           {sortedData?.map((dt: IBuyer, index: number) => {
             if (index < rowsPerPage) {
-              const stationNames = dt.lastTenVisitedStation
-                .map((last) => last.stationName)
-                .join(", ");
+              const stationNames = [""];
+              //  dt?.lasttenvisitedstations
+              //   .map((last) => last)
+              //   .join(", ");
 
               return (
                 <tr
@@ -367,6 +369,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                   } font-poppins text-xs md:text-base cursor-pointer h-[45px] hover:bg-orange-200`}
                   onClick={() => {
                     setCurrentIndex(index);
+                    setTappedBuyer(dt);
                   }}
                 >
                   <td className="text-center text-sm">{index + 1}</td>
@@ -380,17 +383,17 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                     />
                   </td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.fullName === null ? "-" : dt.fullName
+                    dt.firstname === null ? "-" : dt.firstname
                   }`}</td>
 
                   <td className="text-center text-sm px-3 text-nowrap">{`${
-                    dt.phoneno === null ? "-" : dt.phoneno
+                    dt.phonenumber === null ? "-" : dt.phonenumber
                   }`}</td>
                   <td className="text-center text-sm px-3">{`${
                     dt.email === null ? "-" : dt.email
                   }`}</td>
                   <td className="text-center text-sm px-3 w-[30%] py-1">{`${
-                    dt.lastTenVisitedStation === null ? "-" : stationNames
+                    dt.lasttenvisitedstations === null ? "-" : stationNames
                   }`}</td>
                 </tr>
               );

@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import * as routes from "../../Data/Routes";
 import { FaLock, FaLockOpen } from "react-icons/fa";
-import { signUp } from "../../Features/User/userSlice";
+// import { signUp } from "../../Features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/store";
 import { useState } from "react";
@@ -37,7 +37,7 @@ export const ResetPassword = () => {
 
   // Submit handler
   const handleSubmit = (values: IResetPassword) => {
-    dispatch(signUp(values));
+    // dispatch(signUp(values));
   };
 
   // Formik form handling

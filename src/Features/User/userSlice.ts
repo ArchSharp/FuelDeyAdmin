@@ -19,6 +19,8 @@ import {
   ITokens,
   IVendorSummary,
   IFuelSummary,
+  ISignUp,
+  IUpdateStaff,
 } from "./type";
 
 const initialState: IUserState = {
@@ -42,6 +44,8 @@ const userSlice = createSlice({
       state.alertProps = null;
       state.vendorSummary = null;
       state.vendors = null;
+      state.staffs = null;
+      state.buyers = null;
     },
 
     setProfile: (state, { payload }: PayloadAction<IProfile | null>) => {
@@ -133,7 +137,7 @@ export const signIn = (data: ISignin): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const path = "/SignInAdmin";
+      const path = "SignInAdmin";
       // console.log("checking ResetPassword path: ", path, " data: ", data);
       const response = await axios.post(path, data);
       if (response) {
@@ -235,61 +239,104 @@ export const getAllVendors = (page: number): AppThunk => {
   };
 };
 
-export const signUp = (data: any): AppThunk => {
+export const getAllBuyers = (page: number): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(clearErrors());
     try {
-      let baseurl = import.meta.env.VITE_BASEURL;
+      const path = `AdminGetAllBuyers?page=${page}`;
+      // console.log("payload: ", data);
+      const response = await axiosWithAuth.get(path);
+      if (response) {
+        const data = response.data;
 
-      console.log("payload: ", data);
-
-      // Create a new XMLHttpRequest object
-      var response = new window.XMLHttpRequest();
-
-      // Open a connection to the specified URL with a POST method
-      response.open("POST", baseurl, true);
-
-      // Set the request header to specify the data format (application/json)
-      response.setRequestHeader("Content-Type", "text/plain");
-
-      // Define a callback function to handle the response when it is ready
-      response.onreadystatechange = function () {
-        if (response.readyState === XMLHttpRequest.DONE) {
-          if (response.status >= 200 && response.status < 300) {
-            // Parse the JSON response
-            const responseData = JSON.parse(response.responseText);
-            console.log("SignUp response: ", responseData);
-
-            // Handle successful response
-            let msg: IAlertProps = {
-              isError: true,
-              showAlert: true,
-              content: responseData?.message,
-            };
-            if (responseData?.message === "User already exist") {
-              msg.isError = true;
-            } else if ("Registartion is successful") {
-              msg.isError = false;
-            }
-            dispatch(setShowAlert(msg));
-          } else {
-            // Handle HTTP errors
-            console.log("SignUp error response: ", response.statusText);
-            dispatch(setError(response.statusText));
-          }
-          // Set loading to false after response is processed
-          dispatch(setLoading(false));
+        console.log("getAllBuyers response: ", data);
+        if (data?.code === 200) {
+          dispatch(setBuyers(data?.body));
+        } else {
+          // j
         }
-      };
-
-      // Send the request with the data in JSON format
-      response.send(JSON.stringify(data));
+      }
     } catch (error: any) {
-      console.log("SignUp error response: ", error);
+      console.log("getAllBuyers error response: ", error);
       dispatch(setError(error?.message));
-      dispatch(setLoading(false));
     }
+    dispatch(setLoading(false));
+  };
+};
+
+export const getAllStaffs = (page: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(clearErrors());
+    try {
+      const path = `AdminGetAllAdmins?page=${page}`;
+      // console.log("payload: ", data);
+      const response = await axiosWithAuth.get(path);
+      if (response) {
+        const data = response.data;
+
+        console.log("getAllStaffs response: ", data);
+        if (data?.code === 200) {
+          dispatch(setStaffs(data?.body));
+        } else {
+          // j
+        }
+      }
+    } catch (error: any) {
+      console.log("getAllStaffs error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const createStaff = (data: ISignUp): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const path = "NewAdmin";
+      // console.log("checking ResetPassword path: ", path, " data: ", data);
+      const response = await axios.post(path, data);
+      if (response) {
+        const { data } = response;
+        console.log("createStaff response: ", data);
+        if (data?.code === 201) {
+          dispatch(getAllStaffs(1));
+        } else if (data?.code !== 201) {
+          //
+        }
+      }
+    } catch (error: any) {
+      console.log("createStaff error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const updateStaff = (data: IUpdateStaff): AppThunk => {
+  return async (dispatch, getState) => {
+    dispatch(setLoading(true));
+    try {
+      const adminId = getState()?.user?.currentUser?.id;
+      const path = `UpdateAdminById?adminId=${adminId}`;
+      // console.log("checking ResetPassword path: ", path, " data: ", data);
+      const response = await axios.post(path, data);
+      if (response) {
+        const { data } = response;
+        console.log("updateStaff response: ", data);
+        if (data?.code === 200) {
+          dispatch(getAllStaffs(1));
+        } else if (data?.code !== 200) {
+          //
+        }
+      }
+    } catch (error: any) {
+      console.log("updateStaff error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
   };
 };
 

@@ -1,21 +1,20 @@
 // Modal.tsx
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useAppSelector } from "../../Store/store";
 import { IBuyer } from "../../Features/User/type";
 
 interface ModalProps {
   isOpen: boolean;
   content: string;
   onClose: () => void;
-  dataId: number;
+  data: IBuyer;
 }
 
 const BuyerDetailsModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   content,
-  dataId,
+  data,
 }) => {
   const modalClasses = `w-[95vw] md:w-[720px] h-[610px] rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-md z-[5] ${
     isOpen ? "block" : "hidden"
@@ -25,13 +24,11 @@ const BuyerDetailsModal: React.FC<ModalProps> = ({
     isOpen ? "block" : "hidden"
   }`;
 
-  const { buyers } = useAppSelector((state) => state.user);
-
   const [buyer, setBuyer] = useState<IBuyer>();
 
   useEffect(() => {
-    setBuyer(buyers?.data[dataId]);
-  }, [content, dataId]);
+    setBuyer(data);
+  }, [content, data]);
   // console.log("dataId: ", dataId);
 
   return (
@@ -48,7 +45,7 @@ const BuyerDetailsModal: React.FC<ModalProps> = ({
         </div>
         <div className="flex mt-2">
           <div className="text-base text-left font-semibold text-green-700">
-            {buyer?.fullName}
+            {buyer?.firstname}
           </div>
         </div>
         <hr className="my-4" />
@@ -57,9 +54,9 @@ const BuyerDetailsModal: React.FC<ModalProps> = ({
             {VendorRow(
               "",
               "Buyer Name",
-              buyer?.fullName,
+              buyer?.firstname + " " + buyer?.lastname,
               "Buyer Phone",
-              buyer?.phoneno
+              buyer?.phonenumber
             )}
 
             {VendorRow("mt-5", "Buyer Email", buyer?.email, "", "")}
@@ -82,14 +79,14 @@ const BuyerDetailsModal: React.FC<ModalProps> = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {buyer?.lastTenVisitedStation.map((last, index) => (
+                  {buyer?.lasttenvisitedstations?.map((last, index) => (
                     <tr key={index} className="">
                       <td className="text-center">{index + 1}</td>
-                      <td className="text-center py-2">{last.stationName}</td>
+                      <td className="text-center py-2">{last}</td>
                       <td className="text-center px-5 py-2 h-fit text-nowrap">
-                        {last.address}
+                        {last}
                       </td>
-                      <td className="text-center py-2">{last.countIn3Days}</td>
+                      <td className="text-center py-2">{last}</td>
                     </tr>
                   ))}
                 </tbody>

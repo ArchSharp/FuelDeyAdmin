@@ -3,6 +3,23 @@ export interface ISignin {
   password: string;
 }
 
+export interface ISignUp {
+  address: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  password: string;
+  phonenumber: string;
+  role: string;
+}
+
+export interface IUpdateStaff {
+  address: string;
+  phonenumber: string;
+  role: string;
+  adminid: string;
+}
+
 export interface IUserState {
   currentUser?: IProfile | any | null;
   isLoading: boolean;
@@ -56,15 +73,20 @@ export interface IStaffs {
 }
 
 export interface IStaff {
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  email: string;
-  phoneno: string;
   address: string;
+  createdat: string;
+  email: string;
+  firstname: string;
+  id: string;
+  imageurl: string;
+  is_email_verified: boolean;
+  is_two_factor_enabled: boolean;
+  isactive: boolean;
+  lastname: string;
+  password: string;
+  phonenumber: string;
   role: string;
-  createdAt: string;
-  isActive: boolean;
+  updatedat: string;
 }
 
 export interface IVendors {
@@ -108,11 +130,20 @@ export interface IBuyers {
 }
 
 export interface IBuyer {
-  fullName: string;
-  phoneno: string;
+  createdat: string;
   email: string;
-  isActive: boolean;
-  lastTenVisitedStation: ILastTenVisitedStation[];
+  firstname: string;
+  id: string;
+  imageurl: string;
+  is_email_verified: boolean;
+  is_two_factor_enabled: boolean;
+  isactive: boolean;
+  lastname: string;
+  lasttenvisitedstations: string[];
+  password: string;
+  phonenumber: string;
+  role: string;
+  updatedat: string;
 }
 
 export interface ILastTenVisitedStation {

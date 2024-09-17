@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import * as routes from "../../Data/Routes";
 import { MdAttachEmail } from "react-icons/md";
-import { signUp } from "../../Features/User/userSlice";
+// import { signUp } from "../../Features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/store";
 import { ISignin } from "../../Features/User/type";
@@ -32,7 +32,7 @@ export const ForgotPassword = () => {
 
   // Submit handler
   const handleSubmit = (values: ISignin) => {
-    dispatch(signUp(values));
+    // dispatch(signUp(values));
   };
 
   // Formik form handling

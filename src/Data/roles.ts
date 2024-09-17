@@ -1,1 +1,1 @@
-export const roles = [{ role: "SuperAdmin" }, { role: "Admin" }];
+export const roles = [{ role: "superadmin" }, { role: "admin" }];
