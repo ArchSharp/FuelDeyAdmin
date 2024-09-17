@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { setIsAuth, setShowAlert } from "./User/userSlice";
+import { getNewAccessToken, setIsAuth, setShowAlert } from "./User/userSlice";
 import { IAlertProps } from "./User/type";
 
 const baseURL = import.meta.env.VITE_BASEURL;
@@ -33,26 +33,26 @@ export const setupAxiosInterceptors = (dispatch: any) => {
     },
     async (error) => {
       if (error?.response && error.response.status === 401) {
-        // console.log("Token has expired: ", error?.response?.status);
+        console.log("Token has expired: ", error?.response?.status);
 
+        // After getting a new token, retry the original request
+        await dispatch(getNewAccessToken());
+        const config = error.config;
+        const newToken = localStorage.getItem("rtoken") as string;
+        config.timeout = 15000;
+        config.headers.Authorization = `Bearer ${newToken}`;
+        console.log("config: ", config);
+
+        return Axios(config);
+        // return null;
+      } else if (error?.response && error.response.status === 403) {
         var msg: IAlertProps = {
           isError: true,
           showAlert: true,
           content: "Token has expired, please sign in to continue",
         };
-        // await dispatch(setShowAlert(msg));
-        // await dispatch(setIsAuth(false));
-        // await dispatch()
-
-        // After getting a new token, retry the original request
-        // const config = error.config;
-        // const newToken = store.getState().user.token as string;
-        // config.timeout = 15000;
-        // config.headers.Authorization = `Bearer ${newToken}`;
-        // console.log("config: ", config);
-
-        // return Axios(config);
-        return null;
+        await dispatch(setShowAlert(msg));
+        await dispatch(setIsAuth(false));
       }
       // If it's not a 403 error, you can handle it as needed or re-throw the error
       return Promise.reject(error);

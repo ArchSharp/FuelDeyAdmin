@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "../../Store/store";
 import { axios } from "../utils";
 import axiosWithAuth from "../utils";
-import { clearErrors, setError /*setSuccess*/ } from "../Error/errorSlice";
+import {
+  clearErrors,
+  setError /*setSuccess*/,
+  setSuccess,
+} from "../Error/errorSlice";
 import {
   IUserState,
   IResetPassword,
@@ -27,7 +31,7 @@ import {
 
 const initialState: IUserState = {
   isLoading: false,
-  userId: "",
+  email: "",
 };
 
 const userSlice = createSlice({
@@ -41,7 +45,7 @@ const userSlice = createSlice({
     setLogout: (state) => {
       state.isAuth = false;
       state.token = null;
-      state.userId = "";
+      state.email = "";
       state.currentUser = null;
       state.alertProps = null;
       state.vendorSummary = null;
@@ -52,6 +56,7 @@ const userSlice = createSlice({
       state.fuelSummary = null;
       state.isLoading = false;
       state.alertProps = null;
+      localStorage.clear();
     },
 
     setProfile: (state, { payload }: PayloadAction<IProfile | null>) => {
@@ -80,7 +85,7 @@ const userSlice = createSlice({
 
     setAuth: (state, { payload }: PayloadAction<IAuth>) => {
       state.isLoading = false;
-      state.userId = payload.userId;
+      state.email = payload.userId;
       state.token = payload.token;
       state.isAuth = true;
     },
@@ -116,31 +121,90 @@ const userSlice = createSlice({
     setStaffs: (state, { payload }: PayloadAction<IStaffs | null>) => {
       state.staffs = payload;
     },
+
+    setEmail: (state, { payload }: PayloadAction<string | null>) => {
+      state.email = payload;
+    },
   },
 });
 
 export const reset_password = (data: IResetPassword): AppThunk => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(setLoading(true));
     try {
-      const path = "/ResetPassword";
+      const path = "AdminResetPassword";
       // console.log("checking ResetPassword path: ", path, " data: ", data);
-      const response = await axios.put(path, data);
+      const response = await axios.patch(path, data);
       if (response) {
-        const { data } = response;
-        if (data && !data.token) {
-          if (data.error.length > 0)
-            data.error.forEach((element: string) => {
-              dispatch(setError(element));
-            });
-          else if (data.message) dispatch(setError(data.message));
-        } else if (data && data.token) {
-          // dispatch(setProfile(data.profile));
-          // dispatch(setToken(data.token));
+        const data = response.data;
+
+        console.log("reset_password response: ", data);
+        if (data?.code === 200) {
+          var msg: IAlertProps = {
+            isError: false,
+            showAlert: true,
+            content: "You can now login, your password has been reset",
+          };
+          dispatch(setShowAlert(msg));
+          dispatch(setSuccess("Navigate to login"));
+        } else {
+          // j
         }
       }
     } catch (error: any) {
       dispatch(setError(error?.message));
+      var err = error?.response?.data;
+      console.log("reset_password error response: ", err);
+      var msg: IAlertProps = {
+        isError: true,
+        showAlert: true,
+        content: err?.body,
+      };
+      dispatch(setShowAlert(msg));
+
+      if (err?.message === "Expired otp") {
+        dispatch(forgotPasswordFunc(getState()?.user?.email));
+      }
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const forgotPasswordFunc = (email: string): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(clearErrors());
+    try {
+      const path = `AdminForgotPassword?email=${email}`;
+      // console.log("payload: ", data);
+      const response = await axios.get(path);
+      if (response) {
+        const data = response.data;
+
+        console.log("forgotPasswordFunc response: ", data);
+        if (data?.code === 200) {
+          // dispatch(setVendorSummary(data?.body));
+          var msg: IAlertProps = {
+            isError: false,
+            showAlert: true,
+            content: "A Code has been sent to your email, Please check",
+          };
+          dispatch(setShowAlert(msg));
+          dispatch(setSuccess("Navigate to reset password"));
+        } else {
+          // j
+        }
+      }
+    } catch (error: any) {
+      dispatch(setError(error?.message));
+      var err = error?.response?.data;
+      console.log("forgotPasswordFunc error response: ", err);
+      var msg: IAlertProps = {
+        isError: true,
+        showAlert: true,
+        content: err?.body,
+      };
+      dispatch(setShowAlert(msg));
     }
     dispatch(setLoading(false));
   };
@@ -161,6 +225,7 @@ export const signIn = (data: ISignin): AppThunk => {
           dispatch(setToken(data.extrainfo));
           dispatch(setIsAuth(true));
           localStorage.setItem("token", data?.extrainfo?.accesstoken);
+          localStorage.setItem("rtoken", data?.extrainfo?.refreshtoken);
           var msg: IAlertProps = {
             isError: false,
             showAlert: true,
@@ -171,7 +236,39 @@ export const signIn = (data: ISignin): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("signIn error response: ", error);
+      dispatch(setError(error?.message));
+      var err = error?.response?.data;
+      console.log("reset_password error response: ", err);
+      var msg: IAlertProps = {
+        isError: true,
+        showAlert: true,
+        content: err?.body,
+      };
+      dispatch(setShowAlert(msg));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const getNewAccessToken = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(clearErrors());
+    try {
+      const refreshToken = localStorage.getItem("rtoken");
+      const path = `AdminGetNewAccessToken?refresh_token=${refreshToken}`;
+      // console.log("payload: ", data);
+      const response = await axiosWithAuth.get(path);
+      if (response) {
+        const data = response.data;
+
+        if (data?.access_token) {
+          console.log("getNewAccessToken response: ", data);
+          localStorage.setItem("token", data?.access_token);
+        }
+      }
+    } catch (error: any) {
+      console.log("getNewAccessToken error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -517,6 +614,7 @@ export const {
   setIsAuth,
   setLogout,
   setProfile,
+  setEmail,
   setShowAlert,
   setToken,
   setCurrentRoute,

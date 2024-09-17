@@ -5,39 +5,42 @@ import { FaLock, FaLockOpen } from "react-icons/fa";
 // import { signUp } from "../../Features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IResetPassword } from "../../Features/User/type";
+import { reset_password } from "../../Features/User/userSlice";
+import { clearErrors } from "../../Features/Error/errorSlice";
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state: any) => state.user);
+  const { isLoading, email } = useAppSelector((state: any) => state.user);
+  const { errors } = useAppSelector((state: any) => state.error);
   const [showPass, setShowPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
 
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
-    password: Yup.string()
+    otp: Yup.string()
       .min(6, "Must not be less than 6 characters")
+      .max(6, "Cannot be greater than six digits"),
+    newpassword: Yup.string()
       .required("Password is required")
       .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
       .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
-      .matches(/^(?=.*[0-9])/, "Must contain at least one number")
-      .matches(/^(?=.*[!@#%&])/, "Required at least one character: ! @ # % &"),
-    confirm_password: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm Password is required"),
+      .matches(/^(?=.*[0-9])/, "Must contain at least one number"),
+    // .matches(/^(?=.*[!@#%&])/, "Required at least one character: ! @ # % &"),
   });
 
   // Initial form values
   const initialValues = {
-    password: "",
-    confirm_password: "",
+    newpassword: "",
+    otp: "",
+    email: email,
   };
 
   // Submit handler
   const handleSubmit = (values: IResetPassword) => {
-    // dispatch(signUp(values));
+    dispatch(reset_password(values));
   };
 
   // Formik form handling
@@ -47,14 +50,28 @@ export const ResetPassword = () => {
     onSubmit: handleSubmit,
   });
 
+  useEffect(() => {
+    console.log(errors[0]);
+    if (errors[0]?.message === "Navigate to reset password") {
+      navigate(routes.resetPassword);
+      formik.setFieldValue("otp", "");
+      formik.setFieldValue("newpassword", "");
+      dispatch(clearErrors());
+      alert("Please check your email for new code to reset your password");
+    } else if (errors[0]?.message === "Navigate to login") {
+      navigate(routes.signin);
+      dispatch(clearErrors());
+    }
+  }, [errors]);
+
   return (
     <form onSubmit={formik.handleSubmit} className="py-10">
       <div className="w-[90%] md:w-fit mx-auto">
         <div className="w-[160px] h-[18px] flex-shrink-0 text-orange-600 text-xl not-italic font-[500] leading-normal">
-          New Password
+          OTP
         </div>
         <div className="w-4/5 h-[20px] flex-shrink-0 text-slate-600 text-sm not-italic font-[400] leading-normal mb-2 mt-1">
-          Enter your New Password
+          Enter Received OTP
         </div>
         <div className="relative">
           <div
@@ -69,26 +86,26 @@ export const ResetPassword = () => {
           </div>
           <input
             className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
-            type={showPass ? "text" : "password"}
-            id="password"
-            name="password"
+            type={"text"}
+            id="otp"
+            name="otp"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.password}
+            value={formik.values.otp}
             // placeholder="Enter password"
           />
         </div>
-        {formik.touched.password && formik.errors.password && (
-          <div className="text-red-700">{formik.errors.password}</div>
+        {formik.touched.otp && formik.errors.otp && (
+          <div className="text-red-700">{formik.errors.otp}</div>
         )}
       </div>
 
       <div className="w-[90%] md:w-fit mx-auto my-6">
         <div className=" h-[18px] flex-shrink-0 text-orange-600 text-lg not-italic font-[500] leading-normal">
-          Confirm New Password
+          New Password
         </div>
         <div className="w-4/5 h-[20px] flex-shrink-0 text-slate-500 text-sm not-italic font-[400] leading-normal mb-2 mt-1">
-          Confirm your New Password
+          Enter New Password
         </div>
         <div className="relative">
           <div
@@ -104,16 +121,16 @@ export const ResetPassword = () => {
           <input
             className="w-full md:w-[358px] h-[50px] md:h-[36px] flex-shrink-0 rounded-[80px] border-2 border-inputBorder py-5 pl-[50px]"
             type={showConfPass ? "text" : "password"}
-            id="confirm_password"
-            name="confirm_password"
+            id="newpassword"
+            name="newpassword"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.confirm_password}
+            value={formik.values.newpassword}
             // placeholder="Enter password"
           />
         </div>
-        {formik.touched.confirm_password && formik.errors.confirm_password && (
-          <div className="text-red-700">{formik.errors.confirm_password}</div>
+        {formik.touched.newpassword && formik.errors.newpassword && (
+          <div className="text-red-700">{formik.errors.newpassword}</div>
         )}
       </div>
 

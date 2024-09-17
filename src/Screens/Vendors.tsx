@@ -13,10 +13,12 @@ export const Vendors = () => {
   useEffect(() => {
     if (vendors) {
       setTotalVendors(vendors?.pagination?.total);
+      console.log("catch-1");
     }
   }, [vendors]);
 
   useEffect(() => {
+    console.log("catch-2");
     dispatch(getAllVendors(1));
   }, []);
 

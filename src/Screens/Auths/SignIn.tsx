@@ -126,13 +126,13 @@ export const SignIn = () => {
         </span>
       </div>
       <div className="text-slate-500 font-fueldeyserifreg xs:my-[10px] md:my-1 mx-auto w-[90%] md:w-[358px] text-biyaGray text-sm not-italic font-[400] leading-normal">
-        Don't have an account?
-        <span
+        {/* Don't have an account? */}
+        {/* <span
           onClick={() => navigate(routes.signup)}
           className="text-orange-900 font-fueldeyserifreg text-sm not-italic font-[400] leading-normal ml-1 cursor-pointer no-underline"
         >
           Register now
-        </span>
+        </span> */}
         <button
           type="submit"
           disabled={isLoading}

@@ -34,7 +34,7 @@ export interface IUserState {
   vendorSummary?: IVendorSummary[] | null;
   fuelSummary?: IFuelSummary | null;
   alertProps?: IAlertProps | null;
-  userId?: string;
+  email?: string | null;
   currentRoute?: string;
   stateFuelDashboardData?: StateFuelDashboardData;
   vendors?: IVendors | null;
@@ -286,11 +286,12 @@ export interface IKyc {
   notifications: string[];
 }
 
-export interface IForgetPassword {
+export interface IForgotPassword {
   email: string;
 }
 
 export interface IResetPassword {
-  password: string;
-  confirm_password: string;
+  email: string;
+  otp: string;
+  newpassword: string;
 }

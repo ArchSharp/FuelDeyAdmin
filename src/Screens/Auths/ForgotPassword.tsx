@@ -2,45 +2,49 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import * as routes from "../../Data/Routes";
 import { MdAttachEmail } from "react-icons/md";
-// import { signUp } from "../../Features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/store";
-import { ISignin } from "../../Features/User/type";
+import { forgotPasswordFunc, setEmail } from "../../Features/User/userSlice";
+import { IForgotPassword } from "../../Features/User/type";
+import { useEffect } from "react";
+import { clearErrors } from "../../Features/Error/errorSlice";
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state: any) => state.user);
+  const { errors } = useAppSelector((state: any) => state.error);
 
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
     email: Yup.string().required("Email is required"),
-    password: Yup.string()
-      .min(6, "Must not be less than 6 characters")
-      .required("Password is required")
-      .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
-      .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
-      .matches(/^(?=.*[0-9])/, "Must contain at least one number")
-      .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
   });
 
   // Initial form values
   const initialValues = {
     email: "",
-    password: "",
   };
 
   // Submit handler
-  const handleSubmit = (values: ISignin) => {
-    // dispatch(signUp(values));
+  const handleSubmit = (values: IForgotPassword) => {
+    dispatch(setEmail(values.email));
+    dispatch(forgotPasswordFunc(values.email));
   };
 
   // Formik form handling
-  const formik = useFormik<ISignin>({
+  const formik = useFormik<IForgotPassword>({
     initialValues,
     validationSchema,
     onSubmit: handleSubmit,
   });
+
+  useEffect(() => {
+    console.log(errors[0]);
+    if (errors[0]?.message === "Navigate to reset password") {
+      navigate(routes.resetPassword);
+      dispatch(clearErrors());
+    }
+  }, [errors]);
 
   return (
     <form onSubmit={formik.handleSubmit} className="py-10">

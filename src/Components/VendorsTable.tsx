@@ -9,7 +9,7 @@ import { CiSearch } from "react-icons/ci";
 import ReactPaginate from "react-paginate";
 import { useAppDispatch } from "../Store/store";
 import { IAlertProps, IVendor, IVendors } from "../Features/User/type";
-import { setShowAlert } from "../Features/User/userSlice";
+import { getAllVendors, setShowAlert } from "../Features/User/userSlice";
 import { SVGs } from "../assets/SVGs";
 import VendorDetailsModal from "./Modals/VendorDetailsModal";
 
@@ -30,7 +30,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   const [sortBy, setSortBy] = useState<keyof any>("internalid");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [openTrx, setOpenTrx] = useState(false);
-  const [processors, setProcessors] = useState("All Processors");
+  const [filter, setFilter] = useState("All Types");
   // const [showFilter, setShowFilter] = useState(false);
   const [showProcessor, setShowProcessor] = useState(false);
   // const [openToDate, setOpenToDate] = useState<boolean>(false);
@@ -40,10 +40,17 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [tappedVendor, setTappedVendor] = useState<IVendor>();
   // const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [currentPageNo, setCurrentPageNo] = useState(1);
 
   useEffect(() => {
     setData(vendorsData);
   }, [vendorsData]);
+
+  useEffect(() => {
+    // Skip the first load
+    setIsFirstLoad(false);
+  }, []);
 
   const handleRowsPerPageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -77,32 +84,32 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   useEffect(() => {
     const sortedData = vendorsData?.data
       ?.slice()
-      .filter((dt: any) => dt?.processorName === processors);
+      .filter((dt: any) => dt?.stationname === filter);
 
-    if (processors !== "All Processors") {
+    if (filter !== "All Types") {
       setData({ data: sortedData, pagination: data.pagination });
     } else {
       setData(vendorsData);
     }
     // setShowFilter(false);
     // setShowProcessor((prevValue) => !prevValue);
-  }, [processors, vendorsData, data?.pagination]);
+  }, [filter, vendorsData, data?.pagination]);
 
   // const handleProcessorChange = (
   //   event: React.ChangeEvent<HTMLSelectElement>
   // ) => {
-  //   setProcessors(event.target.value);
+  //   setFilter(event.target.value);
   // };
 
-  const handleFromDate = (option: string) => {
-    console.log("fromdate: ", option);
-    setFromDate(option);
-  };
+  // const handleFromDate = (option: string) => {
+  //   console.log("fromdate: ", option);
+  //   setFromDate(option);
+  // };
 
-  const handleToDate = (option: string) => {
-    console.log("todate: ", option);
-    setToDate(option);
-  };
+  // const handleToDate = (option: string) => {
+  //   console.log("todate: ", option);
+  //   setToDate(option);
+  // };
 
   // const handleSearch = (option: string) => {
   //   setSearch(option);
@@ -142,8 +149,14 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   }, [dispatch, fromDate, toDate]);
 
   const handlePageClick = (event: any) => {
+    if (isFirstLoad) return;
     if (event.selected !== undefined) {
       const num: number = event.selected + 1;
+      if (num !== currentPageNo) {
+        dispatch(getAllVendors(num));
+
+        setCurrentPageNo(num);
+      }
       // if (num !== data?.pagination?.page) dispatch(getAllTransactions(num));
 
       console.log(
@@ -154,8 +167,21 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
   };
 
   useEffect(() => {
-    // dispatch(getAllTransactions(1));
-  }, [dispatch]);
+    if (search && search.length >= 3) {
+      const words = search
+        .split(" ")
+        .map((word) => word.trim())
+        .filter(Boolean);
+      const regex = new RegExp(words.join("|"), "i"); // 'i' for case-insensitive matching
+      const sortedData = vendorsData?.data
+        ?.slice()
+        .filter((dt: IVendor) => regex.test(dt?.stationname)); // Use regex to match station names
+      console.log("searching...: ", sortedData);
+      setData({ data: sortedData, pagination: data.pagination });
+    } else if (search.length === 0) {
+      setData(vendorsData);
+    }
+  }, [search, vendorsData]);
 
   // console.log("sorted data: ", showProcessor);
 
@@ -169,8 +195,8 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
       />
       {/* Table header */}
       <div className="pt-6 flex">
-        {/* processors */}
-        <div className="w-[165px] h-[38px] text-sm ml-7 z-[3]">
+        {/* filter */}
+        <div className="w-[165px] h-[38px] text-sm ml-7 z-[3] mr-3">
           <button
             className="flex w-full h-full justify-center items-center border-[1px] rounded-[64px] text-xs font-poppins font-bold"
             onClick={() => {
@@ -186,19 +212,19 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
             <ul className="bg-gray-200 rounded-md px-0 text-xs">
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("All Processors")}
+                onClick={() => setFilter("All Types")}
               >
                 All Types
               </li>
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("Interswitch")}
+                onClick={() => setFilter("private")}
               >
                 Private
               </li>
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("ZONE")}
+                onClick={() => setFilter("government")}
               >
                 Government
               </li>
@@ -227,7 +253,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
           )}
         </div> */}
         {/* Dates */}
-        <div className="w-[160px] h-[38px] z-[3] ml-5 mr-3">
+        {/* <div className="w-[160px] h-[38px] z-[3] ml-5 mr-3">
           <div className="relative w-full h-full">
             {!fromDate && (
               <IoCalendar className="absolute top-3 left-4 text-main" />
@@ -263,7 +289,8 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
               className="rounded-[64px] h-full w-[145px] pr-1 border-[1px] text-center border-gray-400 font-poppins text-xs font-bold"
             />
           </div>
-        </div>
+        </div> */}
+
         <div className="w-[220px] h-[38px] z-[3] ml-0 mr-5">
           <div className="relative w-[220px] h-[38px]">
             <CiSearch

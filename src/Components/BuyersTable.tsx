@@ -9,7 +9,7 @@ import { CiSearch } from "react-icons/ci";
 import ReactPaginate from "react-paginate";
 import { useAppDispatch } from "../Store/store";
 import { IAlertProps, IBuyer, IBuyers } from "../Features/User/type";
-import { setShowAlert } from "../Features/User/userSlice";
+import { getAllBuyers, setShowAlert } from "../Features/User/userSlice";
 import { SVGs } from "../assets/SVGs";
 import BuyerDetailsModal from "./Modals/BuyerDetailsModal";
 
@@ -31,7 +31,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   const [sortBy, setSortBy] = useState<keyof any>("internalid");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [openTrx, setOpenTrx] = useState(false);
-  const [processors, setProcessors] = useState("All Processors");
+  const [filter, setFilter] = useState("All Types");
   // const [showFilter, setShowFilter] = useState(false);
   const [showProcessor, setShowProcessor] = useState(false);
   // const [openToDate, setOpenToDate] = useState<boolean>(false);
@@ -41,10 +41,17 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   // const [showAlert, setShowAlert] = useState<boolean>(false);
   const [tappedBuyer, setTappedBuyer] = useState<IBuyer>();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [currentPageNo, setCurrentPageNo] = useState(1);
 
   useEffect(() => {
     setData(buyersData);
   }, [buyersData]);
+
+  useEffect(() => {
+    // Skip the first load
+    setIsFirstLoad(false);
+  }, []);
 
   const handleRowsPerPageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -76,34 +83,35 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   });
 
   useEffect(() => {
+    var isTrue = filter === "active" ? true : false;
     const sortedData = buyersData?.data
       ?.slice()
-      .filter((dt: any) => dt?.processorName === processors);
+      .filter((dt: any) => dt?.isactive === isTrue);
 
-    if (processors !== "All Processors") {
+    if (filter !== "All Types") {
       setData({ data: sortedData, pagination: data.pagination });
     } else {
       setData(buyersData);
     }
     // setShowFilter(false);
     // setShowProcessor((prevValue) => !prevValue);
-  }, [processors, buyersData, data?.pagination]);
+  }, [filter, buyersData, data?.pagination]);
 
   // const handleProcessorChange = (
   //   event: React.ChangeEvent<HTMLSelectElement>
   // ) => {
-  //   setProcessors(event.target.value);
+  //   setFilter(event.target.value);
   // };
 
-  const handleFromDate = (option: string) => {
-    console.log("fromdate: ", option);
-    setFromDate(option);
-  };
+  // const handleFromDate = (option: string) => {
+  //   console.log("fromdate: ", option);
+  //   setFromDate(option);
+  // };
 
-  const handleToDate = (option: string) => {
-    console.log("todate: ", option);
-    setToDate(option);
-  };
+  // const handleToDate = (option: string) => {
+  //   console.log("todate: ", option);
+  //   setToDate(option);
+  // };
 
   // const handleSearch = (option: string) => {
   //   setSearch(option);
@@ -143,8 +151,14 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   }, [dispatch, fromDate, toDate]);
 
   const handlePageClick = (event: any) => {
+    if (isFirstLoad) return;
     if (event.selected !== undefined) {
       const num: number = event.selected + 1;
+      if (num !== currentPageNo) {
+        dispatch(getAllBuyers(num));
+
+        setCurrentPageNo(num);
+      }
       // if (num !== data?.pagination?.page) dispatch(getAllTransactions(num));
 
       console.log(
@@ -155,8 +169,21 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
   };
 
   useEffect(() => {
-    // dispatch(getAllTransactions(1));
-  }, [dispatch]);
+    if (search && search.length >= 3) {
+      const words = search
+        .split(" ")
+        .map((word) => word.trim())
+        .filter(Boolean);
+      const regex = new RegExp(words.join("|"), "i"); // 'i' for case-insensitive matching
+      const sortedData = buyersData?.data
+        ?.slice()
+        .filter((dt: IBuyer) => regex.test(dt?.firstname + " " + dt.lastname)); // Use regex to match station names
+      // console.log("searching...: ", sortedData);
+      setData({ data: sortedData, pagination: data.pagination });
+    } else if (search.length === 0) {
+      setData(buyersData);
+    }
+  }, [search, buyersData]);
 
   // console.log("sorted data: ", showProcessor);
 
@@ -170,8 +197,8 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
       />
       {/* Table header */}
       <div className="pt-6 flex">
-        {/* processors */}
-        <div className="w-[165px] h-[38px] text-sm ml-7 z-[3]">
+        {/* filter */}
+        <div className="w-[165px] h-[38px] text-sm ml-7 z-[3] mr-3">
           <button
             className="flex w-full h-full justify-center items-center border-[1px] rounded-[64px] text-xs font-poppins font-bold"
             onClick={() => {
@@ -187,19 +214,19 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
             <ul className="bg-gray-200 rounded-md px-0 text-xs">
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("All Processors")}
+                onClick={() => setFilter("All Types")}
               >
                 All Types
               </li>
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer text-green-600 font-bold"
-                onClick={() => setProcessors("Interswitch")}
+                onClick={() => setFilter("active")}
               >
                 Active
               </li>
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer text-red-600 font-bold"
-                onClick={() => setProcessors("ZONE")}
+                onClick={() => setFilter("inactive")}
               >
                 Inactive
               </li>
@@ -228,7 +255,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
           )}
         </div> */}
         {/* Dates */}
-        <div className="w-[160px] h-[38px] z-[3] ml-5 mr-3">
+        {/* <div className="w-[160px] h-[38px] z-[3] ml-5 mr-3">
           <div className="relative w-full h-full">
             {!fromDate && (
               <IoCalendar className="absolute top-3 left-4 text-main" />
@@ -264,7 +291,8 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
               className="rounded-[64px] h-full w-[145px] pr-1 border-[1px] text-center border-gray-400 font-poppins text-xs font-bold"
             />
           </div>
-        </div>
+        </div> */}
+
         <div className="w-[220px] h-[38px] z-[3] ml-0 mr-5">
           <div className="relative w-[220px] h-[38px]">
             <CiSearch
@@ -351,6 +379,17 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                 )}
               </div>
             </th>
+
+            <th onClick={() => handleSort("isactive")}>
+              <div className="flex items-center justify-center px-2 text-nowrap">
+                ACTIVE
+                {sortBy === "isactive" && (
+                  <span>
+                    {sortOrder === "asc" ? <BsArrowUp /> : <BsArrowDown />}
+                  </span>
+                )}
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -399,6 +438,11 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                   <td className="text-center text-sm px-3 w-[30%] py-1">{`${
                     dt.lasttenvisitedstations.length === 0 ? "-" : stationNames
                   }`}</td>
+                  <td
+                    className={`${
+                      dt.isactive == true ? "text-green-700" : "text-red-700"
+                    } text-center text-sm px-3 w-[30%] py-1 font-bold`}
+                  >{`${dt.isactive == true ? "Active" : "Inactive"}`}</td>
                 </tr>
               );
             } else {

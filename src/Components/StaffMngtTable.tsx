@@ -7,7 +7,7 @@ import { CiSearch } from "react-icons/ci";
 import ReactPaginate from "react-paginate";
 import { useAppDispatch, useAppSelector } from "../Store/store";
 import { IAlertProps, IStaff, IStaffs } from "../Features/User/type";
-import { setShowAlert } from "../Features/User/userSlice";
+import { getAllStaffs, setShowAlert } from "../Features/User/userSlice";
 import { SVGs } from "../assets/SVGs";
 import { IoPersonAdd } from "react-icons/io5";
 import StaffModal from "./Modals/StaffModal";
@@ -33,7 +33,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [openStaff, setOpenStaff] = useState(false);
   const [addStaff, setAddStaff] = useState(false);
-  const [processors, setProcessors] = useState("All Processors");
+  const [filter, setFilter] = useState("All Types");
   // const [showFilter, setShowFilter] = useState(false);
   const [showProcessor, setShowProcessor] = useState(false);
   // const [openToDate, setOpenToDate] = useState<boolean>(false);
@@ -43,10 +43,17 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   // const [showAlert, setShowAlert] = useState<boolean>(false);
   const [tappedStaff, setTappedStaff] = useState<IStaff>();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [currentPageNo, setCurrentPageNo] = useState(1);
 
   useEffect(() => {
     setData(staffsData);
   }, [staffsData]);
+
+  useEffect(() => {
+    // Skip the first load
+    setIsFirstLoad(false);
+  }, []);
 
   const handleRowsPerPageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -80,21 +87,21 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   useEffect(() => {
     const sortedData = staffsData?.data
       ?.slice()
-      .filter((dt: any) => dt?.processorName === processors);
+      .filter((dt: any) => dt?.role === filter);
 
-    if (processors !== "All Processors") {
+    if (filter !== "All Types") {
       setData({ data: sortedData, pagination: data.pagination });
     } else {
       setData(staffsData);
     }
     // setShowFilter(false);
     // setShowProcessor((prevValue) => !prevValue);
-  }, [processors, staffsData, data?.pagination]);
+  }, [filter, staffsData, data?.pagination]);
 
   // const handleProcessorChange = (
   //   event: React.ChangeEvent<HTMLSelectElement>
   // ) => {
-  //   setProcessors(event.target.value);
+  //   setFilter(event.target.value);
   // };
 
   // const handleSearch = (option: string) => {
@@ -136,8 +143,14 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   }, [dispatch, fromDate, toDate]);
 
   const handlePageClick = (event: any) => {
+    if (isFirstLoad) return;
     if (event.selected !== undefined) {
       const num: number = event.selected + 1;
+      if (num !== currentPageNo) {
+        dispatch(getAllStaffs(num));
+
+        setCurrentPageNo(num);
+      }
       // if (num !== data?.pagination?.page) dispatch(getAllTransactions(num));
 
       console.log(
@@ -148,8 +161,21 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   };
 
   useEffect(() => {
-    // dispatch(getAllTransactions(1));
-  }, [dispatch]);
+    if (search && search.length >= 3) {
+      const words = search
+        .split(" ")
+        .map((word) => word.trim())
+        .filter(Boolean);
+      const regex = new RegExp(words.join("|"), "i"); // 'i' for case-insensitive matching
+      const sortedData = staffsData?.data
+        ?.slice()
+        .filter((dt: IStaff) => regex.test(dt?.firstname + " " + dt.lastname)); // Use regex to match station names
+      // console.log("searching...: ", sortedData);
+      setData({ data: sortedData, pagination: data.pagination });
+    } else if (search.length === 0) {
+      setData(staffsData);
+    }
+  }, [search, staffsData]);
 
   // console.log("sorted data: ", showProcessor);
 
@@ -181,7 +207,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
             <div className="w-fit mx-3">New Staff</div>
           </button>
         )}
-        {/* processors */}
+        {/* filter */}
         <div className="w-[165px] h-[38px] text-sm ml-5 z-[3]">
           <button
             className="flex w-full h-full justify-center items-center border-[1px] rounded-[64px] text-xs font-poppins font-bold"
@@ -198,19 +224,19 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
             <ul className="bg-gray-200 rounded-md px-0 text-xs">
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("All Processors")}
+                onClick={() => setFilter("All Types")}
               >
                 All Types
               </li>
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("Interswitch")}
+                onClick={() => setFilter("admin")}
               >
                 Admin
               </li>
               <li
                 className="py-2 px-3 hover:bg-white cursor-pointer"
-                onClick={() => setProcessors("ZONE")}
+                onClick={() => setFilter("superadmin")}
               >
                 SuperAdmin
               </li>
@@ -233,7 +259,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
               name="rrn"
               type="text"
               value={search}
-              placeholder="Search staff by email"
+              placeholder="Search staff by full name"
               // onClick={() => handleSearch}
               onChange={(e) => setSearch(e.currentTarget.value)}
               className="rounded-[64px] w-full pl-10 h-full border-[1px] border-gray-400 font-poppins text-xs font-bold"
@@ -366,7 +392,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
                     dt.role === null ? "-" : dt.role
                   }`}</td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.createdat === null ? "-" : dt.createdat
+                    dt.createdat === null ? "-" : formatDate(dt.createdat)
                   }`}</td>
                   <td
                     className={`text-center text-sm px-3 ${

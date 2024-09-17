@@ -12,10 +12,6 @@ export const Notifications = () => {
   const [response, setResponse] = useState("");
   const [isReply, setIsReply] = useState(false);
   const [allNotification, setAllNotification] = useState<INotifications>();
-  const [buyersNotifications, setBuyersNotifications] =
-    useState<INotification[]>();
-  const [vendorsNotifications, setVendorsNotifications] =
-    useState<INotification[]>();
   const [isBuyers, setIsBuyers] = useState(false);
   const [selectedNotification, setSelectedNotification] =
     useState<INotification[]>();
@@ -27,28 +23,24 @@ export const Notifications = () => {
   }, [notifications]);
 
   useEffect(() => {
-    if (allNotification) {
-      const buyers = allNotification?.data.filter(
-        (notification) => notification.commutername != ""
-      );
-
-      setBuyersNotifications(buyers);
-    }
-  }, [allNotification]);
-
-  useEffect(() => {
-    if (allNotification) {
-      const vendors = allNotification?.data.filter(
-        (notification) => notification.vendorname != ""
-      );
-
-      setVendorsNotifications(vendors);
-    }
-  }, [allNotification]);
-
-  useEffect(() => {
     dispatch(getAllNotifications(1));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (allNotification) {
+      if (isBuyers) {
+        const buyers = allNotification?.data.filter(
+          (notification) => notification.commutername != ""
+        );
+        setSelectedNotification(buyers);
+      } else {
+        const vendors = allNotification?.data.filter(
+          (notification) => notification.vendorname != ""
+        );
+        setSelectedNotification(vendors);
+      }
+    }
+  }, [isBuyers, allNotification]);
 
   function timeAgo(dateString: string): string {
     const now = new Date().getTime();
@@ -99,7 +91,6 @@ export const Notifications = () => {
         <div
           onClick={() => {
             setIsBuyers(false);
-            setSelectedNotification(buyersNotifications);
           }}
           className={`text-xl ${
             !isBuyers && "text-orange-700 border-b-[1.5px] border-b-orange-700"
@@ -110,7 +101,6 @@ export const Notifications = () => {
         <div
           onClick={() => {
             setIsBuyers(true);
-            setSelectedNotification(vendorsNotifications);
           }}
           className={`text-xl ${
             isBuyers && "text-orange-700 border-b-[1.5px] border-b-orange-700"

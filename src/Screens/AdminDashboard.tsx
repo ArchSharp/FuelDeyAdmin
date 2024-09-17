@@ -51,7 +51,7 @@ export const AdminDashboard = () => {
   useEffect(() => {
     console.log("isAuth: ", isAuth);
     if (isAuth === false) {
-      navigate(routes.homepage);
+      navigate("/");
     }
   }, [isAuth]);
 
@@ -127,6 +127,16 @@ export const AdminDashboard = () => {
       dispatch(getFuelSummaryData());
     }
   }, [dispatch, vendorSummary, fuelSummary]);
+
+  useEffect(() => {
+    const fetchEvery2Minutes = setInterval(() => {
+      console.log("Fetching....");
+      dispatch(getVendorSummary());
+      dispatch(getFuelSummaryData());
+    }, 120000);
+
+    return () => clearInterval(fetchEvery2Minutes);
+  }, []);
 
   return (
     <div className="flex relative">
