@@ -21,6 +21,8 @@ import {
   IFuelSummary,
   ISignUp,
   IUpdateStaff,
+  INotifications,
+  IUpdateNotification,
 } from "./type";
 
 const initialState: IUserState = {
@@ -46,6 +48,10 @@ const userSlice = createSlice({
       state.vendors = null;
       state.staffs = null;
       state.buyers = null;
+      state.notifications = null;
+      state.fuelSummary = null;
+      state.isLoading = false;
+      state.alertProps = null;
     },
 
     setProfile: (state, { payload }: PayloadAction<IProfile | null>) => {
@@ -100,6 +106,13 @@ const userSlice = createSlice({
       state.buyers = payload;
     },
 
+    setNotifications: (
+      state,
+      { payload }: PayloadAction<INotifications | null>
+    ) => {
+      state.notifications = payload;
+    },
+
     setStaffs: (state, { payload }: PayloadAction<IStaffs | null>) => {
       state.staffs = payload;
     },
@@ -148,6 +161,12 @@ export const signIn = (data: ISignin): AppThunk => {
           dispatch(setToken(data.extrainfo));
           dispatch(setIsAuth(true));
           localStorage.setItem("token", data?.extrainfo?.accesstoken);
+          var msg: IAlertProps = {
+            isError: false,
+            showAlert: true,
+            content: "Login Success",
+          };
+          dispatch(setShowAlert(msg));
         } else if (data?.code !== 200) {
         }
       }
@@ -291,6 +310,33 @@ export const getAllStaffs = (page: number): AppThunk => {
   };
 };
 
+export const getAllNotifications = (page: number): AppThunk => {
+  return async (dispatch, getState) => {
+    dispatch(setLoading(true));
+    dispatch(clearErrors());
+    try {
+      const adminId = getState()?.user?.currentUser?.id;
+      const path = `AdminGetAllNotifications?page=${page}&adminId=${adminId}`;
+      // console.log("payload: ", data);
+      const response = await axiosWithAuth.get(path);
+      if (response) {
+        const data = response.data;
+
+        console.log("getAllNotifications response: ", data);
+        if (data?.code === 200) {
+          dispatch(setNotifications(data?.body));
+        } else {
+          // j
+        }
+      }
+    } catch (error: any) {
+      console.log("getAllNotifications error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
 export const createStaff = (data: ISignUp): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
@@ -303,6 +349,12 @@ export const createStaff = (data: ISignUp): AppThunk => {
         console.log("createStaff response: ", data);
         if (data?.code === 201) {
           dispatch(getAllStaffs(1));
+          var msg: IAlertProps = {
+            isError: false,
+            showAlert: true,
+            content: "Staff created successfully",
+          };
+          dispatch(setShowAlert(msg));
         } else if (data?.code !== 201) {
           //
         }
@@ -322,18 +374,55 @@ export const updateStaff = (data: IUpdateStaff): AppThunk => {
       const adminId = getState()?.user?.currentUser?.id;
       const path = `UpdateAdminById?adminId=${adminId}`;
       // console.log("checking ResetPassword path: ", path, " data: ", data);
-      const response = await axios.post(path, data);
+      const response = await axiosWithAuth.post(path, data);
       if (response) {
         const { data } = response;
         console.log("updateStaff response: ", data);
         if (data?.code === 200) {
           dispatch(getAllStaffs(1));
+          var msg: IAlertProps = {
+            isError: false,
+            showAlert: true,
+            content: "Staff updated Successfully",
+          };
+          dispatch(setShowAlert(msg));
         } else if (data?.code !== 200) {
           //
         }
       }
     } catch (error: any) {
       console.log("updateStaff error response: ", error);
+      dispatch(setError(error?.message));
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const updateNotification = (data: IUpdateNotification): AppThunk => {
+  return async (dispatch, getState) => {
+    dispatch(setLoading(true));
+    try {
+      const adminId = getState()?.user?.currentUser?.id;
+      const path = `UpdateVendorNotificationById?adminId=${adminId}`;
+      // console.log("checking ResetPassword path: ", path, " data: ", data);
+      const response = await axiosWithAuth.post(path, data);
+      if (response) {
+        const { data } = response;
+        console.log("updateNotification response: ", data);
+        if (data?.code === 200) {
+          dispatch(getAllNotifications(1));
+          var msg: IAlertProps = {
+            isError: false,
+            showAlert: true,
+            content: "Notification updated Successfully",
+          };
+          dispatch(setShowAlert(msg));
+        } else if (data?.code !== 200) {
+          //
+        }
+      }
+    } catch (error: any) {
+      console.log("updateNotification error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -437,5 +526,6 @@ export const {
   setStaffs,
   setVendorSummary,
   setFuelSummary,
+  setNotifications,
 } = userSlice.actions;
 export default userSlice.reducer;

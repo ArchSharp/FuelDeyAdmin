@@ -112,7 +112,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
     setOpenTrx(false);
   };
 
-  var pages = Math.ceil(data?.pagination?.totalCount / data?.pagination?.limit);
+  var pages = data?.pagination?.total_pages;
 
   useEffect(() => {
     var today = new Date();
@@ -405,6 +405,12 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
         <tbody>
           {sortedData?.map((dt: IVendor, index: number) => {
             if (index < rowsPerPage) {
+              var fueltypes = [];
+              if (dt.isdiesel) fueltypes.push("Diesel");
+              if (dt.isgas) fueltypes.push("Gas");
+              if (dt.iskerosene) fueltypes.push("Kerosene");
+              if (dt.ispetrol) fueltypes.push("Petrol");
+
               return (
                 <tr
                   key={index}
@@ -450,13 +456,24 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
                   }`}</td>
                   <td
                     className={`text-center text-sm px-3 ${
-                      dt.ispetrol === true ? "text-green-700" : "text-red-700"
+                      dt.ispetrol === true ||
+                      dt.isdiesel === true ||
+                      dt.isgas === true ||
+                      dt.iskerosene === true
+                        ? "text-green-700"
+                        : "text-red-700"
                     } font-bold`}
-                  >{`${dt.ispetrol === true ? "Available" : "Finished"}`}</td>
-                  <td className="text-center text-sm px-3 text-nowrap">{`${
-                    // dt.fuelTypes === null ? "-" : dt.fuelTypes.join(", ")
-                    ""
+                  >{`${
+                    dt.ispetrol === true ||
+                    dt.isdiesel === true ||
+                    dt.isgas === true ||
+                    dt.iskerosene === true
+                      ? "Available"
+                      : "Finished"
                   }`}</td>
+                  <td className="text-center text-sm px-3 text-nowrap">{`${fueltypes.join(
+                    ", "
+                  )}`}</td>
                 </tr>
               );
             } else {
@@ -477,6 +494,9 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
             <option value={10}>10</option>
             <option value={20}>20</option>
             <option value={30}>30</option>
+            <option value={30}>50</option>
+            <option value={30}>80</option>
+            <option value={30}>100</option>
           </select>
           per page
         </div>

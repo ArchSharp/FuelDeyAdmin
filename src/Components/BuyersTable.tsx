@@ -113,7 +113,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
     setOpenTrx(false);
   };
 
-  var pages = Math.ceil(data?.pagination?.totalCount / data?.pagination?.limit);
+  var pages = data?.pagination?.total_pages;
 
   useEffect(() => {
     var today = new Date();
@@ -356,10 +356,12 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
         <tbody>
           {sortedData?.map((dt: IBuyer, index: number) => {
             if (index < rowsPerPage) {
-              const stationNames = [""];
-              //  dt?.lasttenvisitedstations
-              //   .map((last) => last)
-              //   .join(", ");
+              const stationNames =
+                dt.lasttenvisitedstations.length > 0
+                  ? dt?.lasttenvisitedstations
+                      .map((last) => last.stationname)
+                      .join(", ")
+                  : "";
 
               return (
                 <tr
@@ -383,7 +385,9 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                     />
                   </td>
                   <td className="text-center text-sm text-nowrap">{`${
-                    dt.firstname === null ? "-" : dt.firstname
+                    dt.firstname === null
+                      ? "-"
+                      : dt.firstname + " " + dt.lastname
                   }`}</td>
 
                   <td className="text-center text-sm px-3 text-nowrap">{`${
@@ -393,7 +397,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
                     dt.email === null ? "-" : dt.email
                   }`}</td>
                   <td className="text-center text-sm px-3 w-[30%] py-1">{`${
-                    dt.lasttenvisitedstations === null ? "-" : stationNames
+                    dt.lasttenvisitedstations.length === 0 ? "-" : stationNames
                   }`}</td>
                 </tr>
               );
@@ -415,6 +419,9 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
             <option value={10}>10</option>
             <option value={20}>20</option>
             <option value={30}>30</option>
+            <option value={30}>50</option>
+            <option value={30}>80</option>
+            <option value={30}>100</option>
           </select>
           per page
         </div>

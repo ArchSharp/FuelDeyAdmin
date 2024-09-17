@@ -5,7 +5,7 @@ import { FaArrowDown } from "react-icons/fa6";
 import { RiCpuFill } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import ReactPaginate from "react-paginate";
-import { useAppDispatch } from "../Store/store";
+import { useAppDispatch, useAppSelector } from "../Store/store";
 import { IAlertProps, IStaff, IStaffs } from "../Features/User/type";
 import { setShowAlert } from "../Features/User/userSlice";
 import { SVGs } from "../assets/SVGs";
@@ -26,6 +26,7 @@ type IStaffsProps = {
 export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
   // const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { currentUser } = useAppSelector((state) => state.user);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [data, setData] = useState<IStaffs>(staffsData);
   const [sortBy, setSortBy] = useState<keyof any>("internalid");
@@ -105,7 +106,7 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
     setAddStaff(false);
   };
 
-  var pages = Math.ceil(data?.pagination?.totalCount / data?.pagination?.limit);
+  var pages = data?.pagination?.total_pages;
 
   useEffect(() => {
     var today = new Date();
@@ -169,15 +170,17 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
       {/* Table header */}
       <div className="pt-6 flex">
         {/* add staff */}
-        <button
-          className="flex px-5 py-2 ml-5 bg-blue-950 text-white h-full justify-center items-center border-[1px] rounded-[64px] text-xs md:text-sm font-poppins font-bold"
-          onClick={() => {
-            setAddStaff(!addStaff);
-          }}
-        >
-          <IoPersonAdd className=" text-main text-xl" />
-          <div className="w-fit mx-3">New Staff</div>
-        </button>
+        {currentUser?.role === "superadmin" && (
+          <button
+            className="flex px-5 py-2 ml-5 bg-blue-950 text-white h-full justify-center items-center border-[1px] rounded-[64px] text-xs md:text-sm font-poppins font-bold"
+            onClick={() => {
+              setAddStaff(!addStaff);
+            }}
+          >
+            <IoPersonAdd className=" text-main text-xl" />
+            <div className="w-fit mx-3">New Staff</div>
+          </button>
+        )}
         {/* processors */}
         <div className="w-[165px] h-[38px] text-sm ml-5 z-[3]">
           <button
@@ -390,6 +393,9 @@ export const StaffMngtTable = ({ staffsData }: IStaffsProps) => {
             <option value={10}>10</option>
             <option value={20}>20</option>
             <option value={30}>30</option>
+            <option value={30}>50</option>
+            <option value={30}>80</option>
+            <option value={30}>100</option>
           </select>
           per page
         </div>

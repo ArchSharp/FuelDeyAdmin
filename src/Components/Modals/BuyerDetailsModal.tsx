@@ -82,11 +82,11 @@ const BuyerDetailsModal: React.FC<ModalProps> = ({
                   {buyer?.lasttenvisitedstations?.map((last, index) => (
                     <tr key={index} className="">
                       <td className="text-center">{index + 1}</td>
-                      <td className="text-center py-2">{last}</td>
+                      <td className="text-center py-2">{last.stationname}</td>
                       <td className="text-center px-5 py-2 h-fit text-nowrap">
-                        {last}
+                        {last.stationaddress}
                       </td>
-                      <td className="text-center py-2">{last}</td>
+                      <td className="text-center py-2">{last.frequency}</td>
                     </tr>
                   ))}
                 </tbody>

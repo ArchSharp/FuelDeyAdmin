@@ -40,8 +40,9 @@ export const setupAxiosInterceptors = (dispatch: any) => {
           showAlert: true,
           content: "Token has expired, please sign in to continue",
         };
-        await dispatch(setShowAlert(msg));
-        await dispatch(setIsAuth(false));
+        // await dispatch(setShowAlert(msg));
+        // await dispatch(setIsAuth(false));
+        // await dispatch()
 
         // After getting a new token, retry the original request
         // const config = error.config;

@@ -30,13 +30,16 @@ export class VendorStockLevel extends PureComponent<VendorStockLevelProps> {
       ...item,
     }));
 
-    // const maxValue = [vendor?.stockLevel]?.reduce((max: number, item: any) => {
-    //   const maxAvailability = Math.max(item?.petrol || 0);
-    //   return Math.max(max, maxAvailability);
-    // }, 0);
+    // Find the max level for this vendor (consider petrol, diesel, gas, and kerosene levels)
+    const maxVendorLevel = Math.max(
+      vendor?.petrollevel || 0,
+      vendor?.diesellevel || 0,
+      vendor?.gaslevel || 0,
+      vendor?.kerosenelevel || 0
+    );
 
-    // let exactMaxValue = maxValue + 1000;
-    let exactMaxValue = 1000;
+    let exactMaxValue = maxVendorLevel + 1000;
+    // let exactMaxValue = 1000;
 
     return (
       <div style={{ width: "100%", height: "100%" }}>

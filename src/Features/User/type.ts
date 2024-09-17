@@ -20,6 +20,12 @@ export interface IUpdateStaff {
   adminid: string;
 }
 
+export interface IUpdateNotification {
+  id: string;
+  isadminread: boolean;
+  response: string;
+}
+
 export interface IUserState {
   currentUser?: IProfile | any | null;
   isLoading: boolean;
@@ -34,6 +40,7 @@ export interface IUserState {
   vendors?: IVendors | null;
   buyers?: IBuyers | null;
   staffs?: IStaffs | null;
+  notifications?: INotifications | null;
 }
 
 export interface IFuelSummary {
@@ -65,6 +72,26 @@ export interface IStocklevel {
   gas: number;
   kerosene: number;
   petrol: number;
+}
+
+export interface INotifications {
+  data: INotification[];
+  pagination: IPagination;
+}
+
+export interface INotification {
+  commuterid: string;
+  commutername: string;
+  createdat: string;
+  id: string;
+  isadminread: boolean;
+  ishelp: boolean;
+  question: string;
+  repliedby: string;
+  response: string;
+  updatedat: string;
+  vendorid: string;
+  vendorname: string;
 }
 
 export interface IStaffs {
@@ -109,12 +136,14 @@ export interface IVendor {
   isdiesel: boolean;
   isgas: boolean;
   ispetrol: boolean;
+  iskerosene: boolean;
   kerosenelevel: number;
   latitude: string;
   lga: string;
   longitude: string;
   petrollevel: number;
   petrolprice: number;
+  keroseneprice: number;
   phonenumber: string;
   postalcode: number;
   ratingcount: any;
@@ -139,7 +168,7 @@ export interface IBuyer {
   is_two_factor_enabled: boolean;
   isactive: boolean;
   lastname: string;
-  lasttenvisitedstations: string[];
+  lasttenvisitedstations: ILastTenVisitedStation[];
   password: string;
   phonenumber: string;
   role: string;
@@ -147,17 +176,18 @@ export interface IBuyer {
 }
 
 export interface ILastTenVisitedStation {
-  stationName: string;
-  address: string;
-  coordinates: string;
-  countIn3Days: number;
+  commuterid: string;
+  frequency: number;
+  stationaddress: string;
+  stationid: string;
+  stationname: string;
 }
 
 export interface IPagination {
   limit: number;
   page: number;
-  totalCount: number;
-  totalUser: number;
+  total: number;
+  total_pages: number;
 }
 
 export interface StateFuelDashboardData {
