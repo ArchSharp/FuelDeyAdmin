@@ -38,10 +38,10 @@ export const setupAxiosInterceptors = (dispatch: any) => {
         // After getting a new token, retry the original request
         await dispatch(getNewAccessToken());
         const config = error.config;
-        const newToken = localStorage.getItem("rtoken") as string;
+        const newToken = localStorage.getItem("token") as string;
         config.timeout = 15000;
         config.headers.Authorization = `Bearer ${newToken}`;
-        console.log("config: ", config);
+        // console.log("config: ", config);
 
         return Axios(config);
         // return null;
