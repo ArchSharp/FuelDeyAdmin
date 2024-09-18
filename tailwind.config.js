@@ -10,7 +10,7 @@ export default {
         footerText: "rgba(252,252,252,0.6)",
         solution: "#3e4a56",
         darkcyan: "rgb(0,139,139)",
-        career: "rgba(10,65,81,0.5)",
+        fuelYellow: "rgb(255,167,0)",
       },
       fontFamily: {
         helvetica: "Helvetica",

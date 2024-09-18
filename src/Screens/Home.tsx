@@ -1,6 +1,6 @@
 import fuelSplash from "../assets/Images/fuel-splash3.png";
 import * as routes from "../Data/Routes";
-import fueldeylogo from "../assets/Images/fuel-dey-logo.jpeg";
+import fueldeylogo from "../assets/Images/fuel-dey-logo.png";
 import { Route, Routes } from "react-router-dom";
 import { SignIn } from "./Auths/SignIn";
 // import { SignUp } from "./Auths/SignUp";

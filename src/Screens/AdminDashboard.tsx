@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { sidebars } from "../Data/sidebarsText";
 import fueldeylogo from "../assets/Images/fuel-dey-logo-no-bg.png";
-import userImg from "../assets/Images/fuel-dey-logo - full.jpeg";
+import userImg from "../assets/Images/Frame 64.png";
 import { FaAngleDoubleLeft, FaChevronRight } from "react-icons/fa";
 import {
   IoChevronDownSharp,
@@ -159,7 +159,7 @@ export const AdminDashboard = () => {
           <div key={index}>
             <div
               className={`text-white p-4 cursor-pointer flex items-center text-base ${
-                mainNavIndex === index ? "bg-orange-500" : "bg-transparent"
+                mainNavIndex === index ? "bg-fuelYellow" : "bg-transparent"
               }`}
               onClick={() => {
                 handleSubNavClick(0);
