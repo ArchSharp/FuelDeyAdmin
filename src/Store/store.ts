@@ -36,7 +36,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(middleware),
+    }).concat(
+      import.meta.env.VITE_ENVIRONMENT !== "production" ? middleware : []
+    ),
   devTools: process.env.NODE_ENV !== "production",
 });
 

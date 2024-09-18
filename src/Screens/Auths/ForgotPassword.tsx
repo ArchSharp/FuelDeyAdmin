@@ -39,7 +39,7 @@ export const ForgotPassword = () => {
   });
 
   useEffect(() => {
-    console.log(errors[0]);
+    // console.log(errors[0]);
     if (errors[0]?.message === "Navigate to reset password") {
       navigate(routes.resetPassword);
       dispatch(clearErrors());

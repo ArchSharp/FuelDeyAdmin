@@ -45,7 +45,7 @@ export const ChangePassword = () => {
   // Submit handler
   const handleSubmit = (values: IPasswordChange) => {
     // dispatch(reset_password(values));
-    console.log(values);
+    // console.log(values);
   };
 
   // Formik form handling

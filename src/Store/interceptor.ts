@@ -4,14 +4,14 @@ import { store } from "./store"; // Import your Redux store
 // import { getNewAccessToken } from "../Features/User/userSlice";
 
 export const interceptor = () => {
-  console.log("Seen interceptor");
+  // console.log("Seen interceptor");
   axios.interceptors.response.use(
     (response) => {
-      console.log("Seen interceptor");
+      // console.log("Seen interceptor");
       return response;
     },
     async (error) => {
-      console.log("From interceptor: ", error);
+      // console.log("From interceptor: ", error);
       if (error.response && error.response.status === 403) {
         // Dispatch an action to refresh the access token
         // store.dispatch(getNewAccessToken());

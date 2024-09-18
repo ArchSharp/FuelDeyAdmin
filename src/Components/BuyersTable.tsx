@@ -161,9 +161,9 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
       }
       // if (num !== data?.pagination?.page) dispatch(getAllTransactions(num));
 
-      console.log(
-        `User requested page number ${num} page: ${data?.pagination?.page}`
-      );
+      // console.log(
+      //   `User requested page number ${num} page: ${data?.pagination?.page}`
+      // );
       // setItemOffset(newOffset);
     }
   };

@@ -33,7 +33,7 @@ export const setupAxiosInterceptors = (dispatch: any) => {
     },
     async (error) => {
       if (error?.response && error.response.status === 401) {
-        console.log("Token has expired: ", error?.response?.status);
+        // console.log("Token has expired: ", error?.response?.status);
 
         // After getting a new token, retry the original request
         await dispatch(getNewAccessToken());

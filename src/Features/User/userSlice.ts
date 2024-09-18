@@ -138,7 +138,7 @@ export const reset_password = (data: IResetPassword): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("reset_password response: ", data);
+        // console.log("reset_password response: ", data);
         if (data?.code === 200) {
           var msg: IAlertProps = {
             isError: false,
@@ -154,7 +154,7 @@ export const reset_password = (data: IResetPassword): AppThunk => {
     } catch (error: any) {
       dispatch(setError(error?.message));
       var err = error?.response?.data;
-      console.log("reset_password error response: ", err);
+      // console.log("reset_password error response: ", err);
       var msg: IAlertProps = {
         isError: true,
         showAlert: true,
@@ -181,7 +181,7 @@ export const forgotPasswordFunc = (email: string): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("forgotPasswordFunc response: ", data);
+        // console.log("forgotPasswordFunc response: ", data);
         if (data?.code === 200) {
           // dispatch(setVendorSummary(data?.body));
           var msg: IAlertProps = {
@@ -198,7 +198,7 @@ export const forgotPasswordFunc = (email: string): AppThunk => {
     } catch (error: any) {
       dispatch(setError(error?.message));
       var err = error?.response?.data;
-      console.log("forgotPasswordFunc error response: ", err);
+      // console.log("forgotPasswordFunc error response: ", err);
       var msg: IAlertProps = {
         isError: true,
         showAlert: true,
@@ -238,7 +238,7 @@ export const signIn = (data: ISignin): AppThunk => {
     } catch (error: any) {
       dispatch(setError(error?.message));
       var err = error?.response?.data;
-      console.log("reset_password error response: ", err);
+      // console.log("reset_password error response: ", err);
       var msg: IAlertProps = {
         isError: true,
         showAlert: true,
@@ -263,12 +263,12 @@ export const getNewAccessToken = (): AppThunk => {
         const data = response.data;
 
         if (data?.access_token) {
-          console.log("getNewAccessToken response: ", data);
+          // console.log("getNewAccessToken response: ", data);
           localStorage.setItem("token", data?.access_token);
         }
       }
     } catch (error: any) {
-      console.log("getNewAccessToken error response: ", error);
+      // console.log("getNewAccessToken error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -287,7 +287,7 @@ export const getVendorSummary = (): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("getVendorSummary response: ", data);
+        // console.log("getVendorSummary response: ", data);
         if (data?.code === 200) {
           dispatch(setVendorSummary(data?.body));
         } else {
@@ -295,7 +295,7 @@ export const getVendorSummary = (): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("getVendorSummary error response: ", error);
+      // console.log("getVendorSummary error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -314,7 +314,7 @@ export const getFuelSummaryData = (): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("getFuelSummaryData response: ", data);
+        // console.log("getFuelSummaryData response: ", data);
         if (data?.code === 200) {
           dispatch(setFuelSummary(data?.body));
         } else {
@@ -322,7 +322,7 @@ export const getFuelSummaryData = (): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("getFuelSummaryData error response: ", error);
+      // console.log("getFuelSummaryData error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -340,7 +340,7 @@ export const getAllVendors = (page: number): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("getAllVendors response: ", data);
+        // console.log("getAllVendors response: ", data);
         if (data?.code === 200) {
           dispatch(setVendors(data?.body));
         } else {
@@ -348,7 +348,7 @@ export const getAllVendors = (page: number): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("getAllVendors error response: ", error);
+      // console.log("getAllVendors error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -366,7 +366,7 @@ export const getAllBuyers = (page: number): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("getAllBuyers response: ", data);
+        // console.log("getAllBuyers response: ", data);
         if (data?.code === 200) {
           dispatch(setBuyers(data?.body));
         } else {
@@ -374,7 +374,7 @@ export const getAllBuyers = (page: number): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("getAllBuyers error response: ", error);
+      // console.log("getAllBuyers error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -392,7 +392,7 @@ export const getAllStaffs = (page: number): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("getAllStaffs response: ", data);
+        // console.log("getAllStaffs response: ", data);
         if (data?.code === 200) {
           dispatch(setStaffs(data?.body));
         } else {
@@ -400,7 +400,7 @@ export const getAllStaffs = (page: number): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("getAllStaffs error response: ", error);
+      // console.log("getAllStaffs error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -419,7 +419,7 @@ export const getAllNotifications = (page: number): AppThunk => {
       if (response) {
         const data = response.data;
 
-        console.log("getAllNotifications response: ", data);
+        // console.log("getAllNotifications response: ", data);
         if (data?.code === 200) {
           dispatch(setNotifications(data?.body));
         } else {
@@ -427,7 +427,7 @@ export const getAllNotifications = (page: number): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("getAllNotifications error response: ", error);
+      // console.log("getAllNotifications error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -443,7 +443,7 @@ export const createStaff = (data: ISignUp): AppThunk => {
       const response = await axios.post(path, data);
       if (response) {
         const { data } = response;
-        console.log("createStaff response: ", data);
+        // console.log("createStaff response: ", data);
         if (data?.code === 201) {
           dispatch(getAllStaffs(1));
           var msg: IAlertProps = {
@@ -457,7 +457,7 @@ export const createStaff = (data: ISignUp): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("createStaff error response: ", error);
+      // console.log("createStaff error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -474,7 +474,7 @@ export const updateStaff = (data: IUpdateStaff): AppThunk => {
       const response = await axiosWithAuth.post(path, data);
       if (response) {
         const { data } = response;
-        console.log("updateStaff response: ", data);
+        // console.log("updateStaff response: ", data);
         if (data?.code === 200) {
           dispatch(getAllStaffs(1));
           var msg: IAlertProps = {
@@ -488,7 +488,7 @@ export const updateStaff = (data: IUpdateStaff): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("updateStaff error response: ", error);
+      // console.log("updateStaff error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -505,7 +505,7 @@ export const updateNotification = (data: IUpdateNotification): AppThunk => {
       const response = await axiosWithAuth.post(path, data);
       if (response) {
         const { data } = response;
-        console.log("updateNotification response: ", data);
+        // console.log("updateNotification response: ", data);
         if (data?.code === 200) {
           dispatch(getAllNotifications(1));
           var msg: IAlertProps = {
@@ -519,7 +519,7 @@ export const updateNotification = (data: IUpdateNotification): AppThunk => {
         }
       }
     } catch (error: any) {
-      console.log("updateNotification error response: ", error);
+      // console.log("updateNotification error response: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));
@@ -533,7 +533,7 @@ export const getFillingStations = (city: any): AppThunk => {
     try {
       let baseurl = import.meta.env.VITE_PLACES_API;
       baseurl = `${baseurl}&type=gas_station&query=filling station in ${city}`;
-      console.log("payload: ", city);
+      // console.log("payload: ", city);
 
       // Create a new XMLHttpRequest object
       var response = new window.XMLHttpRequest();
@@ -550,13 +550,13 @@ export const getFillingStations = (city: any): AppThunk => {
           if (response.status >= 200 && response.status < 300) {
             // Parse the JSON response
             const responseData = JSON.parse(response.responseText);
-            console.log("getFillingStations response: ", responseData);
+            // console.log("getFillingStations response: ", responseData);
           } else {
             // Handle HTTP errors
-            console.log(
-              "getFillingStations error response: ",
-              response.statusText
-            );
+            // console.log(
+            //   "getFillingStations error response: ",
+            //   response.statusText
+            // );
             dispatch(setError(response.statusText));
           }
           // Set loading to false after response is processed
@@ -567,7 +567,7 @@ export const getFillingStations = (city: any): AppThunk => {
       // Send the request with the data in JSON format
       response.send(JSON.stringify({ city: "city" }));
     } catch (error: any) {
-      console.log("getFillingStations error response: ", error);
+      // console.log("getFillingStations error response: ", error);
       dispatch(setError(error?.message));
       dispatch(setLoading(false));
     }
@@ -589,10 +589,10 @@ export const getFillingStationsAxios = (city: string): AppThunk => {
       const response = await axios.get(placesUrl, { params });
       if (response) {
         const { results } = response.data;
-        console.log("Places data: ", results);
+        // console.log("Places data: ", results);
       }
     } catch (error: any) {
-      console.log("Places error: ", error);
+      // console.log("Places error: ", error);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));

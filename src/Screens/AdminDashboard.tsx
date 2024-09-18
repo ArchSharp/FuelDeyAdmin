@@ -49,7 +49,7 @@ export const AdminDashboard = () => {
   const pathName = useLocation().pathname;
 
   useEffect(() => {
-    console.log("isAuth: ", isAuth);
+    // console.log("isAuth: ", isAuth);
     if (isAuth === false) {
       navigate("/");
     }
@@ -130,7 +130,7 @@ export const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchEvery2Minutes = setInterval(() => {
-      console.log("Fetching....");
+      // console.log("Fetching....");
       dispatch(getVendorSummary());
       dispatch(getFuelSummaryData());
     }, 120000);

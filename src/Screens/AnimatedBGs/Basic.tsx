@@ -24,7 +24,7 @@ export const Basic = () => {
   }, []);
 
   const particlesLoaded = useCallback(async (container: any) => {
-    console.log(container?.id);
+    // console.log(container?.id);
   }, []);
 
   return (

@@ -159,9 +159,9 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
       }
       // if (num !== data?.pagination?.page) dispatch(getAllTransactions(num));
 
-      console.log(
-        `User requested page number ${num} page: ${data?.pagination?.page}`
-      );
+      // console.log(
+      //   `User requested page number ${num} page: ${data?.pagination?.page}`
+      // );
       // setItemOffset(newOffset);
     }
   };
@@ -176,7 +176,7 @@ export const VendorsTable = ({ vendorsData }: IVendorsProps) => {
       const sortedData = vendorsData?.data
         ?.slice()
         .filter((dt: IVendor) => regex.test(dt?.stationname)); // Use regex to match station names
-      console.log("searching...: ", sortedData);
+      // console.log("searching...: ", sortedData);
       setData({ data: sortedData, pagination: data.pagination });
     } else if (search.length === 0) {
       setData(vendorsData);
