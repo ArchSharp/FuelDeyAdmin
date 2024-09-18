@@ -5,13 +5,13 @@ import { MdAttachEmail } from "react-icons/md";
 import { FaLock, FaLockOpen } from "react-icons/fa";
 // import { signUp } from "../../Features/User/userSlice";
 // import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../Store/store";
+import { useAppSelector } from "../../Store/store";
 import { useState } from "react";
 import { IPasswordChange } from "../../Features/User/type";
 
 export const ChangePassword = () => {
   // const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { isLoading, currentUser } = useAppSelector((state: any) => state.user);
   const [showPass, setShowPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
@@ -44,7 +44,8 @@ export const ChangePassword = () => {
 
   // Submit handler
   const handleSubmit = (values: IPasswordChange) => {
-    // dispatch(signUp(values));
+    // dispatch(reset_password(values));
+    console.log(values);
   };
 
   // Formik form handling

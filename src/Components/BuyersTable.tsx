@@ -3,7 +3,7 @@ import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { FaArrowDown, FaEye } from "react-icons/fa6";
 // import { HiFilter } from "react-icons/hi";
 import { RiCpuFill } from "react-icons/ri";
-import { IoCalendar } from "react-icons/io5";
+// import { IoCalendar } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 
 import ReactPaginate from "react-paginate";
@@ -192,7 +192,7 @@ export const BuyersTable = ({ buyersData }: IVendorsProps) => {
       <BuyerDetailsModal
         isOpen={openTrx}
         onClose={closeModal}
-        content="testing"
+        content={`${currentIndex}`}
         data={tappedBuyer!}
       />
       {/* Table header */}
