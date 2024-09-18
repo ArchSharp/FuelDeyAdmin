@@ -263,7 +263,7 @@ export const AdminDashboard = () => {
                         : ""
                     }`
                   : "user-nav-hide"
-              } bg-slate-300 shadow-xl w-[300px] h-[400px] border-2 z-[7]`}
+              } bg-slate-300 shadow-xl w-[300px] h-fit border-2 z-[7]`}
             >
               <div
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
@@ -273,6 +273,60 @@ export const AdminDashboard = () => {
                 }}
               >
                 Profile
+              </div>
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.adminDash);
+                }}
+              >
+                Dashboard
+              </div>
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.vendors);
+                }}
+              >
+                Vendor
+              </div>
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.buyers);
+                }}
+              >
+                Buyers
+              </div>
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.notifications);
+                }}
+              >
+                Notification
+              </div>
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.staffMngt);
+                }}
+              >
+                Manage Staff
+              </div>
+              <div
+                className="font-poppins text-sm pl-5 py-3 hover:bg-white"
+                onClick={() => {
+                  setShowUserNav(false);
+                  navigate("/admin/" + routes.settings);
+                }}
+              >
+                Settings
               </div>
               <div
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
