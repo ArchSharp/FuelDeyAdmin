@@ -284,6 +284,7 @@ export const AdminDashboard = () => {
                 onClick={() => {
                   setShowUserNav(false);
                   navigate("/admin/" + routes.adminDash);
+                  setMainNavIndex(0);
                 }}
               >
                 Dashboard
