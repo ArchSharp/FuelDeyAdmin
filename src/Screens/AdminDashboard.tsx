@@ -330,6 +330,7 @@ export const AdminDashboard = () => {
                 onClick={() => {
                   setShowUserNav(false);
                   navigate("/admin/" + routes.settings);
+                  setSubNavIndex(1);
                 }}
               >
                 Settings
