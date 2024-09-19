@@ -7,12 +7,18 @@ import { SignIn } from "./Auths/SignIn";
 import { ForgotPassword } from "./Auths/ForgotPassword";
 import { useMediaQuery } from "react-responsive";
 import { ResetPassword } from "./Auths/ResetPassword";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../Store/store";
+import { setLoading } from "../Features/User/userSlice";
 
 export const Home = () => {
+  const dispatch = useAppDispatch();
   const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
   const [pauseAnimate, setPauseAnimate] = useState(false);
-  //
+
+  useEffect(() => {
+    dispatch(setLoading(false));
+  }, []);
 
   return (
     <div className="">
