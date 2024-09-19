@@ -49,11 +49,11 @@ export const AdminDashboard = () => {
   const pathName = useLocation().pathname;
 
   useEffect(() => {
-    // console.log("isAuth: ", isAuth);
-    if (isAuth === false) {
-      navigate("/");
+    if (!isAuth) {
+      // console.log("isAuth: ", isAuth);
+      window.location.pathname = "/";
     }
-  }, [isAuth]);
+  }, [isAuth, pathName]);
 
   const handleClick = (index: number) => {
     setMainNavIndex(index);
@@ -119,20 +119,24 @@ export const AdminDashboard = () => {
   // console.log("isNavIn: ", isNavIn);
 
   useEffect(() => {
-    if (!vendorSummary) {
-      dispatch(getVendorSummary());
-    }
+    if (pathName !== "/" && isAuth === true) {
+      if (!vendorSummary) {
+        dispatch(getVendorSummary());
+      }
 
-    if (!fuelSummary) {
-      dispatch(getFuelSummaryData());
+      if (!fuelSummary) {
+        dispatch(getFuelSummaryData());
+      }
     }
   }, [dispatch, vendorSummary, fuelSummary]);
 
   useEffect(() => {
     const fetchEvery2Minutes = setInterval(() => {
       // console.log("Fetching....");
-      dispatch(getVendorSummary());
-      dispatch(getFuelSummaryData());
+      if (pathName !== "/" && isAuth === true) {
+        dispatch(getVendorSummary());
+        dispatch(getFuelSummaryData());
+      }
     }, 120000);
 
     return () => clearInterval(fetchEvery2Minutes);
@@ -343,9 +347,9 @@ export const AdminDashboard = () => {
 
         <div className="h-[90vh] overflow-y-auto">
           <Routes>
-            <Route path={routes.adminDash} element={<DashboardAdmin />} />
-            <Route path={routes.vendors} element={<Vendors />} />
-            <Route path={routes.buyers} element={<Buyers />} />
+            <Route path={routes.adminDash} index element={<DashboardAdmin />} />
+            <Route path={routes.vendors} index element={<Vendors />} />
+            <Route path={routes.buyers} index element={<Buyers />} />
             <Route path={routes.notifications} element={<Notifications />} />
             <Route path={routes.staffMngt} element={<StaffMngt />} />
             <Route
