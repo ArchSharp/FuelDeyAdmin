@@ -27,6 +27,7 @@ import {
 } from "../Features/User/userSlice";
 import { Settings } from "./Settings";
 import { Notifications } from "./Notifications";
+import ProtectedRoute from "../Components/ProtectedRoute";
 
 export const AdminDashboard = () => {
   const { isAuth, vendorSummary, fuelSummary } = useAppSelector(
@@ -51,7 +52,7 @@ export const AdminDashboard = () => {
   useEffect(() => {
     if (!isAuth) {
       // console.log("isAuth: ", isAuth);
-      window.location.pathname = "/";
+      // window.location.pathname = "/";
     }
   }, [isAuth, pathName]);
 
@@ -347,14 +348,56 @@ export const AdminDashboard = () => {
 
         <div className="h-[90vh] overflow-y-auto">
           <Routes>
-            <Route path={routes.adminDash} index element={<DashboardAdmin />} />
-            <Route path={routes.vendors} index element={<Vendors />} />
-            <Route path={routes.buyers} index element={<Buyers />} />
-            <Route path={routes.notifications} element={<Notifications />} />
-            <Route path={routes.staffMngt} element={<StaffMngt />} />
+            <Route
+              path={routes.adminDash}
+              index
+              element={
+                <ProtectedRoute isAuth={isAuth}>
+                  <DashboardAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={routes.vendors}
+              index
+              element={
+                <ProtectedRoute isAuth={isAuth}>
+                  <Vendors />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={routes.buyers}
+              index
+              element={
+                <ProtectedRoute isAuth={isAuth}>
+                  <Buyers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={routes.notifications}
+              element={
+                <ProtectedRoute isAuth={isAuth}>
+                  <Notifications />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={routes.staffMngt}
+              element={
+                <ProtectedRoute isAuth={isAuth}>
+                  <StaffMngt />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path={routes.settings}
-              element={<Settings subIndex={subNavIndex} />}
+              element={
+                <ProtectedRoute isAuth={isAuth}>
+                  <Settings subIndex={subNavIndex} />
+                </ProtectedRoute>
+              }
             />
           </Routes>
         </div>
