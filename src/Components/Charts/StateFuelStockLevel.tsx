@@ -33,7 +33,7 @@ class StateFuelStockLevel extends PureComponent<StateFuelStockLevelProps> {
       ...item,
     }));
 
-    const maxValue = transformedData.reduce((max: number, item: any) => {
+    const maxValue = transformedData?.reduce((max: number, item: any) => {
       const maxAvailability = Math.max(
         item.Petrol,
         item.Diesel,
