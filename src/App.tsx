@@ -21,6 +21,7 @@ import {
 import { IdleSessionTimeout } from "idle-session-timeout";
 import { Notification } from "./Components/Notification";
 import Modal from "./Components/Modals/Modal";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -143,7 +144,15 @@ function App() {
       {!showTimeLeft && <Notification />}
       <Routes>
         <Route path={routes.homepage} index element={<Home />} />
-        <Route path={routes.admin} index element={<AdminDashboard />} />
+        <Route
+          path={routes.admin}
+          index
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path={routes.error} index element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

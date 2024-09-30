@@ -27,7 +27,6 @@ import {
 } from "../Features/User/userSlice";
 import { Settings } from "./Settings";
 import { Notifications } from "./Notifications";
-import ProtectedRoute from "../Components/ProtectedRoute";
 
 export const AdminDashboard = () => {
   const { isAuth, vendorSummary, fuelSummary } = useAppSelector(
@@ -350,56 +349,14 @@ export const AdminDashboard = () => {
 
         <div className="h-[90vh] overflow-y-auto">
           <Routes>
-            <Route
-              path={routes.dashboard}
-              index
-              element={
-                <ProtectedRoute isAuth={isAuth}>
-                  <DashboardAdmin />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={routes.vendors}
-              index
-              element={
-                <ProtectedRoute isAuth={isAuth}>
-                  <Vendors />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={routes.buyers}
-              index
-              element={
-                <ProtectedRoute isAuth={isAuth}>
-                  <Buyers />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={routes.notifications}
-              element={
-                <ProtectedRoute isAuth={isAuth}>
-                  <Notifications />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={routes.staffMngt}
-              element={
-                <ProtectedRoute isAuth={isAuth}>
-                  <StaffMngt />
-                </ProtectedRoute>
-              }
-            />
+            <Route path={routes.dashboard} index element={<DashboardAdmin />} />
+            <Route path={routes.vendors} index element={<Vendors />} />
+            <Route path={routes.buyers} index element={<Buyers />} />
+            <Route path={routes.notifications} element={<Notifications />} />
+            <Route path={routes.staffMngt} element={<StaffMngt />} />
             <Route
               path={routes.settings}
-              element={
-                <ProtectedRoute isAuth={isAuth}>
-                  <Settings subIndex={subNavIndex} />
-                </ProtectedRoute>
-              }
+              element={<Settings subIndex={subNavIndex} />}
             />
           </Routes>
         </div>
