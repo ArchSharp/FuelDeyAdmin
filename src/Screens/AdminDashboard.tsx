@@ -95,7 +95,7 @@ export const AdminDashboard = () => {
 
   useEffect(() => {
     if (pathName === "/admin") {
-      navigate(routes.adminDash);
+      navigate(routes.dashboard);
       setMainNavIndex(0);
     } else if (pathName === "/admin/" + routes.vendors) {
       setMainNavIndex(1);
@@ -169,8 +169,8 @@ export const AdminDashboard = () => {
               onClick={() => {
                 handleSubNavClick(0);
                 handleClick(index);
-                let route = routes.adminDash;
-                if (index === 0) route = routes.adminDash;
+                let route = routes.dashboard;
+                if (index === 0) route = routes.dashboard;
                 else if (index === 1) route = routes.vendors;
                 else if (index === 2) route = routes.buyers;
                 else if (index === 3) route = routes.notifications;
@@ -283,7 +283,7 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.adminDash);
+                  navigate("/admin/" + routes.dashboard);
                   setMainNavIndex(0);
                 }}
               >
@@ -351,7 +351,7 @@ export const AdminDashboard = () => {
         <div className="h-[90vh] overflow-y-auto">
           <Routes>
             <Route
-              path={routes.adminDash}
+              path={routes.dashboard}
               index
               element={
                 <ProtectedRoute isAuth={isAuth}>

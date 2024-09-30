@@ -322,7 +322,7 @@ export const getFuelSummaryData = (): AppThunk => {
         }
       }
     } catch (error: any) {
-      // console.log("getFuelSummaryData error response: ", error);
+      //console.log("getFuelSummaryData error response: ", error?.response?.data);
       dispatch(setError(error?.message));
     }
     dispatch(setLoading(false));

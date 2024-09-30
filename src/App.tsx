@@ -143,7 +143,7 @@ function App() {
       {!showTimeLeft && <Notification />}
       <Routes>
         <Route path={routes.homepage} index element={<Home />} />
-        <Route path={routes.admindash} index element={<AdminDashboard />} />
+        <Route path={routes.admin} index element={<AdminDashboard />} />
         <Route path={routes.error} index element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
