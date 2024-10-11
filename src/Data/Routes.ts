@@ -1,4 +1,4 @@
-export const admin = "/admin/*";
+export const admin = "/admin";
 export const dashboard = "dashboard";
 export const vendors = "vendors";
 export const settings = "settings";

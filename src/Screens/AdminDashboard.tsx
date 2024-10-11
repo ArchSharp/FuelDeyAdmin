@@ -50,8 +50,9 @@ export const AdminDashboard = () => {
 
   useEffect(() => {
     if (!isAuth) {
-      // console.log("isAuth: ", isAuth);
-      // window.location.pathname = "/";
+      // console.log("Not logged in: ", isAuth);
+      window.location.pathname = "/";
+      navigate(routes.homepage);
     }
   }, [isAuth, pathName]);
 
@@ -92,29 +93,29 @@ export const AdminDashboard = () => {
     }
   }, [coordinates]);
 
-  useEffect(() => {
-    if (pathName === "/admin") {
-      navigate(routes.dashboard);
-      setMainNavIndex(0);
-    } else if (pathName === "/admin/" + routes.vendors) {
-      setMainNavIndex(1);
-      navigate(routes.vendors);
-    } else if (pathName === "/admin/" + routes.buyers) {
-      setMainNavIndex(2);
-      navigate(routes.buyers);
-    } else if (pathName === "/admin/" + routes.notifications) {
-      setMainNavIndex(3);
-      navigate(routes.notifications);
-    } else if (pathName === "/admin/" + routes.staffMngt) {
-      setMainNavIndex(4);
-      navigate(routes.staffMngt);
-    } else if (pathName === "/admin/" + routes.settings) {
-      setMainNavIndex(5);
-      setSubNavIndex(0);
+  // useEffect(() => {
+  //   if (pathName === "/admin") {
+  //     navigate(routes.dashboard);
+  //     setMainNavIndex(0);
+  //   } else if (pathName === "/admin/" + routes.vendors) {
+  //     setMainNavIndex(1);
+  //     navigate(routes.vendors);
+  //   } else if (pathName === "/admin/" + routes.buyers) {
+  //     setMainNavIndex(2);
+  //     navigate(routes.buyers);
+  //   } else if (pathName === "/admin/" + routes.notifications) {
+  //     setMainNavIndex(3);
+  //     navigate(routes.notifications);
+  //   } else if (pathName === "/admin/" + routes.staffMngt) {
+  //     setMainNavIndex(4);
+  //     navigate(routes.staffMngt);
+  //   } else if (pathName === "/admin/" + routes.settings) {
+  //     setMainNavIndex(5);
+  //     setSubNavIndex(0);
 
-      navigate(routes.settings);
-    }
-  }, [pathName]);
+  //     navigate(routes.settings);
+  //   }
+  // }, [pathName]);
 
   // console.log("isNavIn: ", isNavIn);
 
@@ -168,15 +169,15 @@ export const AdminDashboard = () => {
               onClick={() => {
                 handleSubNavClick(0);
                 handleClick(index);
-                let route = routes.dashboard;
-                if (index === 0) route = routes.dashboard;
-                else if (index === 1) route = routes.vendors;
-                else if (index === 2) route = routes.buyers;
-                else if (index === 3) route = routes.notifications;
-                else if (index === 4) route = routes.staffMngt;
-                else if (index === 5) route = routes.settings;
+                // let route = routes.dashboard;
+                // if (index === 0) route = routes.dashboard;
+                // else if (index === 1) route = routes.vendors;
+                // else if (index === 2) route = routes.buyers;
+                // else if (index === 3) route = routes.notifications;
+                // else if (index === 4) route = routes.staffMngt;
+                // else if (index === 5) route = routes.settings;
 
-                navigate(route);
+                // navigate(route);
               }}
             >
               {index === 0 && <MdSpaceDashboard className="mr-2 text-2xl" />}
@@ -273,7 +274,8 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.settings);
+                  // navigate("/admin/" + routes.settings);
+                  setMainNavIndex(6);
                 }}
               >
                 Profile
@@ -282,7 +284,7 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.dashboard);
+                  // navigate("/admin/" + routes.dashboard);
                   setMainNavIndex(0);
                 }}
               >
@@ -292,7 +294,8 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.vendors);
+                  // navigate("/admin/" + routes.vendors);
+                  setMainNavIndex(1);
                 }}
               >
                 Vendor
@@ -301,7 +304,8 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.buyers);
+                  // navigate("/admin/" + routes.buyers);
+                  setMainNavIndex(2);
                 }}
               >
                 Buyers
@@ -310,7 +314,8 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.notifications);
+                  // navigate("/admin/" + routes.notifications);
+                  setMainNavIndex(3);
                 }}
               >
                 Notification
@@ -319,7 +324,8 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.staffMngt);
+                  // navigate("/admin/" + routes.staffMngt);
+                  setMainNavIndex(4);
                 }}
               >
                 Manage Staff
@@ -328,8 +334,9 @@ export const AdminDashboard = () => {
                 className="font-poppins text-sm pl-5 py-3 hover:bg-white"
                 onClick={() => {
                   setShowUserNav(false);
-                  navigate("/admin/" + routes.settings);
-                  setSubNavIndex(1);
+                  // navigate("/admin/" + routes.settings);
+                  setMainNavIndex(5);
+                  setSubNavIndex(0);
                 }}
               >
                 Settings
@@ -348,7 +355,7 @@ export const AdminDashboard = () => {
         </div>
 
         <div className="h-[90vh] overflow-y-auto">
-          <Routes>
+          {/* <Routes>
             <Route path={routes.dashboard} index element={<DashboardAdmin />} />
             <Route path={routes.vendors} index element={<Vendors />} />
             <Route path={routes.buyers} index element={<Buyers />} />
@@ -358,7 +365,14 @@ export const AdminDashboard = () => {
               path={routes.settings}
               element={<Settings subIndex={subNavIndex} />}
             />
-          </Routes>
+          </Routes> */}
+
+          {mainNavIndex === 0 && <DashboardAdmin />}
+          {mainNavIndex === 1 && <Vendors />}
+          {mainNavIndex === 2 && <Buyers />}
+          {mainNavIndex === 3 && <Notifications />}
+          {mainNavIndex === 4 && <StaffMngt />}
+          {mainNavIndex === 5 && <Settings subIndex={subNavIndex} />}
         </div>
       </div>
     </div>
