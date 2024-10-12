@@ -314,7 +314,7 @@ export const getFuelSummaryData = (): AppThunk => {
       if (response) {
         const data = response.data;
 
-        // console.log("getFuelSummaryData response: ", data);
+        console.log("getFuelSummaryData response: ", data);
         if (data?.code === 200) {
           dispatch(setFuelSummary(data?.body));
         } else {

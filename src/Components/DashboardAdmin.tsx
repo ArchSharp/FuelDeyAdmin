@@ -26,6 +26,8 @@ export const DashboardAdmin = () => {
     setChartIndex(index);
   };
 
+  console.log("fuelSummary: ", fuelSummary);
+
   useEffect(() => {
     if (fuelSummary) {
       setAvailability(
@@ -45,6 +47,14 @@ export const DashboardAdmin = () => {
       setBuyersInActive(fuelSummary?.buyers?.inactive);
     }
   }, [fuelSummary]);
+
+  if (!fuelSummary) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[60vh]">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="px-3 md:px-5 lg:px-10">

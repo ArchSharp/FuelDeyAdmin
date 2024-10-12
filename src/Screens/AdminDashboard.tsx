@@ -39,7 +39,7 @@ export const AdminDashboard = () => {
     query: "(min-width: 768px) and (max-width: 1023px)",
   });
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
-  const [mainNavIndex, setMainNavIndex] = useState<number | null>(0);
+  const [mainNavIndex, setMainNavIndex] = useState<number>(0);
   const [subNavIndex, setSubNavIndex] = useState<number>(0);
   const [isNavIn, setIsNavIn] = useState(true);
   const [showUserNav, setShowUserNav] = useState(false);
@@ -120,12 +120,16 @@ export const AdminDashboard = () => {
   // console.log("isNavIn: ", isNavIn);
 
   useEffect(() => {
+    console.log("got here-3");
     if (pathName !== "/" && isAuth === true) {
+      console.log("got here-1");
       if (!vendorSummary) {
+        console.log("got here-2");
         dispatch(getVendorSummary());
       }
 
       if (!fuelSummary) {
+        console.log("got here-3");
         dispatch(getFuelSummaryData());
       }
     }
