@@ -144,18 +144,17 @@ function App() {
       )}
       {!showTimeLeft && <Notification />}
       <Routes>
-        <Route path={routes.homepage} index element={<Home />} />
+        <Route path={routes.homepage} element={<Home />} />
         <Route
           path={routes.admin}
-          index
           element={
             <ProtectedRoute isAuth={isAuth}>
               <AdminDashboard />
             </ProtectedRoute>
           }
         />
-        <Route path={routes.error} index element={<ErrorPage />} />
-        <Route path={routes.mobApp} index element={<DownloadMobileApp />} />
+        <Route path={routes.error} element={<ErrorPage />} />
+        <Route path={routes.mobApp} element={<DownloadMobileApp />} />
       </Routes>
     </BrowserRouter>
   );
