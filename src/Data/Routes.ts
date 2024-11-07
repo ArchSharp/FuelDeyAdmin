@@ -1,3 +1,4 @@
+export const signin = "/";
 export const admin = "/admin";
 export const homepage = "/";
 export const f_password = "/forgot-password";
