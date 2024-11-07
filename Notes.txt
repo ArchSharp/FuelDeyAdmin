@@ -15,3 +15,100 @@ https://www.youtube.com/watch?v=m_zi2RfmI4M deploy website to hostinger
   
   RewriteRule . /index.html [L]
 </IfModule>
+
+Setting up a ReactJS Application on AWS EC2
+
+Step 1: Launch an AWS EC2 Ubuntu Server
+
+Log in to the AWS Management Console.
+Navigate to the EC2 Dashboard.
+Click on “Launch Instance” and choose an Amazon Machine Image (AMI) with your preferred OS.
+
+Step 2: Connecting to the EC2 Instance
+
+Use your preferred SSH terminal to connect to the EC2 instance.
+For example, if you’re on a Mac, you can use the Terminal app.
+
+Step 3: Installing Node.js, NPM, and Nginx
+
+sudo apt-get update -y
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo apt install npm -y
+sudo apt install nginx -y
+
+Step 4: Cloning ReactJS App to EC2
+
+git clone *github project link*
+
+Step 5: Install all the required dependencies
+
+cd <project-folder>
+npm install
+
+
+Step 6: Create Production Build
+
+npm run build
+sudo mkdir /var/www/vhosts/frontend/
+sudo cp -R build/ /var/www/vhosts/frontend/
+
+Step 7: Create Nginx File
+
+with this command, you can check if already a default nginx file exists. You have to remove it.
+
+cd /etc/nginx/sites-enabled/
+sudo rm -rf default
+
+Create a configuration file for Nginx using the following command:
+
+sudo vim /etc/nginx/sites-available/<nginx-file-name>
+Paste the provided server configuration inside the file created.
+
+server {
+  listen 80 default_server;
+  server_name _;
+
+  location / {
+      autoindex on;
+      root /var/www/vhosts/frontend/build;
+      try_files $uri /index.html;
+    }
+}
+Activate the configuration using the following command:
+
+sudo ln -s /etc/nginx/sites-available/<nginx-file-name> /etc/nginx/sites-enabled/
+
+Step 8: Start the Application
+
+Restart Nginx and allow the changes to take place.
+
+sudo systemctl restart nginx
+sudo service nginx restart
+
+Additionally, in case of errors, you can check error logs and status.
+
+Step 9: Domain and SSL setup
+
+Domain
+
+First, you have to Public IP address or ec2 instance as An R3cord of your domain, it can be on any domain provider like GoDaddy. You can also watch the video.
+
+SSL Setup
+
+sudo apt-get install certbot python3-certbot-nginx
+sudo certbot --nginx -d <domain-name>
+sudo systemctl reload nginx
+
+Step 10: Conclusion
+
+Deploying a ReactJS application on an AWS EC2 instance requires careful configuration and setup. By following these steps, you can successfully launch your application and serve it using Nginx, ensuring a seamless user experience.
+
+
+Always do this whenever I update anything on Fueldey website
+-	Ssh into the ec2 and cd into FuelDey folder
+-	Run “git pull”
+-	Run “npm run build”
+-	Cd into “cd /var/www/vhosts/frontend/”
+-	Delete the dist folder by running “sudo rm –r dist”
+-	Run “sudo cp -R dist/ /var/www/vhosts/frontend/”
