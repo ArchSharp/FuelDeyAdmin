@@ -22,6 +22,7 @@ import { IdleSessionTimeout } from "idle-session-timeout";
 import { Notification } from "./Components/Notification";
 import Modal from "./Components/Modals/Modal";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import { DownloadMobileApp } from "./Screens/DownloadMobileApp";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -154,6 +155,7 @@ function App() {
           }
         />
         <Route path={routes.error} index element={<ErrorPage />} />
+        <Route path={routes.mobApp} index element={<DownloadMobileApp />} />
       </Routes>
     </BrowserRouter>
   );

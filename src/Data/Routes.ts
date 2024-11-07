@@ -13,6 +13,7 @@ export const appointment = "/appointment";
 export const f_password = "/forgot-password";
 export const availDocs = "/available-doctors";
 export const error = "*";
+export const mobApp = "/download-mobile-app";
 export const portal = "/portal";
 export const welcome = "/welcome";
 export const resetPassword = "/reset-password";
