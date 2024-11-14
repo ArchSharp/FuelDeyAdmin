@@ -50,8 +50,8 @@ npm install
 Step 6: Create Production Build
 
 npm run build
-sudo mkdir /var/www/vhosts/frontend/
-sudo cp -R build/ /var/www/vhosts/frontend/
+sudo mkdir /var/www/frontend/
+sudo cp -R dist/ /var/www/frontend/
 
 Step 7: Create Nginx File
 
@@ -71,7 +71,7 @@ server {
 
   location / {
       autoindex on;
-      root /var/www/vhosts/frontend/dist;
+      root /var/www/frontend/dist;
       try_files $uri /index.html;
     }
 }
@@ -109,6 +109,6 @@ Always do this whenever I update anything on Fueldey website
 -	Ssh into the ec2 and cd into FuelDey folder
 -	Run “git pull”
 -	Run “npm run build”
--	Cd into “cd /var/www/vhosts/frontend/”
+-	Cd into “cd /var/www/frontend/”
 -	Delete the dist folder by running “sudo rm –r dist”
--	Run “sudo cp -R dist/ /var/www/vhosts/frontend/”
+-	Run “sudo cp -R dist/ /var/www/frontend/”
